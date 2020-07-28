@@ -1,0 +1,252 @@
+i {
+    font-style: normal;
+}
+
+.on {
+    pointer-events: none;
+    filter        : grayscale(80%);
+}
+
+// 点击添加的样式
+.active {
+    background     : url("../../assets/img/text_bg.png") no-repeat;
+    background-size: 100%;
+    color          : #ff9000 !important;
+}
+
+.model {
+    display  : flex;
+    color    : #fff;
+    font-size: 14px;
+    position : relative;
+
+    // 新建模式
+    .add {
+        position: absolute;
+        top     : -3px;
+        left    : 0;
+    }
+
+    // 编辑模式
+    .edit_1 {
+        position: absolute;
+        top     : -3px;
+        left    : 95px;
+    }
+
+    // 左侧模式名称
+    .name {
+        margin-top     : 20px;
+        margin-right   : 5px;
+        padding-top    : 8px;
+        width          : 290px;
+        text-align     : center;
+        background     : url("../../assets/img/框2.png") no-repeat;
+        background-size: 100%;
+
+        .data {
+            display       : flex;
+            flex-direction: column;
+            margin-top    : 15px;
+            overflow-x    : hidden;
+            height        : 373px;
+
+            input {
+                width          : 70px;
+                height         : 15px;
+                outline-style  : none;
+                border         : 0px;
+                background     : url("../../assets/img/search.png") no-repeat;
+                background-size: 100% 100%;
+                color          : #ccc;
+                margin-right   : 15px;
+            }
+
+            span {
+                height       : 30px;
+                line-height  : 30px;
+                color        : #15f6f3;
+                position     : relative;
+                border-bottom: 1px solid #000;
+
+                .el-icon-delete,
+                .el-icon-edit-outline {
+                    position: absolute;
+                    top     : 8px;
+                    right   : 10px;
+                    color   : #ff9000;
+                }
+
+                .el-icon-edit-outline {
+                    position: absolute;
+                    top     : 8px;
+                    right   : 40px;
+                }
+            }
+        }
+
+        .data::-webkit-scrollbar {
+            display: none;
+            /* Chrome Safari */
+        }
+
+        .addModel,
+        .delModel {
+            width          : 300px;
+            height         : 150px;
+            background     : url("../../assets/img/map_bg.png") no-repeat;
+            background-size: 100% 100%;
+            position       : absolute;
+            top            : 105px;
+            left           : 245px;
+            z-index        : 99;
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+
+            input {
+                outline-style: none;
+                border       : 0px;
+                margin       : 15px 0;
+                padding-left : 3px;
+            }
+
+            .select {
+                margin-top     : 10px;
+                width          : 150px;
+                display        : flex;
+                justify-content: space-between;
+
+                .confirm {
+                    width          : 60px;
+                    height         : 20px;
+                    line-height    : 20px;
+                    color          : #0bb5b9;
+                    background     : url("../../assets/img/Yes.png") no-repeat;
+                    background-size: 100% 100%;
+                }
+
+                .cancel {
+                    width          : 60px;
+                    height         : 20px;
+                    line-height    : 20px;
+                    color          : #f00;
+                    background     : url("../../assets/img/No.png") no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+        }
+    }
+
+    // 右侧编辑面板
+    .edit {
+        flex           : 1;
+        margin-top     : 20px;
+        padding-top    : 8px;
+        background     : url("../../assets/img/框3.png") no-repeat;
+        background-size: 100% 100%;
+        text-align     : center;
+        position       : relative;
+
+        .info {
+            margin-top : 15px;
+            margin-left: 2px;
+
+            div {
+                height       : 30px;
+                line-height  : 30px;
+                text-align   : left;
+                padding-left : 50px;
+                border-bottom: 1px solid #000;
+
+                span {
+                    margin-right: 60px;
+                }
+            }
+
+            .radio {
+                position: absolute;
+                top     : -6px;
+                left    : 133px;
+                width   : 15px;
+                height  : 15px;
+            }
+
+            .radio2 {
+                position: absolute;
+                top     : -6px;
+                left    : 290px;
+                width   : 15px;
+                height  : 15px;
+            }
+
+            input {
+                width          : 110px;
+                height         : 15px;
+                outline-style  : none;
+                border         : 0px;
+                background     : url("../../assets/img/search.png") no-repeat;
+                background-size: 100% 100%;
+                color          : #fff;
+                margin-right   : 10px;
+            }
+
+            select {
+                // border: none;
+                outline        : none;
+                border         : none;
+                background     : url("../../assets/img/dayBg.png") no-repeat;
+                background-size: 100% 100%;
+                width          : 90px;
+                color          : #fff;
+                margin-right   : 15px;
+
+                option {
+                    color: black;
+                }
+            }
+        }
+
+
+
+        .el-icon-circle-plus {
+            margin-right : 3px;
+            color        : #15f6f3;
+            margin-bottom: 3px;
+        }
+
+        .el-icon-remove {
+
+            color        : #15f6f3;
+            margin-bottom: 3px;
+        }
+
+        .select {
+            width          : 150px;
+            display        : flex;
+            justify-content: space-between;
+            position       : absolute;
+            left           : 215px;
+            bottom         : 35px;
+
+            .confirm {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #0bb5b9;
+                background     : url("../../assets/img/Yes.png") no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .cancel {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #f00;
+                background     : url("../../assets/img/No.png") no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+    }
+}

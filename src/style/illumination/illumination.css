@@ -1,0 +1,344 @@
+.illumination .bc_color {
+  border-right: 3px solid #00d8ff;
+  color: #fff !important;
+}
+.illumination .top {
+  height: 50px;
+  width: 100%;
+  color: #00f5f5;
+  font-size: 16px;
+  text-align: center;
+  line-height: 50px;
+  background: url("../../assets/img/top.png") no-repeat;
+  background-size: 100% 100%;
+}
+.illumination .main {
+  display: flex;
+  margin: 20px 20px 0;
+}
+.illumination .leftside {
+  width: 420px;
+  height: 820px;
+  background: url("../../assets/img/left.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 10px 15px 20px;
+  color: #fff;
+}
+.illumination .leftside .title {
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 10px;
+}
+.illumination .leftside .title span:nth-child(1) {
+  color: #00d7fb;
+  font-size: 16px;
+}
+.illumination .leftside .title span:nth-child(2) {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.illumination .leftside .title::after {
+  content: "";
+  display: block;
+  background: url("../../assets/img/bg_36.png") no-repeat;
+  background-size: 100%;
+  width: 40px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  left: 135px;
+}
+.illumination .leftside .num {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.illumination .leftside .num .le {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  text-align: right;
+  color: #14d9b1;
+  background: url('../../assets/img/05.png') no-repeat;
+  background-size: 100%;
+  width: 150px;
+  height: 60px;
+}
+.illumination .leftside .num .le span:nth-child(1) {
+  margin-top: 12px;
+  margin-right: 10px;
+}
+.illumination .leftside .num .le span:nth-child(2) {
+  margin-right: 7px;
+}
+.illumination .leftside .num .rig {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+.illumination .leftside .num .rig div {
+  display: flex;
+  flex-direction: column;
+}
+.illumination .leftside .amount {
+  display: flex;
+  margin-bottom: 20px;
+}
+.illumination .leftside .amount div {
+  display: flex;
+  flex-direction: column;
+}
+.illumination .leftside .amount div span {
+  width: 80px;
+  font-size: 14px;
+}
+.illumination .leftside .amount div span:nth-child(2) {
+  width: 137px;
+  height: 45px;
+  border-bottom: 5px solid;
+  margin-top: -40px;
+  margin-right: 5px;
+}
+.illumination .leftside .but {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.illumination .leftside .but div:nth-child(2) {
+  width: 420px;
+  height: 45px;
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+  border-bottom: 5px solid;
+  margin-top: -40px;
+}
+.illumination .leftside .skyblue {
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+}
+.illumination .leftside .blue {
+  border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+}
+.illumination .leftside .yellow {
+  border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+}
+.illumination .leftside .consume {
+  font-size: 14px;
+}
+.illumination .leftside .consume div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.illumination .leftside .light {
+  display: flex;
+  margin-left: 5px;
+  margin-bottom: 15px;
+}
+.illumination .leftside .light div:nth-child(1) {
+  margin-right: 7px;
+  font-size: 14px;
+}
+.illumination .leftside .light div:nth-child(2) {
+  flex: 1;
+  margin-top: 5px;
+}
+.illumination .leftside .light div:nth-child(2) .el-progress-bar__outer {
+  height: 4px !important;
+  width: 260px;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+.illumination .leftside .screen {
+  display: flex;
+  font-size: 14px;
+}
+.illumination .leftside .screen select {
+  border: none;
+  background: url("../../assets/img/dayBg.png") no-repeat;
+  background-size: 100% 100%;
+  width: 80px;
+  color: #fff;
+  background: #030d14;
+  outline: none;
+  text-align-last: center;
+}
+.illumination .leftside .screen select option {
+  color: black;
+}
+.illumination .leftside .screen div span:nth-child(1) {
+  margin-right: 20px;
+}
+.illumination .leftside .screen div:nth-child(1) {
+  margin-right: 100px;
+}
+.illumination .leftside .comTop {
+  font-size: 14px;
+  margin: 15px 5px;
+}
+.illumination .leftside .comTop select {
+  border: none;
+  background: url("../../assets/img/dayBg.png") no-repeat;
+  background-size: 100% 100%;
+  width: 80px;
+  color: #fff;
+  background: #030d14;
+  outline: none;
+  text-align-last: center;
+}
+.illumination .leftside #map2 {
+  color: white;
+  width: 400px;
+  height: 100px;
+  background: url('../../assets/img/warn.png') no-repeat;
+  background-size: 100%;
+  margin: 10px 0 5px;
+}
+.illumination .leftside .buttom {
+  margin-left: 360px;
+  color: #fff;
+  background-color: #000;
+  margin-top: 3%;
+  border: 1px solid #000;
+}
+.illumination .rightside {
+  flex: 1;
+  margin-left: 8px;
+  position: relative;
+}
+.illumination .rightside .topside {
+  height: 720px;
+  margin-bottom: 8px;
+  display: flex;
+}
+.illumination .rightside .topside .left {
+  flex: 90%;
+  margin-top: 15px;
+}
+.illumination .rightside .topside .right {
+  flex: 10%;
+}
+.illumination .rightside .topside .right div {
+  background-color: #00020a;
+  color: #969696;
+  width: 100%;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 100px;
+  font-size: 16px;
+}
+.illumination .rightside .botside {
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+}
+.illumination .rightside .botside .warn {
+  width: 340px;
+  height: 130px;
+  background: url('../../assets/img/warn_bg.png') no-repeat;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.illumination .rightside .botside .warn span {
+  margin-top: 7px;
+  margin-left: 15px;
+}
+.illumination .rightside .botside .warn span:nth-child(1) {
+  margin-top: 20px;
+  width: 50px;
+  text-align: center;
+  background: url('../../assets/img/warn_title.png') no-repeat;
+  background-size: 100%;
+}
+.illumination .rightside .info_1,
+.illumination .rightside .info_2,
+.illumination .rightside .info_3,
+.illumination .rightside .info_4,
+.illumination .rightside .info_5 {
+  height: 315px;
+  position: absolute;
+  top: 278px;
+  left: 196px;
+  display: flex;
+}
+.illumination .rightside .info_1 .panel,
+.illumination .rightside .info_2 .panel,
+.illumination .rightside .info_3 .panel,
+.illumination .rightside .info_4 .panel,
+.illumination .rightside .info_5 .panel {
+  width: 200px;
+  height: 220px;
+  background: url('../../assets/img/点位bg.png') no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  padding-top: 15px;
+  margin-top: -30px;
+}
+.illumination .rightside .info_1 .panel div,
+.illumination .rightside .info_2 .panel div,
+.illumination .rightside .info_3 .panel div,
+.illumination .rightside .info_4 .panel div,
+.illumination .rightside .info_5 .panel div {
+  padding: 0 15px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.illumination .rightside .info_1 .panel div span:nth-child(1),
+.illumination .rightside .info_2 .panel div span:nth-child(1),
+.illumination .rightside .info_3 .panel div span:nth-child(1),
+.illumination .rightside .info_4 .panel div span:nth-child(1),
+.illumination .rightside .info_5 .panel div span:nth-child(1) {
+  color: #36af97;
+}
+.illumination .rightside .info_1 .panel div:nth-child(2),
+.illumination .rightside .info_2 .panel div:nth-child(2),
+.illumination .rightside .info_3 .panel div:nth-child(2),
+.illumination .rightside .info_4 .panel div:nth-child(2),
+.illumination .rightside .info_5 .panel div:nth-child(2) {
+  margin-top: 10px;
+}
+.illumination .rightside .info_1 .coordinate,
+.illumination .rightside .info_2 .coordinate,
+.illumination .rightside .info_3 .coordinate,
+.illumination .rightside .info_4 .coordinate,
+.illumination .rightside .info_5 .coordinate {
+  width: 180px;
+  height: 95px;
+  background: url('../../assets/img/map.png');
+  background-size: 100% 100%;
+  position: relative;
+  margin-right: 15px;
+}
+.illumination .rightside .info_1 .coordinate span,
+.illumination .rightside .info_2 .coordinate span,
+.illumination .rightside .info_3 .coordinate span,
+.illumination .rightside .info_4 .coordinate span,
+.illumination .rightside .info_5 .coordinate span {
+  color: #34fecf;
+  font-size: 12px;
+  position: absolute;
+  top: 9px;
+  left: 80px;
+  width: 120px;
+}
+.illumination .rightside .info_2 {
+  top: 180px;
+  left: 600px;
+}
+.illumination .rightside .info_3 {
+  top: 400px;
+  left: 910px;
+}
+.illumination .rightside .info_4 {
+  top: 540px;
+  left: 650px;
+}
+.illumination .rightside .info_5 {
+  top: 520px;
+  left: 155px;
+}

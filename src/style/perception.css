@@ -1,0 +1,377 @@
+.bc_color {
+  border-right: 3px solid #00d8ff;
+  color       : #fff !important;
+}
+
+.perception {
+  /* height         : 100vh;
+  background     : url("../assets/img/bg.jpg") no-repeat;
+  background-size: 100% 100%; */
+  color          : #fff;
+  font-size      : 16px;
+}
+
+.perception .top {
+  height         : 50px;
+  width          : 100%;
+  color          : #00f5f5;
+  font-size      : 16px;
+  text-align     : center;
+  line-height    : 50px;
+  background     : url("../assets/img/top.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.perception .main {
+  display: flex;
+  margin : 20px 20px 0;
+}
+
+/* 左侧区域 -------------------------------------------------------*/
+
+.perception .main .leftSide {
+  width          : 420px;
+  height         : 820px;
+  background     : url("../assets/img/left.png") no-repeat;
+  background-size: 100% 100%;
+  padding        : 10px 15px 20px;
+}
+
+/* 左侧区域  标题----------------------------------------------------*/
+
+.perception .leftSide .title {
+  display        : flex;
+  justify-content: space-between;
+  font-weight    : 700;
+  position       : relative;
+  margin-bottom  : 10px;
+}
+
+.perception .leftSide .title span:nth-child(1) {
+  color    : #00d7fb;
+  font-size: 16px;
+}
+
+.perception .leftSide .title span:nth-child(2) {
+  font-size: 16px;
+}
+
+.perception .leftSide .title::before {
+  content        : "";
+  display        : block;
+  background     : url("../assets/img/bg_36.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 40px;
+  height         : 18px;
+  position       : absolute;
+  top            : 1px;
+  left           : 100px;
+}
+
+/* 左侧区域  设备数量--------------------------------------------------*/
+
+.perception .leftSide .num {
+  display        : flex;
+  justify-content: space-between;
+  margin-bottom  : 10px;
+}
+
+.perception .leftSide .num .zuo {
+  display        : flex;
+  font-size      : 16px;
+  font-weight    : 700;
+  background     : url("../assets/img/01.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 170px;
+  height         : 60px;
+  color          : #14d9b1;
+  text-align     : right;
+}
+
+.perception .leftSide .num .zuo span:nth-child(1) {
+  margin-top : 25px;
+  margin-left: 60px;
+}
+
+.perception .leftSide .num .zuo span:nth-child(2) {
+  margin-top : 20px;
+  margin-left: 12px;
+  font-size  : 22px;
+}
+
+.perception .leftSide .num .you {
+  display        : flex;
+  justify-content: flex-end;
+  flex           : 1;
+}
+
+.perception .leftSide .num .you div {
+  display       : flex;
+  flex-direction: column;
+  margin-top    : 10px;
+}
+
+.perception .leftSide .amount {
+  display      : flex;
+  margin-bottom: 15px;
+}
+
+.perception .leftSide .amount div {
+  display       : flex;
+  flex-direction: column;
+  margin-right  : 3px;
+}
+
+.perception .leftSide .amount div span {
+  width    : 80px;
+  font-size: 14px;
+}
+
+.perception .leftSide .amount div span:nth-child(2) {
+  width        : 137px;
+  height       : 45px;
+  border-bottom: 5px solid;
+  margin-top   : -40px;
+  margin-right : 5px;
+}
+
+.perception .leftSide .amount .skyblue {
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+}
+
+.perception .leftSide .amount .blue {
+  border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+}
+
+.perception .leftSide .amount .yellow {
+  border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+}
+
+/* 左侧区域  echarts图-----------------------------------------------*/
+
+.perception .leftSide .warnNum {
+  font-size: 14px;
+  margin   : 10px 5px;
+}
+
+.perception .leftSide .warnNum div {
+  display        : flex;
+  justify-content: space-between;
+  margin-bottom  : 5px;
+}
+
+.perception .leftSide .comTop {
+  font-size: 14px;
+  margin   : 8px 5px 3px;
+}
+
+.perception .leftSide .comTop select {
+  border         : none;
+  background     : url("../assets/img/dayBg.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 80px;
+  color          : #fff;
+  background     : #030d14;
+  outline        : none;
+  text-align-last: center;
+}
+
+#map,
+#map2 {
+  color          : white;
+  width          : 400px;
+  height         : 180px;
+  background     : url("../assets/img/warn.png") no-repeat;
+  background-size: 100%;
+
+}
+
+/* 右侧区域 -----------------------------------------------------------*/
+
+.perception .main .rightSide {
+  flex       : 1;
+  margin-left: 8px;
+  position   : relative;
+}
+
+.perception .main .rightSide .topSide {
+  height       : 720px;
+  margin-bottom: 8px;
+  display      : flex;
+}
+
+/* 右侧区域 上半部分-左边 ----------------------------------------------*/
+
+.perception .main .rightSide .topSide .left {
+  width     : 900px;
+  flex      : 65%;
+  margin-top: 15px;
+}
+
+.perception .main .rightSide .topSide .left .panel {
+  width          : 230px;
+  height         : 180px;
+  background     : url("../assets/img/点位bg.png") no-repeat;
+  background-size: 100% 100%;
+  margin         : 15px;
+  padding        : 8px 15px;
+}
+
+.perception .main .rightSide .topSide .left .panel div {
+  display        : flex;
+  justify-content: space-between;
+}
+
+.perception .main .rightSide .topSide .left .panel .mt {
+  margin-top: 4px;
+}
+
+.perception .main .rightSide .topSide .left .panel .warn {
+  color        : red;
+  font-size    : 14px;
+  margin-bottom: 10px;
+  width        : 230px;
+  flex         : 1;
+  text-overflow: ellipsis;
+  /*让截断的文字显示为点点。还有一个值是clip意截断不显示点点*/
+  white-space  : nowrap;
+  /*让文字不换行*/
+  overflow     : hidden;
+  /*超出要隐藏*/
+}
+
+.perception .main .rightSide .topSide .left .panel .title {
+  margin-bottom: 15px;
+}
+
+.perception .main .rightSide .topSide .left .panel .title2 {
+  margin-bottom: 10px;
+}
+
+.perception .main .rightSide .topSide .left .panel .fz {
+  font-size: 14px;
+}
+
+.perception .main .rightSide .topSide .left .panel .info {
+  font-size    : 14px;
+  margin-bottom: 5px;
+}
+
+/* 右侧区域 上半部分-中间 ---------------------------------------------*/
+
+.none {
+  visibility: hidden;
+}
+
+.perception .main .rightSide .topSide .mid {
+  background     : url("../assets/img/weather.png") no-repeat;
+  background-size: 100% 100%;
+  height         : 100%;
+  flex           : 25%;
+}
+
+.perception .main .rightSide .topSide .tempMax {
+  height  : 430px;
+  position: relative;
+}
+
+.perception .main .rightSide .topSide .tempMax img {
+  height     : 150px;
+  margin-left: 31%;
+  margin-top : 78px;
+}
+
+.perception .main .rightSide .topSide .tempMax .tep {
+  position : absolute;
+  top      : 30%;
+  left     : 42%;
+  font-size: 50px;
+}
+
+.perception .main .rightSide .topSide .tempMax .indices {
+  display        : flex;
+  justify-content: space-around;
+  margin-top     : 20px;
+}
+
+.perception .main .rightSide .topSide .tempMax .indices .info {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  font-size      : 12px;
+  background     : url("../assets/img/23.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 70px;
+  padding-bottom : 10px;
+  text-overflow  : ellipsis;
+  /*只是起到注解作用*/
+  white-space    : nowrap;
+  /*不让文本换行*/
+  overflow       : hidden;
+  /*超出的部分显示...*/
+}
+
+.perception .main .rightSide .topSide .tempMax .indices img {
+  width : 45px;
+  height: 45px;
+  margin: 0;
+}
+
+.perception .main .rightSide .topSide .weather {
+  display        : flex;
+  justify-content: space-around;
+}
+
+.perception .main .rightSide .topSide .weather img {
+  width         : 40px;
+  height        : 40px;
+  vertical-align: text-top;
+}
+
+/* 右侧区域 上半部分-右边 ---------------------------------------------*/
+
+.perception .main .rightSide .topSide .right {
+  flex: 10%;
+}
+
+.perception .main .rightSide .topSide .right div {
+  background-color: #00020a;
+  color           : #969696;
+  width           : 100%;
+  margin-left     : 15px;
+  margin-bottom   : 15px;
+  height          : 30px;
+  line-height     : 30px;
+  text-align      : center;
+  width           : 100px;
+}
+
+/* 右侧区域 下半部分 -------------------------------------------------*/
+
+.perception .main .rightSide .botside {
+  color    : #fff;
+  font-size: 14px;
+  display  : flex;
+}
+
+.perception .main .rightSide .botside .warn {
+  width          : 340px;
+  height         : 130px;
+  background     : url("../assets/img/warn_bg.png") no-repeat;
+  background-size: 100%;
+  display        : flex;
+  flex-direction : column;
+}
+
+.perception .main .rightSide .botside .warn span {
+  margin-top : 7px;
+  margin-left: 15px;
+}
+
+.perception .main .rightSide .botside .warn span:nth-child(1) {
+  margin-top     : 20px;
+  width          : 50px;
+  text-align     : center;
+  background     : url("../assets/img/warn_title.png") no-repeat;
+  background-size: 100%;
+}

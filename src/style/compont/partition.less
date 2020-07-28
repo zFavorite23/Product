@@ -1,0 +1,225 @@
+// 正常选中
+.color {
+    color: #f78606 !important;
+}
+
+// 离线
+.color2 {
+    color         : red !important;
+    pointer-events: none;
+    cursor        : default;
+    opacity       : 0.6;
+}
+
+// 不在任何组
+.color3 {
+    color: #00d8ff !important;
+}
+
+// 在别的组里
+.color4 {
+    color: #969696 !important;
+}
+
+// 点击添加的样式
+.active {
+    background     : url("../../assets/img/text_bg.png") no-repeat;
+    background-size: 100%;
+    color          : #ff9000 !important;
+}
+
+.partition {
+    display  : flex;
+    color    : #fff;
+    font-size: 14px;
+    position : relative;
+
+    p {
+        margin: 0;
+    }
+
+    i {
+        font-style: normal;
+    }
+
+    // 新建分区
+    .add {
+        position: absolute;
+        top     : -3px;
+        left    : 0;
+    }
+
+    // 左侧分区
+    .name {
+        margin-top     : 20px;
+        margin-right   : 5px;
+        padding-top    : 8px;
+        width          : 290px;
+        text-align     : center;
+        background     : url("../../assets/img/框2.png") no-repeat;
+        background-size: 100%;
+
+        .data {
+            display       : flex;
+            flex-direction: column;
+            margin-top    : 15px;
+            height        : 373px;
+
+            input {
+                width          : 70px;
+                height         : 15px;
+                outline-style  : none;
+                border         : 0px;
+                background     : url("../../assets/img/search.png") no-repeat;
+                background-size: 100% 100%;
+                color          : #ccc;
+                margin-right   : 15px;
+            }
+
+            span {
+                height       : 30px;
+                line-height  : 30px;
+                color        : #15f6f3;
+                position     : relative;
+                border-bottom: 1px solid #000;
+
+                .el-icon-delete,
+                .el-icon-edit-outline {
+                    position: absolute;
+                    top     : 8px;
+                    right   : 10px;
+                    color   : #ff9000;
+                }
+
+                .el-icon-edit-outline {
+                    position: absolute;
+                    top     : 8px;
+                    right   : 40px;
+                }
+            }
+        }
+
+        .data::-webkit-scrollbar {
+            display: none;
+            /* Chrome Safari */
+        }
+
+        .addGroup,
+        .delGroup {
+            width          : 300px;
+            height         : 150px;
+            background     : url("../../assets/img/map_bg.png") no-repeat;
+            background-size: 100% 100%;
+            position       : absolute;
+            top            : 105px;
+            left           : 245px;
+            z-index        : 99;
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+
+            input {
+                outline-style: none;
+                border       : 0px;
+                margin       : 15px 0;
+                padding-left : 3px;
+            }
+
+            .select {
+                margin-top     : 10px;
+                width          : 150px;
+                display        : flex;
+                justify-content: space-between;
+
+                .confirm {
+                    width          : 60px;
+                    height         : 20px;
+                    line-height    : 20px;
+                    color          : #0bb5b9;
+                    background     : url("../../assets/img/Yes.png") no-repeat;
+                    background-size: 100% 100%;
+                }
+
+                .cancel {
+                    width          : 60px;
+                    height         : 20px;
+                    line-height    : 20px;
+                    color          : #f00;
+                    background     : url("../../assets/img/No.png") no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+        }
+    }
+
+    // 右侧设备
+    .facility {
+        flex           : 1;
+        margin-top     : 20px;
+        padding-top    : 8px;
+        background     : url("../../assets/img/框3.png") no-repeat;
+        background-size: 100% 100%;
+        text-align     : center;
+        position       : relative;
+
+        .data {
+            display   : flex;
+            flex-wrap : wrap;
+            margin-top: 15px;
+            padding   : 0 15px 0 25px;
+
+            span {
+                width        : 120px;
+                height       : 30px;
+                line-height  : 30px;
+                margin-right : 5px;
+                color        : #ff9000;
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        .data2 {
+            display   : flex;
+            flex-wrap : wrap;
+            margin-top: 15px;
+            padding   : 0 15px 0 25px;
+
+            span {
+                width        : 120px;
+                height       : 30px;
+                line-height  : 30px;
+                margin-right : 5px;
+                color        : #15f6f3;
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        .select {
+            width          : 150px;
+            display        : flex;
+            justify-content: space-between;
+            position       : absolute;
+            left           : 215px;
+            bottom         : 35px;
+
+            .confirm {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #0bb5b9;
+                background     : url("../../assets/img/Yes.png") no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .cancel {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #f00;
+                background     : url("../../assets/img/No.png") no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+    }
+}

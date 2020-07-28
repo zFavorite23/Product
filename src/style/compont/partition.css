@@ -1,0 +1,193 @@
+.color {
+  color: #f78606 !important;
+}
+.color2 {
+  color: red !important;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+.color3 {
+  color: #00d8ff !important;
+}
+.color4 {
+  color: #969696 !important;
+}
+.active {
+  background: url("../../assets/img/text_bg.png") no-repeat;
+  background-size: 100%;
+  color: #ff9000 !important;
+}
+.partition {
+  display: flex;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+}
+.partition p {
+  margin: 0;
+}
+.partition i {
+  font-style: normal;
+}
+.partition .add {
+  position: absolute;
+  top: -3px;
+  left: 0;
+}
+.partition .name {
+  margin-top: 20px;
+  margin-right: 5px;
+  padding-top: 8px;
+  width: 290px;
+  text-align: center;
+  background: url("../../assets/img/框2.png") no-repeat;
+  background-size: 100%;
+}
+.partition .name .data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  height: 373px;
+}
+.partition .name .data input {
+  width: 70px;
+  height: 15px;
+  outline-style: none;
+  border: 0px;
+  background: url("../../assets/img/search.png") no-repeat;
+  background-size: 100% 100%;
+  color: #ccc;
+  margin-right: 15px;
+}
+.partition .name .data span {
+  height: 30px;
+  line-height: 30px;
+  color: #15f6f3;
+  position: relative;
+  border-bottom: 1px solid #000;
+}
+.partition .name .data span .el-icon-delete,
+.partition .name .data span .el-icon-edit-outline {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: #ff9000;
+}
+.partition .name .data span .el-icon-edit-outline {
+  position: absolute;
+  top: 8px;
+  right: 40px;
+}
+.partition .name .data::-webkit-scrollbar {
+  display: none;
+  /* Chrome Safari */
+}
+.partition .name .addGroup,
+.partition .name .delGroup {
+  width: 300px;
+  height: 150px;
+  background: url("../../assets/img/map_bg.png") no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 105px;
+  left: 245px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.partition .name .addGroup input,
+.partition .name .delGroup input {
+  outline-style: none;
+  border: 0px;
+  margin: 15px 0;
+  padding-left: 3px;
+}
+.partition .name .addGroup .select,
+.partition .name .delGroup .select {
+  margin-top: 10px;
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.partition .name .addGroup .select .confirm,
+.partition .name .delGroup .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.partition .name .addGroup .select .cancel,
+.partition .name .delGroup .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}
+.partition .facility {
+  flex: 1;
+  margin-top: 20px;
+  padding-top: 8px;
+  background: url("../../assets/img/框3.png") no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  position: relative;
+}
+.partition .facility .data {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  padding: 0 15px 0 25px;
+}
+.partition .facility .data span {
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 5px;
+  color: #ff9000;
+  border-bottom: 1px solid #000;
+}
+.partition .facility .data2 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  padding: 0 15px 0 25px;
+}
+.partition .facility .data2 span {
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 5px;
+  color: #15f6f3;
+  border-bottom: 1px solid #000;
+}
+.partition .facility .select {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 215px;
+  bottom: 35px;
+}
+.partition .facility .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.partition .facility .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}

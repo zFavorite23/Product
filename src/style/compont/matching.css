@@ -1,0 +1,137 @@
+i {
+  font-style: normal;
+}
+.active {
+  background: url("../../assets/img/text_bg.png") no-repeat;
+  background-size: 100%;
+  color: #7a5320;
+}
+.active_1 {
+  background-color: #ccc !important;
+}
+.search {
+  text-align: right;
+}
+.search input {
+  padding-left: 15px;
+  margin-right: 25px;
+}
+select {
+  border: none;
+  outline: none;
+  background: #030d14;
+  color: white;
+}
+.scroll {
+  height: 290px;
+  overflow-y: auto;
+  padding-top: 15px;
+}
+.test-1::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.main {
+  display: flex;
+  margin-top: 10px;
+  text-align: center;
+}
+.main .left {
+  background: url("../../assets/img/框2.png") no-repeat;
+  background-size: 100% 100%;
+  width: 260px;
+  height: 380px;
+  color: white;
+}
+.main .left .title {
+  margin-top: 10px;
+}
+.main .left li {
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  height: 28px;
+  line-height: 28px;
+  padding: 3px 40px;
+  color: #15f6f3;
+}
+.main .right {
+  background: url("../../assets/img/框3.png") no-repeat;
+  background-size: 100% 100%;
+  width: 569px;
+  color: white;
+  height: 380px;
+  margin-left: 10px;
+}
+.main .head {
+  margin-top: 10px;
+}
+.main .img {
+  background: url("../../assets/img/框3.png") no-repeat;
+  background-size: 100%;
+}
+.main .playList {
+  margin: -20px 5px;
+  height: 80px;
+}
+.main .playList .music {
+  font-size: 14px;
+  color: white;
+  margin-left: 15px;
+  padding-top: 8px;
+  text-align: left;
+}
+.main .playList .time {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  margin-top: 10px;
+}
+.main .playList .time span {
+  text-overflow: ellipsis;
+  /*只是起到注解作用*/
+  white-space: nowrap;
+  /*不让文本换行*/
+  overflow: hidden;
+  /*超出的部分显示...*/
+}
+.main .playList .time span img {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  vertical-align: bottom;
+}
+.main .but {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.main .but div {
+  width: 85px;
+  height: 50px;
+  line-height: 25px;
+  margin-right: 35px;
+  color: white;
+  text-align: center;
+}
+.main .but .ok {
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100%;
+}
+.main .but .del {
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100%;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: #15f6f3;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+.el-select-dropdown__wrap {
+  background: blue !important;
+  padding: 0;
+}

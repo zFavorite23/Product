@@ -1,0 +1,167 @@
+.active {
+  background: url("../../assets/img/text_bg.png") no-repeat;
+  background-size: 100%;
+  color: #ff9000 !important;
+}
+.color1 {
+  color: #ff9000;
+}
+.color2 {
+  color: #15f6f3;
+}
+.mate {
+  display: flex;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+}
+.mate .name {
+  margin-top: 20px;
+  margin-right: 5px;
+  padding-top: 8px;
+  width: 290px;
+  height: 407px;
+  text-align: center;
+  background: url("../../assets/img/框2.png") no-repeat;
+  background-size: 100%;
+}
+.mate .name .title {
+  display: flex;
+  justify-content: space-between;
+}
+.mate .name .title span {
+  flex: 50%;
+}
+.mate .name .data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.mate .name .data div {
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+  color: #15f6f3;
+  border-bottom: 1px solid #000;
+}
+.mate .name .data div span {
+  flex: 50%;
+}
+.mate .name select {
+  outline: none;
+  border: none;
+  background: url("../../assets/img/dayBg.png") no-repeat;
+  background-size: 100% 100%;
+  width: 90px;
+  color: #fff;
+  margin-right: 15px;
+}
+.mate .name select option {
+  color: black;
+}
+.mate .name .addModel {
+  width: 300px;
+  height: 150px;
+  background: url("../../assets/img/map_bg.png") no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 105px;
+  left: 245px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.mate .name .addModel input {
+  outline-style: none;
+  border: 0px;
+  margin: 15px 0;
+  padding-left: 3px;
+}
+.mate .name .addModel .select {
+  margin-top: 35px;
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.mate .name .addModel .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.mate .name .addModel .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}
+.mate .status {
+  flex: 1;
+  margin-top: 20px;
+  padding-top: 8px;
+  height: 407px;
+  overflow-x: hidden;
+  background: url("../../assets/img/框3.png") no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  position: relative;
+}
+.mate .status .data {
+  margin: 15px 2px 0 2px;
+}
+.mate .status .data .main {
+  width: 100%;
+  height: 90px;
+  background: url("../../assets/img/上地0109-3_04.png") no-repeat;
+  background-size: 100% 100%;
+}
+.mate .status .data .main .top {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
+.mate .status .data .main .bot {
+  margin-top: 5px;
+  text-align: left;
+  margin-left: 85px;
+}
+.mate .status .data .main .bot div {
+  margin-bottom: 10px;
+}
+.mate .status .data .main .bot div span {
+  margin-right: 25px;
+}
+.mate .status .select {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 215px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.mate .status .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.mate .status .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}
+.mate .status::-webkit-scrollbar {
+  display: none;
+  /* Chrome Safari */
+}

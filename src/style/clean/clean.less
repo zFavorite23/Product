@@ -1,0 +1,382 @@
+.clean {
+
+    // height         : 100vh;
+    // background     : url('../../assets/img/bg.jpg') no-repeat;
+    // background-size: 100% 100%;
+    .bc_color {
+        border-right: 3px solid #00d8ff;
+        color       : #fff !important;
+    }
+
+    .top {
+        height         : 50px;
+        width          : 100%;
+        color          : #00f5f5;
+        font-size      : 16px;
+        text-align     : center;
+        line-height    : 50px;
+        background     : url("../../assets/img/top.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .main {
+        display: flex;
+        margin : 20px 20px 0;
+    }
+
+    // 左侧看板
+    .left {
+        width          : 420px;
+        height         : 820px;
+        background     : url("../../assets/img/left.png") no-repeat;
+        background-size: 100% 100%;
+        padding        : 10px 15px 20px;
+        color          : #fff;
+
+        // 标题
+        .title {
+            display        : flex;
+            justify-content: space-between;
+            font-weight    : 700;
+            position       : relative;
+            margin-bottom  : 10px;
+
+            span:nth-child(1) {
+                color    : #00d7fb;
+                font-size: 16px;
+            }
+
+            span:nth-child(2) {
+                font-size : 12px;
+                margin-top: 5px;
+            }
+        }
+
+        .title::before {
+            content        : "";
+            display        : block;
+            background     : url("../../assets/img/bg_36.png") no-repeat;
+            background-size: 100%;
+            width          : 40px;
+            height         : 20px;
+            position       : absolute;
+            top            : 5px;
+            left           : 135px;
+        }
+
+        // 设备数量
+        .num {
+            display        : flex;
+            justify-content: space-between;
+            margin-bottom  : 10px;
+
+            .le {
+                display        : flex;
+                flex-direction : column;
+                font-size      : 14px;
+                background     : url("../../assets/img/01.png") no-repeat;
+                background-size: 100%;
+                width          : 150px;
+                height         : 60px;
+                color          : #14d9b1;
+                text-align     : right;
+
+                span:nth-child(1) {
+                    margin-top  : 12px;
+                    margin-right: 10px;
+                }
+
+                span:nth-child(2) {
+                    margin-right: 7px;
+                }
+            }
+
+            .you {
+                display        : flex;
+                justify-content: space-between;
+                width          : 150px;
+
+                div {
+                    display       : flex;
+                    flex-direction: column;
+                }
+            }
+        }
+
+        // 设备统计数量
+        .amount {
+            display      : flex;
+            margin-bottom: 20px;
+
+            div {
+                display       : flex;
+                flex-direction: column;
+
+                span {
+                    width    : 80px;
+                    font-size: 14px;
+                }
+
+                span:nth-child(2) {
+                    width        : 137px;
+                    height       : 45px;
+                    border-bottom: 5px solid;
+                    margin-top   : -40px;
+                    margin-right : 5px;
+                }
+            }
+        }
+
+        // 进度条颜色
+        .skyblue {
+            border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+        }
+
+        .blue {
+            border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+        }
+
+        .yellow {
+            border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+        }
+
+        // 使用情况详细 
+        .use {
+            display      : flex;
+            margin-left  : 5px;
+            margin-bottom: 15px;
+            position     : relative;
+
+            div:nth-child(1) {
+                margin-right: 5px;
+                font-size   : 14px;
+                width       : 80px;
+            }
+
+            div:nth-child(2) {
+                flex: 1;
+
+
+                .el-progress-bar__outer {
+                    height      : 4px !important;
+                    width       : 260px;
+                    margin-right: 10px;
+                    margin-top  : 8px;
+                }
+
+                .el-progress__text {
+                    position: absolute;
+                    top     : 5px;
+                    right   : -230px;
+                    color   : #fff;
+                }
+            }
+
+        }
+
+        // 时间筛选
+        .day {
+            display    : flex;
+            margin-top : 5px;
+            margin-left: 5px;
+
+            div {
+                flex: 1;
+
+                span {
+                    font-size   : 14px;
+                    margin-right: 30px;
+                }
+            }
+        }
+
+        .comTop {
+
+            select {
+                border         : none;
+                background     : url('../../assets/img/dayBg.png') no-repeat;
+                background-size: 100%;
+                width          : 80px;
+                color          : #fff;
+
+                option {
+                    color: black;
+                }
+            }
+        }
+
+        .time {
+            margin-top : 5px;
+            margin-left: 5px;
+
+            .block {
+                margin-top : 3px;
+                margin-left: 80px;
+
+
+
+                .available {
+                    padding: 5px 3px;
+
+                }
+            }
+
+
+
+            span {
+                font-size   : 14px;
+                margin-right: 30px;
+            }
+
+        }
+
+        button {
+            margin-left     : 360px;
+            color           : #fff;
+            background-color: #000;
+            border          : 1px solid #000;
+        }
+
+        // 曲线图
+        #map2 {
+            color          : white;
+            width          : 400px;
+            height         : 170px;
+            background     : url('../../assets/img/warn.png') no-repeat;
+            background-size: 100%;
+            margin         : 10px 0 5px;
+        }
+
+        // 时间样式
+        .el-picker-panel {
+            background-color: pink !important;
+        }
+
+        .el-input__inner {
+            width           : 150px;
+            background-color: rgba(0, 0, 0, .8);
+            color           : #fff;
+        }
+    }
+
+    // 右侧内容
+    .right {
+        flex       : 1;
+        margin-left: 8px;
+        position   : relative;
+
+
+        .topside {
+            height       : 720px;
+            margin-bottom: 8px;
+            display      : flex;
+
+            .left_2 {
+
+                flex      : 90%;
+                margin-top: 15px;
+            }
+
+            .right_2 {
+                flex: 10%;
+
+                div {
+                    background-color: #00020a;
+                    color           : #969696;
+                    width           : 100%;
+                    margin-left     : 15px;
+                    margin-bottom   : 15px;
+                    height          : 30px;
+                    line-height     : 30px;
+                    text-align      : center;
+                    width           : 100px;
+                    font-size       : 16px;
+                }
+
+
+            }
+        }
+
+
+        .info {
+
+            width   : 400px;
+            left    : 187px;
+            top     : 60px;
+            position: absolute;
+
+            .color {
+
+                color: #1cdefe;
+            }
+
+
+            // 地标 
+            .coordinate {
+                width          : 180px;
+                height         : 95px;
+                background     : url('../../assets/img/map.png');
+                background-size: 100% 100%;
+                position       : relative;
+
+                span {
+                    color    : #34fecf;
+                    font-size: 12px;
+                    position : absolute;
+                    top      : 9px;
+                    left     : 60px;
+                    width    : 120px;
+                }
+            }
+
+            // 地标看板
+            .panel {
+                width          : 180px;
+                height         : 220px;
+                background     : url('../../assets/img/点位bg.png') no-repeat;
+                background-size: 100% 100%;
+                color          : white;
+                z-index        : 9;
+
+                nav {
+                    // padding: 15px 78px 0;
+                    padding-top: 12px;
+                    margin-left: 30%;
+
+                }
+
+                .item {
+                    margin: 15px;
+
+                    .table {
+
+                        #map {
+                            width : 400px;
+                            color : white;
+                            height: 170px;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+
+
+    }
+
+    .set {
+        position: absolute;
+        right   : 75px;
+        top     : 0;
+
+        img {
+            width : 50px;
+            height: 50px;
+        }
+    }
+
+
+
+}

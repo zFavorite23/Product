@@ -1,0 +1,153 @@
+select {
+  border: none;
+  outline: none;
+  background: #030d14;
+  color: white;
+}
+.parrern {
+  position: relative;
+  text-align: center;
+}
+.parrern i {
+  font-style: normal;
+}
+.parrern .top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: white;
+}
+.parrern .top input {
+  padding-left: 15px;
+}
+.parrern .head {
+  background: url("../../assets/img/上地0109-3_04.png") no-repeat;
+  background-size: 100%;
+  height: 50px;
+  width: 855px;
+  font-size: 14px;
+  color: white;
+  margin-top: 10px;
+}
+.parrern .list {
+  height: 300px;
+  overflow-y: auto;
+}
+.parrern .list div:nth-child(1) {
+  margin-top: 0px;
+}
+.parrern .test-1::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.parrern .img {
+  background: url("../../assets/img/上地0109-3_04.png") no-repeat;
+  background-size: 100%;
+  margin-bottom: 18px !important;
+}
+.parrern .content {
+  margin: -20px 25px;
+  height: 70px;
+  width: 855px;
+  position: relative;
+}
+.parrern .content .el-icon-delete {
+  position: absolute;
+  color: red;
+  top: 5px;
+  right: 10px;
+}
+.parrern .content .el-icon-edit-outline {
+  position: absolute;
+  color: #ff9000;
+  top: 5px;
+  left: 140px;
+}
+.parrern .content .music {
+  font-size: 14px;
+  color: blue;
+  margin-left: 15px;
+  text-align: left;
+  padding-top: 3px;
+}
+.parrern .content .music input {
+  width: 60px;
+  height: 14 px;
+  background: #444444;
+  color: white;
+  border: none;
+  outline: none;
+}
+.parrern .content .time {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+.parrern .content .time .start {
+  position: relative;
+}
+.parrern .content .time .start .icon {
+  position: absolute;
+  background: url("../../assets/img//上地0109-3_03.png") no-repeat;
+  background-size: 100%;
+  width: 10px;
+  height: 10px;
+  top: 7px;
+  right: 6px;
+}
+.parrern .content .time .playTime {
+  position: relative;
+}
+.parrern .content .time .playTime .icon {
+  position: absolute;
+  background: url("../../assets/img//上地0109-3_03.png") no-repeat;
+  background-size: 100%;
+  width: 10px;
+  height: 10px;
+  top: 3px;
+  right: 6px;
+}
+.parrern .content .time span {
+  width: 25%;
+}
+.parrern .content .time span img {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  vertical-align: bottom;
+}
+.parrern .but {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.parrern .but div {
+  width: 85px;
+  height: 50px;
+  line-height: 25px;
+  margin-right: 35px;
+  color: white;
+  text-align: center;
+}
+.parrern .but .ok {
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100%;
+}
+.parrern .but .del {
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100%;
+}
+.parrern .musicList {
+  width: 855px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  position: absolute;
+  top: 25px;
+  left: 20px;
+}

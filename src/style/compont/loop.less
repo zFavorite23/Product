@@ -1,0 +1,107 @@
+// 离线
+.color2 {
+    color         : red !important;
+    pointer-events: none;
+}
+
+// 点击添加的样式
+.active {
+    background     : url("../../assets/img/text_bg.png") no-repeat;
+    background-size: 100%;
+    color          : #ff9000 !important;
+}
+
+.loop {
+    display  : flex;
+    color    : #fff;
+    font-size: 14px;
+    position : relative;
+
+    p {
+        margin: 0;
+    }
+
+
+
+    // 左侧分组
+    .name {
+        margin-top     : 20px;
+        margin-right   : 5px;
+        padding-top    : 8px;
+        width          : 290px;
+        height         : 407px;
+        text-align     : center;
+        background     : url("../../assets/img/框2.png") no-repeat;
+        background-size: 100%;
+
+        .data {
+            display       : flex;
+            flex-direction: column;
+            margin-top    : 15px;
+            text-align    : left;
+
+            span {
+                height       : 30px;
+                line-height  : 30px;
+                color        : #15f6f3;
+                position     : relative;
+                border-bottom: 1px solid #000;
+                padding-left : 35px;
+            }
+        }
+    }
+
+    // 右侧状态面板
+    .status {
+        flex           : 1;
+        margin-top     : 20px;
+        padding-top    : 8px;
+        background     : url("../../assets/img/框3.png") no-repeat;
+        background-size: 100% 100%;
+        text-align     : center;
+        position       : relative;
+
+        .data {
+            display   : flex;
+            flex-wrap : wrap;
+            margin-top: 15px;
+            padding   : 0 15px 0 25px;
+
+            span {
+                width        : 120px;
+                height       : 30px;
+                line-height  : 30px;
+                margin-right : 5px;
+                color        : #15f6f3;
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        .select {
+            width          : 150px;
+            display        : flex;
+            justify-content: space-between;
+            position       : absolute;
+            left           : 215px;
+            bottom         : 35px;
+
+            .confirm {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #0bb5b9;
+                background     : url("../../assets/img/Yes.png") no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .cancel {
+                width          : 60px;
+                height         : 20px;
+                line-height    : 20px;
+                color          : #f00;
+                background     : url("../../assets/img/No.png") no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,409 @@
+.illumination {
+    // height         : 100vh;
+    // background     : url('../../assets/img/bg.jpg') no-repeat;
+    // background-size: 100% 100%;
+
+    .bc_color {
+        border-right: 3px solid #00d8ff;
+        color       : #fff !important;
+    }
+
+    .top {
+        height         : 50px;
+        width          : 100%;
+        color          : #00f5f5;
+        font-size      : 16px;
+        text-align     : center;
+        line-height    : 50px;
+        background     : url("../../assets/img/top.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .main {
+        display: flex;
+        margin : 20px 20px 0;
+    }
+
+    // 左侧面板
+    .leftside {
+        width          : 420px;
+        height         : 820px;
+        background     : url("../../assets/img/left.png") no-repeat;
+        background-size: 100% 100%;
+        padding        : 10px 15px 20px;
+        color          : #fff;
+
+        // 头部标题区域
+        .title {
+            font-weight    : 700;
+            display        : flex;
+            justify-content: space-between;
+            position       : relative;
+            margin-bottom  : 10px;
+
+            span:nth-child(1) {
+                color    : #00d7fb;
+                font-size: 16px;
+
+            }
+
+            span:nth-child(2) {
+                font-size : 12px;
+                margin-top: 5px;
+            }
+        }
+
+
+        .title::after {
+            content        : "";
+            display        : block;
+            background     : url("../../assets/img/bg_36.png") no-repeat;
+            background-size: 100%;
+            width          : 40px;
+            height         : 20px;
+            position       : absolute;
+            top            : 5px;
+            left           : 135px;
+        }
+
+        // 智照明设备数量区域 
+        .num {
+            display        : flex;
+            justify-content: space-between;
+            margin-bottom  : 10px;
+
+            .le {
+                display        : flex;
+                flex-direction : column;
+                font-size      : 14px;
+                text-align     : right;
+                color          : #14d9b1;
+                background     : url('../../assets/img/05.png') no-repeat;
+                background-size: 100%;
+                width          : 150px;
+                height         : 60px;
+
+                span:nth-child(1) {
+                    margin-top  : 12px;
+                    margin-right: 10px;
+                }
+
+                span:nth-child(2) {
+                    margin-right: 7px;
+                }
+            }
+
+            .rig {
+                display        : flex;
+                justify-content: space-between;
+                width          : 150px;
+
+                div {
+                    display       : flex;
+                    flex-direction: column;
+                }
+            }
+        }
+
+        // 设备统计数量区域
+        .amount {
+            display      : flex;
+            margin-bottom: 20px;
+
+            div {
+                display       : flex;
+                flex-direction: column;
+
+                span {
+                    width    : 80px;
+                    font-size: 14px;
+                }
+
+                span:nth-child(2) {
+                    width        : 137px;
+                    height       : 45px;
+                    border-bottom: 5px solid;
+                    margin-top   : -40px;
+                    margin-right : 5px;
+                }
+            }
+
+
+        }
+
+        .but {
+            font-size    : 14px;
+            margin-bottom: 20px;
+
+            div:nth-child(2) {
+                width        : 420px;
+                height       : 45px;
+                border-image : linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+                border-bottom: 5px solid;
+                margin-top   : -40px;
+            }
+        }
+
+        .skyblue {
+            border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+        }
+
+        .blue {
+            border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+        }
+
+        .yellow {
+            border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+        }
+
+        // 消耗情况
+        .consume {
+            font-size: 14px;
+
+            div {
+                display        : flex;
+                justify-content: space-between;
+                margin-bottom  : 8px;
+            }
+        }
+
+        // 各项路灯使用情况详细 
+        .light {
+            display      : flex;
+            margin-left  : 5px;
+            margin-bottom: 15px;
+
+            div:nth-child(1) {
+                margin-right: 7px;
+                font-size   : 14px;
+            }
+
+
+            div:nth-child(2) {
+                flex      : 1;
+                margin-top: 5px;
+
+                .el-progress-bar__outer {
+                    height      : 4px !important;
+                    width       : 260px;
+                    margin-right: 10px;
+                    margin-top  : 8px;
+                }
+            }
+
+        }
+
+        // 使用趋势
+        .screen {
+            display  : flex;
+            font-size: 14px;
+
+            select {
+                border         : none;
+                background     : url("../../assets/img/dayBg.png") no-repeat;
+                background-size: 100% 100%;
+                width          : 80px;
+                color          : #fff;
+                background     : #030d14;
+                outline        : none;
+                text-align-last: center;
+
+                option {
+                    color: black;
+                }
+            }
+
+            div {
+                span:nth-child(1) {
+                    margin-right: 20px;
+                }
+            }
+
+            div:nth-child(1) {
+                margin-right: 100px;
+            }
+        }
+
+        .comTop {
+            font-size: 14px;
+            margin   : 15px 5px;
+
+            select {
+                border         : none;
+                background     : url("../../assets/img/dayBg.png") no-repeat;
+                background-size: 100% 100%;
+                width          : 80px;
+                color          : #fff;
+                background     : #030d14;
+                outline        : none;
+                text-align-last: center;
+
+            }
+        }
+
+        // 曲线图
+        #map2 {
+            color          : white;
+            width          : 400px;
+            height         : 100px;
+            background     : url('../../assets/img/warn.png') no-repeat;
+            background-size: 100%;
+            margin         : 10px 0 5px;
+        }
+
+        .buttom {
+            margin-left     : 360px;
+            color           : #fff;
+            background-color: #000;
+            margin-top      : 3%;
+            border          : 1px solid #000;
+        }
+
+    }
+
+    // 右侧内容
+    .rightside {
+        flex       : 1;
+        margin-left: 8px;
+        position   : relative;
+
+        .topside {
+            height       : 720px;
+            margin-bottom: 8px;
+            display      : flex;
+
+            .left {
+
+                flex      : 90%;
+                margin-top: 15px;
+            }
+
+            .right {
+                flex: 10%;
+
+                div {
+                    background-color: #00020a;
+                    color           : #969696;
+                    width           : 100%;
+                    margin-left     : 15px;
+                    margin-bottom   : 15px;
+                    height          : 30px;
+                    line-height     : 30px;
+                    text-align      : center;
+                    width           : 100px;
+                    font-size       : 16px;
+                }
+
+
+            }
+        }
+
+        .botside {
+            color    : #fff;
+            font-size: 14px;
+            display  : flex;
+
+            .warn {
+                width          : 340px;
+                height         : 130px;
+                background     : url('../../assets/img/warn_bg.png') no-repeat;
+                background-size: 100%;
+                display        : flex;
+                flex-direction : column;
+
+                span {
+                    margin-top : 7px;
+                    margin-left: 15px;
+                }
+
+                span:nth-child(1) {
+                    margin-top     : 20px;
+                    width          : 50px;
+                    text-align     : center;
+                    background     : url('../../assets/img/warn_title.png') no-repeat;
+                    background-size: 100%;
+                }
+            }
+        }
+
+        .info_1,
+        .info_2,
+        .info_3,
+        .info_4,
+        .info_5 {
+            height  : 315px;
+            position: absolute;
+            top     : 278px;
+            left    : 196px;
+            display : flex;
+
+            .panel {
+                width          : 200px;
+                height         : 220px;
+                background     : url('../../assets/img/点位bg.png') no-repeat;
+                background-size: 100% 100%;
+                color          : white;
+                padding-top    : 15px;
+                margin-top     : -30px;
+
+                div {
+
+                    padding        : 0 15px;
+                    font-size      : 14px;
+                    display        : flex;
+                    justify-content: space-between;
+                    margin-top     : 4px;
+
+                    span:nth-child(1) {
+                        color: #36af97;
+
+                    }
+                }
+
+                div:nth-child(2) {
+                    margin-top: 10px;
+                }
+            }
+
+            .coordinate {
+                width          : 180px;
+                height         : 95px;
+                background     : url('../../assets/img/map.png');
+                background-size: 100% 100%;
+                position       : relative;
+                margin-right   : 15px;
+
+                span {
+                    color    : #34fecf;
+                    font-size: 12px;
+                    position : absolute;
+                    top      : 9px;
+                    left     : 80px;
+                    width    : 120px;
+                }
+            }
+
+
+        }
+
+        .info_2 {
+            top : 180px;
+            left: 600px;
+        }
+
+        .info_3 {
+            top : 400px;
+            left: 910px;
+        }
+
+        .info_4 {
+            top : 540px;
+            left: 650px;
+        }
+
+        .info_5 {
+            top : 520px;
+            left: 155px;
+        }
+    }
+}

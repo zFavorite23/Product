@@ -1,0 +1,338 @@
+.security {
+  /* height         : 100vh; */
+  /* background     : url("../../assets/img/bg.jpg") no-repeat; */
+  /* background-size: 100% 100%; */
+  color          : #fff;
+  font-size      : 16px;
+}
+
+.security .bc_color {
+  border-right: 3px solid #00d8ff;
+  color       : #fff !important;
+}
+
+.security .top {
+  height         : 50px;
+  width          : 100%;
+  color          : #00f5f5;
+  font-size      : 16px;
+  text-align     : center;
+  line-height    : 50px;
+  background     : url("../../assets/img/top.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.security .main {
+  display: flex;
+  margin : 20px 20px 0;
+}
+
+/* 左侧区域 -------------------------------------------------------*/
+
+.security .main .leftSide {
+  width          : 420px;
+  height         : 820px;
+  background     : url("../../assets/img/left.png") no-repeat;
+  background-size: 100% 100%;
+  padding        : 10px 15px 20px;
+}
+
+/* 左侧区域  标题----------------------------------------------------*/
+
+.security .leftSide .title {
+  display        : flex;
+  justify-content: space-between;
+  font-weight    : 700;
+  position       : relative;
+  margin-bottom  : 10px;
+}
+
+.security .leftSide .title span:nth-child(1) {
+  color    : #00d7fb;
+  font-size: 16px;
+}
+
+.security .leftSide .title span:nth-child(2) {
+  font-size: 16px;
+}
+
+.security .leftSide .title::before {
+  content        : "";
+  display        : block;
+  background     : url("../../assets/img/bg_36.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 40px;
+  height         : 18px;
+  position       : absolute;
+  top            : 2px;
+  left           : 120px;
+}
+
+/* 左侧区域  设备数量--------------------------------------------------*/
+
+.security .leftSide .num {
+  display        : flex;
+  justify-content: space-between;
+  margin-bottom  : 10px;
+}
+
+.security .leftSide .num .zuo {
+  display        : flex;
+  font-size      : 16px;
+  font-weight    : 700;
+  background     : url("../../assets/img/01.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 170px;
+  height         : 60px;
+  color          : #14d9b1;
+  text-align     : right;
+}
+
+.security .leftSide .num .zuo span:nth-child(1) {
+  margin-top : 25px;
+  margin-left: 60px;
+}
+
+.security .leftSide .num .zuo span:nth-child(2) {
+  margin-top : 20px;
+  margin-left: 12px;
+  font-size  : 22px;
+}
+
+.security .leftSide .num .you {
+  display        : flex;
+  justify-content: flex-end;
+  flex           : 1;
+}
+
+.security .leftSide .num .you div {
+  display       : flex;
+  flex-direction: column;
+  margin-top    : 10px;
+}
+
+.security .leftSide .amount {
+  display      : flex;
+  margin-bottom: 15px;
+}
+
+.security .leftSide .amount div {
+  display       : flex;
+  flex-direction: column;
+  margin-right  : 3px;
+}
+
+.security .leftSide .amount div span {
+  width    : 80px;
+  font-size: 14px;
+}
+
+.security .leftSide .amount div span:nth-child(2) {
+  width        : 137px;
+  height       : 45px;
+  border-bottom: 5px solid;
+  margin-top   : -40px;
+  margin-right : 5px;
+}
+
+.security .leftSide .amount .skyblue {
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+}
+
+.security .leftSide .amount .blue {
+  border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+}
+
+.security .leftSide .amount .yellow {
+  border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+}
+
+/* 左侧区域  echarts图-----------------------------------------------*/
+
+.security .leftSide .warnNum {
+  font-size: 14px;
+  margin   : 10px 5px;
+}
+
+.security .leftSide .warnNum div {
+  display        : flex;
+  justify-content: space-between;
+  margin-bottom  : 5px;
+}
+
+.security .leftSide .comTop {
+  font-size: 14px;
+  margin   : 8px 5px 3px;
+}
+
+.security .leftSide .comTop select {
+  border         : none;
+  background     : url("../../assets/img/dayBg.png") no-repeat;
+  background-size: 100% 100%;
+  width          : 80px;
+  color          : #fff;
+  background     : #030d14;
+  outline        : none;
+  text-align-last: center;
+}
+
+#map,
+#map2 {
+  color          : white;
+  width          : 400px;
+  height         : 180px;
+  background     : url("../../assets/img/warn.png") no-repeat;
+  background-size: 100%;
+
+}
+
+/* 右侧区域 -----------------------------------------------------------*/
+
+.security .main .rightSide {
+  flex       : 1;
+  margin-left: 8px;
+  position   : relative;
+}
+
+.security .main .rightSide .topSide {
+  height       : 720px;
+  margin-bottom: 8px;
+  display      : flex;
+}
+
+/* 右侧区域 上半部分-左边 ----------------------------------------------*/
+
+.security .main .rightSide .topSide .left {
+  flex      : 90%;
+  margin-top: 15px;
+  position  : relative;
+  font-size: 12px;
+}
+
+.security .main .rightSide .topSide .left .video,
+.video2 {
+  background     : url('../../assets/img/map_bg.png') no-repeat;
+  background-size: 100% 100%;
+  width          : 250px;
+  height         : 200px;
+  position       : absolute;
+  top            : 21%;
+  left           : 20%;
+}
+
+.security .main .rightSide .topSide .left .video2 {
+  top : 35%;
+  left: 50%;
+}
+
+.security .main .rightSide .topSide .left .video span:nth-child(1),
+.video2 span:nth-child(1) {
+  margin : 5px 15px;
+  display: block;
+
+}
+
+.security .main .rightSide .topSide .left .video div:nth-child(2),
+.video2 div:nth-child(2) {
+  width : 230px;
+  height: 155px;
+  margin: 10px;
+}
+
+.security .main .rightSide .topSide .left .camera,
+.camera2 {
+  background     : url('../../assets/img/map.png') no-repeat;
+  background-size: 100% 100%;
+  width          : 150px;
+  height         : 100px;
+  position       : absolute;
+  top            : 50%;
+  left           : 20%;
+}
+
+.security .main .rightSide .topSide .left .camera2 {
+  top : 64%;
+  left: 50%;
+}
+
+.security .main .rightSide .topSide .left .camera span,
+.camera2 span {
+  position: absolute;
+  top     : 10%;
+  left    : 50%;
+  color   : #15f6f3;
+}
+
+.security .main .rightSide .topSide .left .camera span::before {
+  background     : url('../../assets/img/icon.png');
+  width          : 30px;
+  height         : 30px;
+  content        : '';
+  background-size: 100% 100%;
+  position       : absolute;
+  top            : -45%;
+  left           : -45%;
+  color          : #15f6f3;
+}
+
+.security .main .rightSide .topSide .left .camera2 span::before {
+  background     : url('../../assets/img/icon.png');
+  width          : 30px;
+  height         : 30px;
+  content        : '';
+  background-size: 100% 100%;
+  position       : absolute;
+  top            : -45%;
+  left           : -40%;
+  color          : #15f6f3;
+}
+
+/* 右侧区域 上半部分-右边 ---------------------------------------------*/
+
+.security .main .rightSide .topSide .right {
+  flex: 10%;
+}
+
+.security .main .rightSide .topSide .right div {
+  background-color: #00020a;
+  color           : #969696;
+  width           : 100%;
+  margin-left     : 15px;
+  margin-bottom   : 15px;
+  height          : 30px;
+  line-height     : 30px;
+  text-align      : center;
+  width           : 100px;
+}
+
+
+
+/* 右侧区域 下半部分 -------------------------------------------------*/
+
+.security .main .rightSide .botside {
+  color    : #fff;
+  font-size: 14px;
+  display  : flex;
+}
+
+.security .main .rightSide .botside .warn {
+  width          : 340px;
+  height         : 130px;
+  background     : url("../../assets/img/warn_bg.png") no-repeat;
+  background-size: 100%;
+  display        : flex;
+  flex-direction : column;
+}
+
+.security .main .rightSide .botside .warn span {
+  margin-top : 7px;
+  margin-left: 15px;
+}
+
+.security .main .rightSide .botside .warn span:nth-child(1) {
+  margin-top     : 20px;
+  width          : 50px;
+  text-align     : center;
+  background     : url("../../assets/img/warn_title.png") no-repeat;
+  background-size: 100%;
+}

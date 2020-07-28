@@ -1,0 +1,296 @@
+.message .bc_color {
+  border-right: 3px solid #00d8ff;
+  color: #fff !important;
+}
+.message .top_title {
+  height: 50px;
+  width: 100%;
+  color: #00f5f5;
+  font-size: 16px;
+  text-align: center;
+  line-height: 50px;
+  background: url("../../assets/img/top.png") no-repeat;
+  background-size: 100% 100%;
+}
+.message li {
+  list-style: none;
+}
+.color {
+  color: #15f6f3;
+}
+.color2 {
+  color: #7a5320;
+}
+.red {
+  background-color: red !important;
+  font-weight: 700;
+  width: 40px;
+  margin: 30px 0 0 15px;
+}
+.hover {
+  color: #15f6f3;
+  background: url("../../assets/img/text_color.png") no-repeat bottom;
+  background-size: 100%;
+}
+.ri {
+  flex: 1;
+  margin-left: 8px;
+  position: relative;
+}
+.ri .info {
+  position: absolute;
+  top: 278px;
+  left: 196px;
+  display: flex;
+}
+.ri .info .coordinate {
+  width: 180px;
+  height: 95px;
+  background: url("../../assets/img/map.png");
+  background-size: 100% 100%;
+  position: relative;
+  margin-right: 15px;
+}
+.ri .info .coordinate span {
+  color: #34fecf;
+  font-size: 12px;
+  position: absolute;
+  top: 9px;
+  left: 60px;
+  width: 120px;
+}
+.ri .info .panel {
+  width: 320px;
+  height: 180px;
+  background: url("../../assets/img/map_bg.png") no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  padding-top: 5px;
+  margin-top: -30px;
+}
+.ri .info .panel div {
+  padding: 0 15px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.ri .info .panel div:nth-child(1) span:nth-child(2) {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  color: #1cdefe;
+}
+.ri .info .panel div:nth-child(1) span:nth-child(2) p {
+  margin: 0;
+}
+.ri .info .panel div:nth-child(2) {
+  margin-top: 20px;
+}
+.ri .topside {
+  height: 720px;
+  margin-bottom: 8px;
+  display: flex;
+}
+.ri .topside .left {
+  flex: 90%;
+  margin-top: 15px;
+}
+.ri .topside .right {
+  flex: 10%;
+}
+.ri .topside .right div {
+  background-color: #00020a;
+  color: #969696;
+  width: 100%;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 100px;
+  font-size: 16px;
+}
+.bod {
+  display: flex;
+  margin: 20px 20px 0;
+}
+.mess {
+  width: 420px;
+  height: 820px;
+  background: url("../../assets/img/left.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 10px 15px 20px;
+  color: #fff;
+}
+.mess .title {
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 10px;
+}
+.mess .title span:nth-child(1) {
+  color: #00d7fb;
+  font-size: 16px;
+}
+.mess .title span:nth-child(2) {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.mess .title::after {
+  content: "";
+  display: block;
+  background: url("../../assets/img/bg_36.png") no-repeat;
+  background-size: 100%;
+  width: 40px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  left: 135px;
+}
+.mess .left2 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.mess .left2 .logo {
+  font-size: 14px;
+  background: url("../../assets/img/mess.png") no-repeat;
+  background-size: 100%;
+  width: 150px;
+  height: 60px;
+  text-align: right;
+  color: #2df5cc;
+  position: relative;
+}
+.mess .left2 .logo div:nth-child(1) {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  font-size: 20px;
+}
+.mess .left2 .logo div:nth-child(2) {
+  position: absolute;
+  top: 28px;
+  right: 5px;
+}
+.mess .left2 .you {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+.mess .left2 .you div {
+  display: flex;
+  flex-direction: column;
+}
+.mess .left3 .top {
+  display: flex;
+  margin-bottom: 20px;
+}
+.mess .left3 .top div {
+  display: flex;
+  flex-direction: column;
+}
+.mess .left3 .top div span {
+  width: 80px;
+  font-size: 14px;
+  text-align: left;
+}
+.mess .left3 .top div span:nth-child(2) {
+  width: 137px;
+  height: 45px;
+  border-bottom: 5px solid;
+  margin-top: -40px;
+  margin-right: 5px;
+}
+.mess .left3 .but {
+  text-align: left;
+  font-size: 14px;
+}
+.mess .left3 .but div:nth-child(2) {
+  width: 420px;
+  height: 45px;
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+  border-bottom: 5px solid;
+  margin-top: -40px;
+}
+.left4 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+}
+.left4 .title_1::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 32px;
+  background: url("../../assets/img/bg_36.png") no-repeat;
+  background-size: 100%;
+  position: absolute;
+  left: 135px;
+  top: 5px;
+}
+.left4 span:nth-child(1) {
+  color: #00d8ff;
+}
+.left4 span:nth-child(2) {
+  font-size: 14px;
+  margin-top: 5px;
+}
+.left5 {
+  margin-top: 20px;
+}
+.left5 .title2 {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+  padding-left: 15px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  background-color: black;
+}
+.left5 .from {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40px;
+  padding-left: 15px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+}
+.left5 .from span:last-child {
+  color: #00d8ff;
+}
+.left5 .text {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+.skyblue {
+  border-image: linear-gradient(90deg, #1afe98 50%, white 50%) 1 1;
+}
+.blue {
+  border-image: linear-gradient(90deg, #1cdefe 50%, white 50%) 1 1 !important;
+}
+.yellow {
+  border-image: linear-gradient(90deg, #fdcd04 50%, white 50%) 1 1 !important;
+}
+.bod {
+  position: relative;
+}
+.bod .icon {
+  position: absolute;
+  top: 0;
+  right: 75px;
+  z-index: 99;
+}
+.bod .icon img {
+  width: 50px;
+  height: 50px;
+}

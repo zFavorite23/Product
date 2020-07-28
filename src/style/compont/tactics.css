@@ -1,0 +1,185 @@
+i {
+  font-style: normal;
+}
+.active {
+  background: url("../../assets/img/text_bg.png") no-repeat;
+  background-size: 100%;
+  color: #ff9000 !important;
+}
+.active2 {
+  color: #ff9000 !important;
+}
+.active3 {
+  color: #ff9000 !important;
+}
+.tactics {
+  display: flex;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+}
+.tactics .add {
+  position: absolute;
+  top: -3px;
+  left: 0;
+}
+.tactics .edit {
+  position: absolute;
+  top: -3px;
+  left: 95px;
+}
+.tactics .name {
+  margin-top: 20px;
+  margin-right: 5px;
+  padding-top: 8px;
+  width: 290px;
+  height: 407px;
+  text-align: center;
+  background: url("../../assets/img/框2.png") no-repeat;
+  background-size: 100%;
+}
+.tactics .name .data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.tactics .name .data .child {
+  padding-left: 0;
+}
+.tactics .name .data .child div {
+  color: #969696;
+  padding-left: 0;
+  background-color: #000;
+  display: flex;
+  text-align: center;
+}
+.tactics .name .data .child div span {
+  flex: 50%;
+}
+.tactics .name .data input {
+  width: 70px;
+  height: 15px;
+  outline-style: none;
+  border: 0px;
+  background: url("../../assets/img/search.png") no-repeat;
+  background-size: 100% 100%;
+  color: #ccc;
+  margin-right: 15px;
+}
+.tactics .name .data div {
+  margin: 0;
+  line-height: 30px;
+  text-align: left;
+  padding-left: 50px;
+  color: #15f6f3;
+  position: relative;
+}
+.tactics .name .data div .el-switch {
+  position: absolute;
+  top: 4px;
+  right: 15px;
+  width: 35px;
+}
+.tactics .name .data div .el-icon-delete,
+.tactics .name .data div .el-icon-edit-outline {
+  position: absolute;
+  top: 8px;
+  right: 75px;
+  color: #ff9000;
+}
+.tactics .name .data div .el-icon-edit-outline {
+  position: absolute;
+  top: 8px;
+  right: 110px;
+}
+.tactics .name .addStrategy,
+.tactics .name .delStrategy {
+  width: 300px;
+  height: 150px;
+  background: url("../../assets/img/map_bg.png") no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 105px;
+  left: 245px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tactics .name .addStrategy input,
+.tactics .name .delStrategy input {
+  outline-style: none;
+  border: 0px;
+  margin: 15px 0;
+  padding-left: 3px;
+}
+.tactics .name .addStrategy .select,
+.tactics .name .delStrategy .select {
+  margin-top: 10px;
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.tactics .name .addStrategy .select .confirm,
+.tactics .name .delStrategy .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.tactics .name .addStrategy .select .cancel,
+.tactics .name .delStrategy .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}
+.tactics .status {
+  flex: 1;
+  margin-top: 20px;
+  padding-top: 8px;
+  background: url("../../assets/img/框3.png") no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+}
+.tactics .status .data {
+  margin-top: 15px;
+  padding: 0 35px;
+  color: #15f6f3;
+}
+.tactics .status .data div {
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+}
+.tactics .status .select {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 215px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tactics .status .select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.tactics .status .select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
+}
