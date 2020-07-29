@@ -2,7 +2,7 @@
   <div class="home">
     <!-- 导航栏 -->
     <div class="item">
-      <router-link to="/">
+      <router-link to="/security">
         <span :class="{ hover: tag == '智慧安防' }" @click="tag = '智慧安防'"
           >智慧安防</span
         >

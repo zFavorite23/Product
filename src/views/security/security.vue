@@ -60,11 +60,7 @@
         <!-- 时间筛选 -->
         <div class="comTop">
           <span class="monitorPoint">间隔选择</span>
-          <select
-            name="sel"
-            style="margin-left:8%;margin-right:50px"
-            v-model="timeIntervalValue"
-          >
+          <select name="sel" style="margin-left:8%;margin-right:50px" v-model="timeIntervalValue">
             <option
               v-for="item in timeIntervalOptions"
               :key="item.timeIntervalValue"
@@ -76,87 +72,64 @@
         <div>
           <div v-if="timeIntervalValue == '日'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              class
-              style="margin-right:4%;margin-left:8%"
-            >
+            <select v-model="selectYear" class style="margin-right:4%;margin-left:8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class style="margin-right:4%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay" class style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-right:3%;margin-left:21.5%"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-right:3%;margin-left:21.5%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectMonth1"
-              class="comTop"
-              style="margin-right:3%"
-            >
+            <select v-model="selectMonth1" class="comTop" style="margin-right:3%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay1" class="comTop" style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
           <div v-if="timeIntervalValue == '月'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%; margin-left: 8%"
-            >
+            <select v-model="selectYear" style="margin-right: 4%; margin-left: 8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- <div class="comTop" style="margin-left: 19%;"> -->
             <select
@@ -168,43 +141,32 @@
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth1" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- </div> -->
           </div>
           <div v-if="timeIntervalValue == '年'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%;margin-left: 8% "
-            >
+            <select v-model="selectYear" style="margin-right: 4%;margin-left: 8% ">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-left: 21.5%;display:block"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-left: 21.5%;display:block">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
         </div>
@@ -221,11 +183,7 @@
         <!-- 时间筛选 -->
         <div class="comTop">
           <span class="monitorPoint">间隔选择</span>
-          <select
-            name="sel"
-            style="margin-left:8%;margin-right:50px"
-            v-model="timeIntervalValue"
-          >
+          <select name="sel" style="margin-left:8%;margin-right:50px" v-model="timeIntervalValue">
             <option
               v-for="item in timeIntervalOptions"
               :key="item.timeIntervalValue"
@@ -238,87 +196,64 @@
         <div>
           <div v-if="timeIntervalValue == '日'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              class
-              style="margin-right:4%;margin-left:8%"
-            >
+            <select v-model="selectYear" class style="margin-right:4%;margin-left:8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class style="margin-right:4%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay" class style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-right:3%;margin-left:21.5%"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-right:3%;margin-left:21.5%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectMonth1"
-              class="comTop"
-              style="margin-right:3%"
-            >
+            <select v-model="selectMonth1" class="comTop" style="margin-right:3%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay1" class="comTop" style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
           <div v-if="timeIntervalValue == '月'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%; margin-left: 8%"
-            >
+            <select v-model="selectYear" style="margin-right: 4%; margin-left: 8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- <div class="comTop" style="margin-left: 19%;"> -->
             <select
@@ -330,43 +265,32 @@
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth1" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- </div> -->
           </div>
           <div v-if="timeIntervalValue == '年'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%;margin-left: 8% "
-            >
+            <select v-model="selectYear" style="margin-right: 4%;margin-left: 8% ">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-left: 21.5%;display:block"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-left: 21.5%;display:block">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
         </div>
@@ -379,54 +303,32 @@
         <div class="topSide">
           <div class="left">
             <div v-if="WebcamList[0]">
-              <div
-                class="video"
-                @click="setShow(WebcamList[0].webcamId, WebcamList[0].rtmpUrl)"
-              >
+              <div class="video" @click="setShow(WebcamList[0].webcamId, WebcamList[0].rtmpUrl)">
                 <span>{{ WebcamList[0].name }}</span>
                 <div>
-                  <videoPlayer
-                    class="video-player vjs-custom-skin"
-                    :options="playerOptions"
-                  ></videoPlayer>
+                  <videoPlayer class="video-player vjs-custom-skin" :options="playerOptions"></videoPlayer>
                 </div>
               </div>
-              <div
-                class="camera"
-                @click="setShow(WebcamList[0].webcamId, WebcamList[0].rtmpUrl)"
-              >
+              <div class="camera" @click="setShow(WebcamList[0].webcamId, WebcamList[0].rtmpUrl)">
                 <span>{{ WebcamList[0].name }}</span>
               </div>
             </div>
             <div v-if="WebcamList[1]">
-              <div
-                class="video2"
-                @click="setShow(WebcamList[1].webcamId, WebcamList[1].rtmpUrl)"
-              >
+              <div class="video2" @click="setShow(WebcamList[1].webcamId, WebcamList[1].rtmpUrl)">
                 <span>{{ WebcamList[1].name }}</span>
                 <div>
-                  <videoPlayer
-                    class="video-player vjs-custom-skin"
-                    :options="playerOptions"
-                  ></videoPlayer>
+                  <videoPlayer class="video-player vjs-custom-skin" :options="playerOptions"></videoPlayer>
                 </div>
               </div>
-              <div
-                class="camera2"
-                @click="setShow(WebcamList[1].webcamId, WebcamList[1].rtmpUrl)"
-              >
+              <div class="camera2" @click="setShow(WebcamList[1].webcamId, WebcamList[1].rtmpUrl)">
                 <span>{{ WebcamList[1].name }}</span>
               </div>
             </div>
           </div>
           <div class="right">
-            <div :class="{ bc_color: tag == '配置面板' }" @click="devicShow">
-              配置面板
-            </div>
+            <div :class="{ bc_color: tag == '配置面板' }" @click="devicShow">配置面板</div>
             <!-- <div :class="{ bc_color: tag == '设置面板' }" @click="setShow">设置面板</div> -->
-            <div :class="{ bc_color: tag == '告警记录' }" @click="warnShow">
-              告警记录
-            </div>
+            <div :class="{ bc_color: tag == '告警记录' }" @click="warnShow">告警记录</div>
           </div>
         </div>
         <!-- 告警区域 -->
@@ -486,7 +388,7 @@ export default {
       devic: false,
       warn: false,
       set: false,
-      // tag: "配置面板",
+      tag: "1",
       // 视频播放
       playerOptions: {
         techOrder: ["flash", "html5"], // 兼容顺序
@@ -907,6 +809,15 @@ export default {
       window.addEventListener("resize", function() {
         lin.resize();
       });
+    },
+
+    ces() {
+      this.$axios({
+        method: "get",
+        url: "cleaning/trashCan/page"
+      }).then(res => {
+        console.log(res);
+      });
     }
   },
   mounted() {
@@ -916,6 +827,7 @@ export default {
   created() {
     // 获取摄像头列表
     this.getWebcamList();
+    this.ces();
   }
 };
 </script>

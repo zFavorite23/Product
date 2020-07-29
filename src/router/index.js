@@ -1,8 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+// 登陆
+import login from '../views/login/login.vue'
+
 // 首页
-import index from "../components/index.vue";
+import home from "../components/index.vue";
 
 // 环境感知
 import perception from "../views/perception/perception.vue";
@@ -83,9 +86,22 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    component: index,
+    path: "/",   // path 设置为 “/” ，默认显示该页面
+    component: login,
+  },
+  {
+    // 登录页
+    path: '/login',
+    component: login
+  },
+  {
+    path: "/home",
+    component: home,
     children: [
+      {
+        path: '',
+        redirect: '/security'
+      },
       // 环境感知
       {
         path: "/perception",
@@ -266,7 +282,7 @@ const routes = [
       },
       // 智慧安防
       {
-        path: "/",
+        path: "/security",
         component: security,
         children: [
           // 全部
