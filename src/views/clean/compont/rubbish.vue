@@ -48,6 +48,12 @@
         align="center"
       ></el-table-column>
     </el-table>
+    <el-pagination
+      class="right"
+      layout="prev, pager, next"
+      :total="total"
+      @current-change="getPageIndex"
+    ></el-pagination>
   </div>
 </template>
 
@@ -56,7 +62,7 @@ export default {
   data() {
     return {
       itemId: "",
-      total: 0, //数据总条数
+      total: 10, //数据总条数
       input: "", // 搜索框
       tableData: [], // table表单
       formInline: {
@@ -91,13 +97,13 @@ export default {
   },
   methods: {
     // 获取设备列表
-    getDevice(pageNum) {
+    getDevice(current) {
       this.$axios({
         method: "get",
         url: "/cleaning/trashCan/page",
         params: {
-          pageNum,
-          pageSize: 20,
+          current,
+          size: 8,
           itemId: this.itemId
         }
       }).then(res => {
@@ -105,6 +111,7 @@ export default {
         this.tableData = res.data.data.records;
         // 数据总条数
         this.total = res.data.data.total;
+        console.log(this.total);
       });
     },
 
@@ -123,8 +130,7 @@ export default {
           url: "/cleaning/trashCan/page",
           params: {
             likeKeyWords: this.input,
-            pageNum: 1,
-            pageSize: 10,
+            size: 3,
             itemId: this.itemId
           }
         }).then(res => {
@@ -138,6 +144,13 @@ export default {
   }
 };
 </script>
+<style>
+.el-table th,
+.el-table tr {
+  background-color: #000 !important;
+  color: #969696;
+}
+</style>
 
 <style scoped>
 .search {
@@ -152,5 +165,9 @@ export default {
 }
 .el-table__header-wrapper {
   background-color: #000;
+}
+.right {
+  float: right;
+  margin-top: 10px;
 }
 </style>

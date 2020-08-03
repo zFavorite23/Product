@@ -154,9 +154,12 @@
       </span>
     </el-dialog>
     <!-- 分页 -->
-    <!-- <div class="block">
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="getPageIndex"></el-pagination>
-    </div>-->
+    <el-pagination
+      class="right"
+      layout="prev, pager, next"
+      :total="total"
+      @current-change="getPageIndex"
+    ></el-pagination>
   </div>
 </template>
 
@@ -201,16 +204,17 @@ export default {
   },
   methods: {
     // 获取保洁人员
-    getClean(pageNum) {
+    getClean(current) {
       this.$axios({
         method: "get",
         url: "/cleaning/cleaner/page",
         params: {
-          pageNum,
-          pageSize: 10,
+          current,
+          size: 8,
           itemId: this.itemId
         }
       }).then(res => {
+        console.log(res);
         this.tableData = res.data.data.records;
         // 数据总条数
         this.total = res.data.data.total;
@@ -364,8 +368,7 @@ export default {
           url: "/cleaning/cleaner/page",
           params: {
             likeKeyWords: this.input,
-            pageNum: 1,
-            pageSize: 10,
+            size: 8,
             itemId: this.itemId
           }
         }).then(res => {
@@ -390,5 +393,9 @@ export default {
   background-color: #000001;
   margin-left: 5px;
   border: 0;
+}
+.right {
+  float: right;
+  margin-top: 10px;
 }
 </style>

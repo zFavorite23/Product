@@ -163,7 +163,7 @@ export default {
               this.$router.replace("/home");
             })
             .catch(() => {
-              this.$message.error("登陆错误，请重试！");
+              this.$message.error("用户不存在！");
             });
         } else {
           return false;

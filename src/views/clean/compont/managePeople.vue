@@ -33,9 +33,9 @@
       ></el-table-column>
       <el-table-column prop="cleanerList" label="所管理保洁人员" align="center">
         <template slot-scope="scope">
-          <span v-for="(item, index) in scope.row.cleanerList" :key="index">{{
-            `${item.cleanerName} 、`
-          }}</span>
+          <span v-for="(item, index) in scope.row.cleanerList" :key="index">
+            {{ `${item.cleanerName} 、` }}
+          </span>
         </template>
       </el-table-column>
       <el-table-column prop="operation" label="操作" align="center">
@@ -55,9 +55,13 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <!-- <div class="block">
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="getPageIndex"></el-pagination>
-    </div>-->
+
+    <el-pagination
+      class="right"
+      layout="prev, pager, next"
+      :total="total"
+      @current-change="getPageIndex"
+    ></el-pagination>
 
     <!-- 新增弹窗 -->
     <el-dialog
@@ -177,13 +181,13 @@ export default {
   },
   methods: {
     // 获取管理人员
-    getManage(pageNum) {
+    getManage(current) {
       this.$axios({
         method: "get",
         url: "/cleaning/manage/page",
         params: {
-          pageNum,
-          pageSize: 20,
+          current,
+          size: 8,
           itemId: this.itemId
         }
       }).then(res => {
@@ -319,6 +323,7 @@ export default {
 
     // 获取分页数据
     getPageIndex(pageNum) {
+      console.log(pageNum);
       // 获取当前页管理人员
       this.getManage(pageNum);
     }
@@ -333,8 +338,7 @@ export default {
           url: "/cleaning/manage/page",
           params: {
             likeKeyWords: this.input,
-            pageNum: 1,
-            pageSize: 10,
+            size: 8,
             itemId: this.itemId
           }
         }).then(res => {
@@ -349,7 +353,25 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style>
+.el-pagination .btn-next,
+.el-pagination .btn-prev {
+  color: #969696 !important;
+  background: center center no-repeat #000 !important;
+}
+.el-dialog,
+.el-pager li {
+  background: rgb(12, 0, 0) !important;
+  color: #969696;
+}
+.el-form-item__label {
+  color: #969696 !important;
+}
+.el-dialog__title {
+  color: #969696 !important;
+}
+</style>
+<style scoped>
 .search {
   display: flex;
   justify-content: flex-end;
@@ -359,5 +381,9 @@ export default {
   background-color: #000001;
   margin-left: 5px;
   border: 0;
+}
+.right {
+  float: right;
+  margin-top: 10px;
 }
 </style>
