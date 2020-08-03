@@ -55,10 +55,11 @@
 export default {
   data() {
     return {
+      itemId: "",
       // 删除图标隐藏
       delShow: false,
       // 样式为空
-      current: "",
+      current: -1,
       // 文件路径
       fileName: "",
       // 输入框内容
@@ -76,6 +77,7 @@ export default {
     };
   },
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
     // 获取分页列表
     this.GetMusic();
   },
@@ -84,7 +86,11 @@ export default {
     GetMusic() {
       this.$axios({
         method: "GET",
-        url: "/loudspeaker/music/page"
+        url: "/loudspeaker/music/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
       }).then(res => {
         // console.log(res);
         this.list = res.data.data.records;
@@ -100,6 +106,7 @@ export default {
       }).then(() => {
         // 重新刷新页面
         this.GetMusic();
+        this.current = -1;
       });
     },
 
@@ -112,40 +119,30 @@ export default {
     upload(event) {
       // 用户当前点击对象
       let files = event.target.files[0];
-      // 文件路径
-      this.fileName = this.getObjectUrl(files);
-
-      console.log(this.fileName);
+      var params = new FormData();
+      params.append("file", files);
       this.$axios({
         method: "POST",
-        url: "/loudspeaker/music",
-        data: {
-          label: "1",
-          musicId: 0,
-          name: files.name,
-          orderBy: "",
-          url: this.fileName
-        }
-      }).then(() => {
-        // console.log(res);
-        this.GetMusic();
-      });
-    },
+        url: "/loudspeaker/music/upload",
+        data: params
+      }).then(res => {
+        this.musicData = res.data.data;
 
-    // 获取文件路径
-    getObjectUrl(file) {
-      let url = null;
-      if (window.createObjectURL != undefined) {
-        // basic
-        url = window.createObjectURL(file);
-      } else if (window.webkitURL != undefined) {
-        // webkit or chrome
-        url = window.webkitURL.createObjectURL(file);
-      } else if (window.URL != undefined) {
-        // mozilla(firefox)
-        url = window.URL.createObjectURL(file);
-      }
-      return url;
+        this.$axios({
+          method: "post",
+          url: "/loudspeaker/music",
+          data: {
+            label: 5,
+            musicId: 0,
+            name: this.musicData.name,
+            orderBy: "",
+            url: this.musicData.url
+          }
+        }).then(res => {
+          console.log(res);
+          this.GetMusic();
+        });
+      });
     },
 
     // 修改音乐类别

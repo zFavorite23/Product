@@ -47,6 +47,7 @@ export default {
   methods: {
     close() {
       this.$parent.operation = !this.$parent.operation;
+      this.$router.push("/message");
     }
   }
 };
@@ -71,7 +72,7 @@ a {
   position: absolute;
   top: 110px;
   left: 90px;
-  z-index: 99;
+  z-index: 11;
 }
 .operation nav {
   margin-top: 20px;

@@ -50,6 +50,7 @@ export default {
       value1: "",
       value2: "",
       value3: "",
+      itemId: "",
       // 时间
       time: {
         year: "",
@@ -75,16 +76,17 @@ export default {
       week: ""
     };
   },
-  props: ["modelid", "modelName"],
+  props: ["modelid", "name"],
   methods: {
     // 添加时间
     addTime() {
+      console.log(this.name);
       this.$axios({
         method: "put",
         url: "/loudspeaker/model",
         data: {
           modelId: this.modelid,
-          name: this.modelName,
+          name: this.name,
           playOrder: "1",
           time: [`${this.value1}-${this.value2}`],
           volume: 10,
@@ -93,7 +95,8 @@ export default {
           week: [this.week],
           year: this.time.year,
           misfirePolicy: this.value,
-          type: this.type
+          type: this.type,
+          itemId: this.itemId
         }
       }).then(res => {
         console.log(res);
@@ -127,7 +130,7 @@ export default {
   },
   created() {
     this.getDate();
-    console.log(this.week);
+    this.itemId = sessionStorage.getItem("itemId");
   }
 };
 </script>

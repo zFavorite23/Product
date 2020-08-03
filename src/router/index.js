@@ -134,11 +134,7 @@ const routes = [
         path: "/message",
         component: message,
         children: [
-          {
-            // 默认显示路由
-            path: "",
-            redirect: "/music"
-          },
+
           {
             // 音乐管理
             path: "/music",
@@ -238,11 +234,7 @@ const routes = [
         path: "/clean",
         component: clean,
         children: [
-          // 默认显示路由
-          {
-            path: "",
-            redirect: "/rubbish"
-          },
+
           // 垃圾桶上传
           {
             path: "/rubbish",

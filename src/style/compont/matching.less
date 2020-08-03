@@ -122,29 +122,31 @@ select {
         }
     }
 
-    .but {
+    .select {
+        width          : 150px;
         display        : flex;
-        justify-content: center;
-        margin-top     : 10px;
+        justify-content: space-between;
+        // position: absolute;
+        margin-left    : 215px;
+        margin-top     : 20px;
+        margin-bottom  : 40px;
 
-        div {
-            width       : 85px;
-            height      : 50px;
-            line-height : 25px;
-            margin-right: 35px;
-            color       : white;
-            text-align  : center;
-        }
-
-        .ok {
+        .confirm {
+            width          : 60px;
+            height         : 20px;
+            line-height    : 20px;
+            color          : #0bb5b9;
             background     : url("../../assets/img/Yes.png") no-repeat;
-            background-size: 100%;
+            background-size: 100% 100%;
         }
 
-        .del {
+        .cancel {
+            width          : 60px;
+            height         : 20px;
+            line-height    : 20px;
+            color          : #f00;
             background     : url("../../assets/img/No.png") no-repeat;
-            background-size: 100%;
-
+            background-size: 100% 100%;
         }
     }
 }

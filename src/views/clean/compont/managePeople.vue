@@ -11,9 +11,7 @@
       <el-button type="primary" icon="el-icon-search" size="mini"
         >搜索</el-button
       >
-      <el-button type="primary" @click="dialogVisible = true" size="mini"
-        >新增</el-button
-      >
+      <el-button type="primary" @click="add()" size="mini">新增</el-button>
     </div>
     <!-- table表单 -->
     <el-table :data="tableData" border style="width: 100%" size="mini">
@@ -59,7 +57,8 @@
     <!-- 分页 -->
     <!-- <div class="block">
       <el-pagination layout="prev, pager, next" :total="total" @current-change="getPageIndex"></el-pagination>
-    </div> -->
+    </div>-->
+
     <!-- 新增弹窗 -->
     <el-dialog
       :lock-scroll="false"
@@ -99,6 +98,7 @@
         >
       </span>
     </el-dialog>
+
     <!-- 编辑弹窗 -->
     <el-dialog
       :lock-scroll="false"
@@ -130,44 +130,11 @@
             show-word-limit
           ></el-input>
         </el-form-item>
-        <el-form-item label="保洁人员：">
-          <el-input v-model="name" size="mini">
-            <i
-              slot="suffix"
-              class="el-input__icon el-icon-user-solid"
-              @click="getClean()"
-            ></i>
-          </el-input>
-        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false" size="mini">取 消</el-button>
         <el-button type="primary" @click="editManage()" size="mini"
           >提 交</el-button
-        >
-      </span>
-    </el-dialog>
-    <!-- 查询所有保洁人员弹窗 -->
-    <el-dialog
-      :lock-scroll="false"
-      :visible.sync="centerDialogVisible"
-      width="30%"
-      center
-    >
-      <span slot="footer" class="dialog-footer">
-        <el-checkbox-group v-model="clean">
-          <el-checkbox
-            v-for="item in cleanList"
-            :label="item"
-            :key="item.cleanerId"
-            @change="addClean($event, item.cleanerId, item.cleanerName)"
-            >{{ item.cleanerName }}</el-checkbox
-          >
-        </el-checkbox-group>
-        <div style="margin: 15px 0;"></div>
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible = false"
-          >确 定</el-button
         >
       </span>
     </el-dialog>
@@ -178,6 +145,7 @@
 export default {
   data() {
     return {
+      itemId: "",
       total: 0, // 数据总条数
       input: "", // 搜索框
       tableData: [], // 管理员列表
@@ -194,40 +162,20 @@ export default {
         // 电话
         tel: "",
         // 下属保洁员工
-        cleanerList: ""
+        cleanerIds: ""
       }, // from表单
-      radio: "1", // 单选框
-      value1: "", // 时间框
-      manageId: "", // 编辑id
-      cleanList: [], // 所有保洁人员列表
-      clean: [], // 复选框保洁空数组
-      list: [], // 用来存勾选中的保洁人员
-      name: "",
-      arr: []
+
+      cleanList: []
     };
   },
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
+
     // 获取管理人员
     this.getManage();
+    this.getClean();
   },
   methods: {
-    // 给管理人员添加保洁人员
-    addClean(e, cleanerId, cleanerName) {
-      // 判断是否选中
-      if (e === true) {
-        // 选中则添加到数组中
-        this.list.push(cleanerId);
-      } else {
-        // 取消选中 判断是否存在数组中 如果在则删除
-        for (let i = 0; i < this.list.length; i++) {
-          if (this.list[i] === cleanerId) {
-            this.list.splice(i, 1);
-          }
-        }
-      }
-      this.name = cleanerName;
-    },
-
     // 获取管理人员
     getManage(pageNum) {
       this.$axios({
@@ -235,7 +183,8 @@ export default {
         url: "/cleaning/manage/page",
         params: {
           pageNum,
-          pageSize: 10
+          pageSize: 20,
+          itemId: this.itemId
         }
       }).then(res => {
         console.log(res);
@@ -244,6 +193,14 @@ export default {
       });
     },
 
+    // 新增清空原数据
+    add() {
+      this.dialogVisible = true;
+      this.formInline.manageName = "";
+      this.formInline.jobNum = "";
+      this.formInline.sex = "";
+      this.formInline.tel = "";
+    },
     // 添加管理人员
     addManage() {
       // 调用接口
@@ -267,8 +224,6 @@ export default {
           this.getManage();
           // 关闭弹窗
           this.dialogVisible = false;
-          // 清空原数组
-          this.list = [];
         })
         .catch(() => {
           // 从新获取数据
@@ -287,19 +242,15 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      })
-        .then(() => {
-          this.$axios({
-            url: `/cleaning/manage/${manageId}`,
-            method: "delete"
-          }).then(() => {
-            // 获取管理人员
-            this.getManage();
-          });
-        })
-        .catch(() => {
-          console.log("删除失败");
+      }).then(() => {
+        this.$axios({
+          url: `/cleaning/manage/${manageId}`,
+          method: "delete"
+        }).then(() => {
+          // 获取管理人员
+          this.getManage();
         });
+      });
     },
 
     // 获取编辑id
@@ -313,7 +264,6 @@ export default {
         method: "get",
         url: `/cleaning/manage/info/${manageId}`
       }).then(res => {
-        console.log(res);
         this.formInline = res.data.data;
       });
     },
@@ -334,11 +284,10 @@ export default {
           // 性别
           sex: this.formInline.sex,
           // 电话
-          tel: this.formInline.tel,
-          // 下属保洁员工
-          cleanerIds: this.list
+          tel: this.formInline.tel
         }
-      }).then(() => {
+      }).then(res => {
+        console.log(res);
         // 关闭弹窗
         this.dialogVisible2 = false;
         // 获取管理人员
@@ -354,9 +303,17 @@ export default {
       this.centerDialogVisible = true;
       this.$axios({
         method: "get",
-        url: "/cleaning/cleaner/page"
+        url: "/cleaning/cleaner/page",
+        params: {
+          itemId: this.itemId
+        }
       }).then(res => {
-        this.cleanList = res.data.data.records;
+        res.data.data.records.forEach(item => {
+          this.cleanList.push({
+            value: item.cleanerId,
+            label: item.cleanerName
+          });
+        });
       });
     },
 
@@ -377,7 +334,8 @@ export default {
           params: {
             likeKeyWords: this.input,
             pageNum: 1,
-            pageSize: 10
+            pageSize: 10,
+            itemId: this.itemId
           }
         }).then(res => {
           console.log(res);

@@ -37,9 +37,9 @@
         </div>
       </div>
       <!-- 底部按钮区域 -->
-      <div class="but">
-        <div class="ok" @click="upMusic()">确定</div>
-        <div class="del" @click="cancel()">取消</div>
+      <div class="select">
+        <div class="confirm" @click="upMusic()">确定</div>
+        <div class="cancel" @click="cancel()">取消</div>
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@
 export default {
   data() {
     return {
+      itemId: "",
       // 音乐id
       id: "",
       // 样式
@@ -67,6 +68,7 @@ export default {
   },
   props: ["modelid"],
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
     this.GetMusic();
   },
 
@@ -75,7 +77,11 @@ export default {
     GetMusic() {
       this.$axios({
         method: "GET",
-        url: "/loudspeaker/music/page"
+        url: "/loudspeaker/music/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
       }).then(res => {
         // console.log(res);
         this.list = res.data.data.records;
@@ -98,8 +104,8 @@ export default {
           modelId: this.modelid,
           musicId: this.id
         }
-      }).then(() => {
-        // console.log(res);
+      }).then(res => {
+        console.log(res);
         // 调用父组件获取模式列表
         this.$parent.loadPattern();
       });
@@ -117,8 +123,6 @@ export default {
   background-color: #686666;
 }
 .content {
-  margin: 10px 15px;
-  background-size: 100%;
   width: 865px;
   height: 375px;
   .scroll {
@@ -135,7 +139,7 @@ export default {
     color: white;
     display: flex;
     margin: 0 20px;
-    padding-top: 20px;
+    padding-top: 10px;
     margin-bottom: 10px;
     span {
       font-size: 14px;
@@ -147,8 +151,6 @@ export default {
     color: white;
     display: flex;
     justify-content: space-between;
-    margin: 0 20px;
-    padding-top: 20px;
     margin-bottom: 10px;
     span {
       width: 25%;
@@ -161,28 +163,30 @@ export default {
     }
   }
 }
-.but {
+.select {
+  width: 150px;
   display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  justify-content: space-between;
   position: absolute;
-  top: 340px;
-  left: 300px;
-  div {
-    width: 85px;
-    height: 50px;
-    line-height: 25px;
-    margin-right: 35px;
-    color: white;
-    text-align: center;
-  }
-  .ok {
+  left: 35%;
+  bottom: 35px;
+
+  .confirm {
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    color: #0bb5b9;
     background: url("../../assets/img/Yes.png") no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
   }
-  .del {
+
+  .cancel {
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    color: #f00;
     background: url("../../assets/img/No.png") no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
   }
 }
 </style>

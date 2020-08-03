@@ -40,6 +40,7 @@ export default {
   methods: {
     close() {
       this.$parent.operation = !this.$parent.operation;
+      this.$router.push("/clean");
     }
   }
 };

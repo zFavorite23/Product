@@ -2,8 +2,8 @@
   /* height         : 100vh; */
   /* background     : url("../../assets/img/bg.jpg") no-repeat; */
   /* background-size: 100% 100%; */
-  color          : #fff;
-  font-size      : 16px;
+  color    : #fff;
+  font-size: 16px;
 }
 
 .security .bc_color {
@@ -35,6 +35,7 @@
   background     : url("../../assets/img/left.png") no-repeat;
   background-size: 100% 100%;
   padding        : 10px 15px 20px;
+  z-index        : 10;
 }
 
 /* 左侧区域  标题----------------------------------------------------*/
@@ -206,7 +207,7 @@
   flex      : 90%;
   margin-top: 15px;
   position  : relative;
-  font-size: 12px;
+  font-size : 12px;
 }
 
 .security .main .rightSide .topSide .left .video,
@@ -218,6 +219,7 @@
   position       : absolute;
   top            : 21%;
   left           : 20%;
+  z-index        : 10;
 }
 
 .security .main .rightSide .topSide .left .video2 {
@@ -290,7 +292,8 @@
 /* 右侧区域 上半部分-右边 ---------------------------------------------*/
 
 .security .main .rightSide .topSide .right {
-  flex: 10%;
+  flex   : 10%;
+  z-index: 10;
 }
 
 .security .main .rightSide .topSide .right div {
@@ -313,6 +316,7 @@
   color    : #fff;
   font-size: 14px;
   display  : flex;
+
 }
 
 .security .main .rightSide .botside .warn {
@@ -322,6 +326,7 @@
   background-size: 100%;
   display        : flex;
   flex-direction : column;
+  z-index        : 10;
 }
 
 .security .main .rightSide .botside .warn span {

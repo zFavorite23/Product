@@ -2,7 +2,10 @@
   <div class="login">
     <div class="v">
       <video playsinline autoplay muted loop class="v1">
-        <source src="http://file.dreamdeck.cn/app/icons/website/index1.mp4" type="video/mp4" />
+        <source
+          src="http://file.dreamdeck.cn/app/icons/website/index1.mp4"
+          type="video/mp4"
+        />
       </video>
     </div>
 
@@ -12,8 +15,18 @@
         <el-form-item>
           <div class="logoName">DreamDeck</div>
         </el-form-item>
+        <el-form-item prop="itemId">
+          <el-select v-model="user.itemId" placeholder="请选择项目">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <!-- 用户名 -->
-        <el-form-item prop="name" v-if="status==1">
+        <el-form-item prop="name" v-if="status == 1">
           <el-input
             placeholder="用户名/手机号"
             clearable
@@ -21,7 +34,7 @@
             prefix-icon="el-icon-s-custom"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="mobile" v-if="status==2">
+        <el-form-item prop="mobile" v-if="status == 2">
           <el-input
             placeholder="手机号"
             clearable
@@ -30,7 +43,7 @@
           ></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item prop="pass" v-if="status==1">
+        <el-form-item prop="pass" v-if="status == 1">
           <el-input
             placeholder="密码"
             clearable
@@ -40,14 +53,27 @@
           ></el-input>
         </el-form-item>
         <!-- 验证码 -->
-        <el-form-item v-if="status==2" prop="code">
-          <el-input class="code" v-model="user.code" clearable placeholder="验证码"></el-input>
+        <el-form-item v-if="status == 2" prop="code">
+          <el-input
+            class="code"
+            v-model="user.code"
+            clearable
+            placeholder="验证码"
+          ></el-input>
           <el-button class="code" type="text">发送验证码</el-button>
         </el-form-item>
         <!-- 记住我 -->
         <el-form-item>
-          <el-checkbox label="记住密码" class="rememberMe" :disabled="status!=1"></el-checkbox>
-          <el-checkbox label="自动登陆" class="rememberMe" :disabled="status!=1"></el-checkbox>
+          <el-checkbox
+            label="记住密码"
+            class="rememberMe"
+            :disabled="status != 1"
+          ></el-checkbox>
+          <el-checkbox
+            label="自动登陆"
+            class="rememberMe"
+            :disabled="status != 1"
+          ></el-checkbox>
         </el-form-item>
         <!-- 登录按钮 -->
         <el-form-item>
@@ -56,8 +82,8 @@
         <!-- 登录方式 -->
         <el-form-item>
           <div class="way">
-            <el-button type="text" @click="status=1">用户名登陆</el-button>
-            <el-button type="text" @click="status=2">手机号登陆</el-button>
+            <el-button type="text" @click="status = 1">用户名登陆</el-button>
+            <el-button type="text" @click="status = 2">手机号登陆</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -74,10 +100,12 @@ export default {
         name: "",
         mobile: "",
         pass: "",
-        code: ""
+        code: "",
+        itemId: ""
       },
 
       rules: {
+        itemId: [{ required: true, message: "请选择项目", trigger: "blur" }],
         name: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
         mobile: [
           { required: true, message: "手机号不能为空", trigger: "blur" }
@@ -96,7 +124,17 @@ export default {
             trigger: "blur"
           }
         ]
-      }
+      },
+      options: [
+        {
+          value: "0",
+          label: "项目1"
+        },
+        {
+          value: "7",
+          label: "项目2"
+        }
+      ]
     };
   },
   methods: {
@@ -107,7 +145,7 @@ export default {
             method: "post",
             url: "/auth/mobile/token/sms",
             headers: {
-              Authorization: "Basic ZGQ6ZGQ"
+              Authorization: "Basic YnM6YnM="
             },
             params: {
               mobile: `SMS@${this.user.mobile}`,
@@ -116,7 +154,12 @@ export default {
             }
           })
             .then(res => {
+              sessionStorage.setItem("itemId", this.user.itemId);
               sessionStorage.setItem("token", res.data.access_token);
+              sessionStorage.setItem(
+                "userInfo",
+                JSON.stringify(res.data.user_info)
+              );
               this.$router.replace("/home");
             })
             .catch(() => {
@@ -131,7 +174,7 @@ export default {
 };
 </script>
 
-<style lang='less' >
+<style lang="less" scoped>
 .login {
   position: relative;
 }
@@ -148,7 +191,7 @@ export default {
 
 .login_box {
   width: 290px;
-  height: 340px;
+  height: 386px;
   //    background-color: #fff;
   background-color: #30363bb3;
   border-radius: 5px;

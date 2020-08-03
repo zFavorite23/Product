@@ -1,3 +1,6 @@
+.message {
+  position: relative;
+}
 .message .bc_color {
   border-right: 3px solid #00d8ff;
   color: #fff !important;
@@ -11,6 +14,13 @@
   line-height: 50px;
   background: url("../../assets/img/top.png") no-repeat;
   background-size: 100% 100%;
+}
+.map {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: -80px;
+  left: 0;
 }
 .message li {
   list-style: none;
@@ -42,6 +52,7 @@
   top: 278px;
   left: 196px;
   display: flex;
+  z-index: 10;
 }
 .ri .info .coordinate {
   width: 180px;
@@ -98,6 +109,7 @@
 }
 .ri .topside .right {
   flex: 10%;
+  z-index: 10;
 }
 .ri .topside .right div {
   background-color: #00020a;
@@ -122,6 +134,7 @@
   background-size: 100% 100%;
   padding: 10px 15px 20px;
   color: #fff;
+  z-index: 10;
 }
 .mess .title {
   font-weight: 700;

@@ -11,16 +11,18 @@
 
         <div class="left2">
           <div class="logo">
-            <div>1</div>
+            <div>{{ num.total }}</div>
             <div>终端设备(个)</div>
           </div>
           <div class="you">
             <div>
-              <span style="font-size: 24px;">1</span>
+              <span style="font-size: 24px;">{{ num.total }}</span>
               <span>设备总数</span>
             </div>
             <div>
-              <span style="font-size: 24px;">100%</span>
+              <span style="font-size: 24px;"
+                >{{ ((num.onLine / num.total) * 100).toFixed(2) }}%</span
+              >
               <span>在线率</span>
             </div>
           </div>
@@ -28,11 +30,11 @@
         <div class="left3">
           <div class="top">
             <div>
-              <span style="color:#1afe98">在线：1</span>
+              <span style="color:#1afe98">在线：{{ num.onLine }}</span>
               <span class="skyblue"></span>
             </div>
             <div>
-              <span style="color:#1cdefe">离线：0</span>
+              <span style="color:#1cdefe">离线：{{ num.offLine }}</span>
               <span class="blue"></span>
             </div>
             <div>
@@ -41,7 +43,7 @@
             </div>
           </div>
           <div class="but">
-            <div style="color:#1afe98">开启数量：1</div>
+            <div style="color:#1afe98">开启数量：{{ num.playLine }}</div>
             <div></div>
           </div>
         </div>
@@ -65,6 +67,29 @@
           <div class="left">
             <operation v-if="operation"></operation>
             <warn v-if="warn"></warn>
+            <!-- <div class="info">
+              <div class="coordinate">
+                <span>大门</span>
+              </div>
+              <div class="panel">
+                <div>
+                  <span>面板</span>
+                  <span>
+                    <p>背景音乐</p>
+                    <p>业务广播</p>
+                    <p>实时广播</p>
+                  </span>
+                </div>
+                <div>
+                  <span>设备状态</span>
+                  <span>在线</span>
+                </div>
+                <div>
+                  <span>播放音量</span>
+                  <span>12</span>
+                </div>
+              </div>
+            </div>-->
           </div>
           <div class="right">
             <div
@@ -75,30 +100,6 @@
             </div>
             <div :class="{ bc_color: tag == '告警记录' }" @click="warnShow">
               告警记录
-            </div>
-          </div>
-        </div>
-
-        <div class="info">
-          <div class="coordinate">
-            <span>大门</span>
-          </div>
-          <div class="panel">
-            <div>
-              <span>面板</span>
-              <span>
-                <p>背景音乐</p>
-                <p>业务广播</p>
-                <p>实时广播</p>
-              </span>
-            </div>
-            <div>
-              <span>设备状态</span>
-              <span>在线</span>
-            </div>
-            <div>
-              <span>播放音量</span>
-              <span>12</span>
             </div>
           </div>
         </div>
@@ -120,7 +121,8 @@ export default {
       // 控制子组件显示
       operation: false,
       warn: false,
-      num: ""
+      num: "",
+      tag: ""
     };
   },
   methods: {
@@ -140,7 +142,7 @@ export default {
     getnum() {
       this.$axios({
         method: "get",
-        url: "/loudspeaker/loudspeaker/statistics"
+        url: "/loudspeaker/sound/statistics"
       }).then(res => {
         // console.log(res);
         this.num = res.data.data;

@@ -16,7 +16,9 @@
           @click="onPattern(index)"
           :class="{ active: index == current }"
         >
-          <span v-show="text" style="color:#15f6f3">{{ item.modelName }}</span>
+          <span v-show="item.textShow" style="color:#15f6f3">{{
+            item.name
+          }}</span>
           <input
             type="text"
             v-show="item.inputshow"
@@ -51,22 +53,23 @@
           <span class="playTime">
             播放时间：
             <select>
-              <option v-for="(item, index) in item.time" :key="index" value>
-                {{ item }}
-              </option>
+              <option
+                v-for="(item, index) in item.timeList"
+                :key="index"
+                value
+                >{{ item }}</option
+              >
             </select>
             <span
               class="icon"
-              @click="onPlayTime(item.modelId, item.modelName)"
+              @click="onPlayTime(item.modelId, item.name)"
             ></span>
           </span>
           <span>
             播放顺序：
             <select
               v-model="item.playOrder"
-              @change="
-                editPlayOrdel(item.playOrder, item.modelName, item.modelId)
-              "
+              @change="editPlayOrdel(item.playOrder, item.name, item.modelId)"
             >
               <option
                 v-for="(playOrderList, index) in playOrderList"
@@ -101,11 +104,7 @@
       <div class="del" @click="(isShow = false), (delShow = false)">取消</div>
     </div>
     <musicList v-show="musicListShow" :modelid="modelid"></musicList>
-    <playTime
-      v-show="playShow"
-      :modelid="modelid"
-      :modelName="modelName"
-    ></playTime>
+    <playTime v-show="playShow" :modelid="modelid" :name="name"></playTime>
   </div>
 </template>
 
@@ -119,10 +118,11 @@ export default {
   },
   data() {
     return {
+      itemId: "",
       // 传给子组件的模式id
       modelid: "",
       // 传给子组件的模式名称
-      modelName: "",
+      name: "",
       // 音乐列表显示
       musicListShow: false,
       //
@@ -164,6 +164,7 @@ export default {
     };
   },
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
     // 获取模式列表
     this.loadPattern();
     // 获取时间
@@ -174,15 +175,19 @@ export default {
     loadPattern() {
       this.$axios({
         method: "get",
-        url: "/loudspeaker/model/page"
+        url: "/loudspeaker/model/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
       }).then(res => {
-        // console.log(res);
-        // 时间
-        this.times = res.data.data.records[0].time[0];
+        console.log(res);
         // 数量
         this.num = res.data.data.total;
         this.list = res.data.data.records;
-        // console.log(this.list)
+        this.list.forEach(item => {
+          this.$set(item, "textShow", true);
+        });
       });
     },
 
@@ -215,9 +220,15 @@ export default {
       // this.delShow = true;
       for (var i = 0; i < this.list.length; i++) {
         if (index == i) {
+          // icon图标
           this.list[i].delShow = true;
         } else {
+          // icon图标
           this.list[i].delShow = false;
+          // 文字
+          this.list[i].textShow = true;
+          // 输入框
+          this.list[i].inputshow = false;
         }
       }
     },
@@ -247,7 +258,8 @@ export default {
           volume: 10,
           week: [],
           year: this.time.year,
-          musics: null
+          musics: null,
+          itemId: this.itemId
         }
       }).then(res => {
         // console.log(res);
@@ -309,7 +321,8 @@ export default {
           type: "",
           volume: 10,
           week: [],
-          year: this.time.year
+          year: this.time.year,
+          itemId: this.itemId
         }
       }).then(() => {
         // console.log(res);
@@ -351,12 +364,13 @@ export default {
     onEdit(id, index) {
       for (let i = 0; i < this.list.length; i++) {
         if (index == i) {
+          // 输入框
           this.list[i].inputshow = true;
-          // 隐藏文字
-          this.text = false;
+          // 文字
+          this.list[i].textShow = false;
         } else {
+          // 输入框
           this.list[i].inputshow = false;
-          this.text = true;
         }
       }
       this.patternId = id;
@@ -371,12 +385,12 @@ export default {
     },
 
     // 添加播放时间
-    onPlayTime(modelId, modelName) {
+    onPlayTime(modelId, name) {
       this.playShow = true;
 
       this.modelid = modelId;
 
-      this.modelName = modelName;
+      this.name = name;
     }
   }
 };

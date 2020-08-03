@@ -48,7 +48,7 @@ select {
   margin-bottom: 18px !important;
 }
 .parrern .content {
-  margin: -20px 25px;
+  margin: -20px 0;
   height: 70px;
   width: 855px;
   position: relative;

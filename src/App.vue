@@ -6,11 +6,14 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 
 <style>
+.v-modal {
+  z-index: 0 !important;
+}
 body {
   margin: 0 !important;
   padding: 0 !important;

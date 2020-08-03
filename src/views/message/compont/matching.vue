@@ -14,7 +14,7 @@
             @click="onselec(index, item.groupId, item.groupName)"
             :class="{ active: index == current }"
           >
-            <span>{{ item.groupName }}</span>
+            <span>{{ item.name }}</span>
             <span>{{ item.modelName }}</span>
           </li>
         </div>
@@ -30,22 +30,22 @@
             @click="getModelId(item.modelId, index)"
             :class="{ active_1: index == current_1 }"
           >
-            <div class="music" style="color:#15f6f3">{{ item.modelName }}</div>
+            <div class="music" style="color:#15f6f3">{{ item.name }}</div>
             <div class="time">
-              <span style="width: 29%"
-                >播放内容：{{
+              <span style="width: 29%">
+                播放内容：{{
                   item.musics == "" ||
                   item.musics == null ||
                   item.musics == undefined
                     ? ""
                     : item.musics[0].name
-                }}</span
-              >
+                }}
+              </span>
               <span style="width: 29%">
                 播放时间：
                 <select>
                   <option
-                    v-for="(item, index) in item.time"
+                    v-for="(item, index) in item.timeList"
                     :key="index"
                     value
                     >{{ item }}</option
@@ -66,9 +66,10 @@
           </div>
         </div>
         <!-- 底部按钮区域 -->
-        <div class="but">
-          <div class="ok" @click="putPattern()">确定</div>
-          <div class="del">取消</div>
+
+        <div class="select">
+          <div class="confirm" @click="putPattern()">添加</div>
+          <div class="cancel" @click="delShow = true">删除</div>
         </div>
       </div>
     </div>
@@ -79,6 +80,7 @@
 export default {
   data() {
     return {
+      itemId: "",
       // 模式列表
       pattrenList: [],
       // 模式时间
@@ -90,7 +92,7 @@ export default {
       // 分组数量
       groupingNum: "",
       // 分组样式为空
-      current: "",
+      current: -1,
       // 模式样式为空
       current_1: "",
       // 分组id
@@ -102,6 +104,7 @@ export default {
     };
   },
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
     // 获取模式列表
     this.loadPattern();
     // 获取分组列表
@@ -112,10 +115,12 @@ export default {
     loadPattern() {
       this.$axios({
         method: "get",
-        url: "/loudspeaker/model/page"
+        url: "/loudspeaker/model/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
       }).then(res => {
-        // 时间
-        this.times = res.data.data.records[0].time[0];
         // 数量
         this.pattrenNum = res.data.data.total;
         this.pattrenList = res.data.data.records;
@@ -126,7 +131,11 @@ export default {
     loadGrouping() {
       this.$axios({
         method: "GET",
-        url: "/loudspeaker/group/page"
+        url: "/loudspeaker/group/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
       }).then(res => {
         this.groupingList = res.data.data.records;
         // 模式数量
@@ -157,10 +166,12 @@ export default {
         data: {
           groupId: this.groupId,
           modelId: this.modelId,
-          name: `${this.groupName}`
+          name: `${this.groupName}`,
+          itemId: this.itemId
         }
       })
-        .then(() => {
+        .then(res => {
+          console.log(res);
           // 获取分组列表
           this.loadGrouping();
         })

@@ -10,6 +10,9 @@
 .color3 {
   color: #00d8ff !important;
 }
+li {
+  list-style: none;
+}
 .color4 {
   color: #ccc !important;
 }
@@ -92,16 +95,22 @@
 .content1 .right .music {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-}
-.content1 .right .music label {
-  width: 95px;
+  margin-top: 15px;
+  padding: 0 15px 0 25px;
 }
 .content1 .right .music span {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #969696;
-  cursor: pointer;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 5px;
+  color: #15f6f3;
+  border-bottom: 1px solid #000;
+  text-overflow: ellipsis;
+  /*只是起到注解作用*/
+  white-space: nowrap;
+  /*不让文本换行*/
+  overflow: hidden;
+  /*超出的部分显示...*/
 }
 .content1 .right ul {
   padding: 0;
@@ -141,6 +150,27 @@
   font-size: 14px;
   text-align: center !important;
 }
-.content1 .right .xuan:hover {
-  cursor: pointer;
+.select {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 215px;
+  bottom: 35px;
+}
+.select .confirm {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #0bb5b9;
+  background: url("../../assets/img/Yes.png") no-repeat;
+  background-size: 100% 100%;
+}
+.select .cancel {
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color: #f00;
+  background: url("../../assets/img/No.png") no-repeat;
+  background-size: 100% 100%;
 }

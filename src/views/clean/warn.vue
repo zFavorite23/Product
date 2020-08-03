@@ -42,6 +42,7 @@ export default {
   methods: {
     close() {
       this.$parent.warn = !this.$parent.warn;
+      this.$router.push("/clean");
     }
   }
 };

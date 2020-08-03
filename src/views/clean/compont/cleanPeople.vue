@@ -56,6 +56,7 @@
         </template>
       </el-table-column>
     </el-table>
+
     <!-- 新增弹窗 -->
     <el-dialog
       :lock-scroll="false"
@@ -96,20 +97,6 @@
             size="mini"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="垃圾桶：">
-          <el-input v-model="deviceName" size="mini">
-            <i
-              slot="suffix"
-              class="el-input__icon el-icon-delete-solid"
-              @click="getDevices()"
-            ></i>
-          </el-input>
-        </el-form-item>
-        <!-- <el-form-item label="管理人员：">
-          <el-input v-model="list" size="mini">
-            <i slot="suffix" class="el-input__icon el-icon-user-solid" @click="getManage()"></i>
-          </el-input>
-        </el-form-item>-->
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
@@ -158,24 +145,6 @@
             size="mini"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="垃圾桶：">
-          <el-input v-model="deviceName" size="mini">
-            <i
-              slot="suffix"
-              class="el-input__icon el-icon-delete-solid"
-              @click="getDevices()"
-            ></i>
-          </el-input>
-        </el-form-item>
-        <el-form-item label="管理人员：">
-          <el-input v-model="name" size="mini">
-            <i
-              slot="suffix"
-              class="el-input__icon el-icon-user-solid"
-              @click="getManage()"
-            ></i>
-          </el-input>
-        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false" size="mini">取 消</el-button>
@@ -188,54 +157,6 @@
     <!-- <div class="block">
       <el-pagination layout="prev, pager, next" :total="total" @current-change="getPageIndex"></el-pagination>
     </div>-->
-    <!-- 查询所有管理人员弹窗 -->
-    <el-dialog
-      :lock-scroll="false"
-      :visible.sync="centerDialogVisible"
-      width="30%"
-      center
-    >
-      <span slot="footer" class="dialog-footer">
-        <el-checkbox-group v-model="mangae">
-          <el-checkbox
-            v-for="item in manageList"
-            :label="item"
-            :key="item.manageId"
-            @change="addManage(item.manageId, item.manageName)"
-            >{{ item.manageName }}</el-checkbox
-          >
-        </el-checkbox-group>
-        <div style="margin: 15px 0;"></div>
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
-    <!-- 查询所以设备弹框 -->
-    <el-dialog
-      :lock-scroll="false"
-      :visible.sync="centerDialogVisible2"
-      width="30%"
-      center
-    >
-      <span slot="footer" class="dialog-footer">
-        <el-checkbox-group v-model="mangae">
-          <el-checkbox
-            v-for="item in deviceList"
-            :label="item"
-            :key="item.deviceid"
-            @change="addDevices($event, item.deviceCode, item.deviceName)"
-            >{{ item.deviceName }}</el-checkbox
-          >
-        </el-checkbox-group>
-        <div style="margin: 15px 0;"></div>
-        <el-button @click="centerDialogVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible2 = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -243,6 +164,7 @@
 export default {
   data() {
     return {
+      itemId: "",
       total: 0, // 数据的总条数
       input: "", // 搜索框
       tableData: [], // table表单
@@ -259,28 +181,23 @@ export default {
         sex: "",
         // 电话
         tel: "",
-        // 相关设备
-        trashCanList: "",
         // 入职时间
         entryDay: "",
-        // 上级
-        manageName: ""
+        manageId: ""
       }, // from表单
       radio: "1", // 单选框
       value1: "", // 时间框
       id: "", // 编辑人员id
       manageList: [], // 所有管理人员列表
-      deviceList: [], // 所以设备列表
-      mangae: [], // 复选框绑定管理空数组
-      list: "", // 用来存勾选中的管理人员
-      name: "",
-      deviceName: "",
-      devices: [] // 用来存勾选中的设备
+      DeviceCodesList: []
     };
   },
   created() {
+    this.itemId = sessionStorage.getItem("itemId");
     // 获取保洁人员
     this.getClean();
+    this.getManage();
+    this.getDeviceCodes();
   },
   methods: {
     // 获取保洁人员
@@ -290,7 +207,8 @@ export default {
         url: "/cleaning/cleaner/page",
         params: {
           pageNum,
-          pageSize: 10
+          pageSize: 10,
+          itemId: this.itemId
         }
       }).then(res => {
         this.tableData = res.data.data.records;
@@ -302,6 +220,7 @@ export default {
     // 添加保洁人员
     addClean() {
       // 调用接口
+      console.log(this.formInline);
       this.$axios({
         method: "POST",
         url: "/cleaning/cleaner/save",
@@ -315,9 +234,7 @@ export default {
           // 电话
           tel: this.formInline.tel,
           // 入职时间
-          entryDay: this.formInline.entryDay,
-          // 垃圾桶
-          deviceCodes: this.devices
+          entryDay: this.formInline.entryDay
         }
       }).then(res => {
         console.log(res);
@@ -325,10 +242,6 @@ export default {
         this.getClean();
         // 关闭弹窗
         this.dialogVisible = false;
-        // 清空保洁人员原数组
-        this.list = [];
-        // 清空设备原数组
-        this.devices = [];
       });
     },
 
@@ -365,6 +278,7 @@ export default {
         method: "get",
         url: `/cleaning/cleaner/info/${cleanerId}`
       }).then(res => {
+        console.log(res);
         this.formInline = res.data.data;
       });
     },
@@ -386,11 +300,7 @@ export default {
           // 电话
           tel: this.formInline.tel,
           // 入职时间
-          entryDay: this.formInline.entryDay,
-          // 相关设备
-          deviceCodes: this.devices,
-          // 上级
-          manageId: this.list
+          entryDay: this.formInline.entryDay
         }
       }).then(res => {
         console.log(res);
@@ -398,10 +308,6 @@ export default {
         this.dialogVisible2 = false;
         // 重新获取保洁人员
         this.getClean();
-        // 清空保洁人员原数组
-        this.list = [];
-        // 清空设备原数组
-        this.devices = [];
       });
     },
 
@@ -411,48 +317,36 @@ export default {
       this.centerDialogVisible = true;
       this.$axios({
         method: "get",
-        url: "/cleaning/manage/page"
+        url: "/cleaning/manage/page",
+        params: {
+          itemId: this.itemId
+        }
       }).then(res => {
-        console.log(res);
-        this.manageList = res.data.data.records;
+        res.data.data.records.forEach(item => {
+          this.manageList.push({
+            value: item.manageId,
+            label: item.manageName
+          });
+        });
       });
     },
 
-    // 获取所有设备列表
-    getDevices() {
-      // 开启弹窗
-      this.centerDialogVisible2 = true;
+    // 获取所有垃圾桶
+    getDeviceCodes() {
       this.$axios({
         method: "get",
-        url: "/cleaning/trashCan/all"
-      }).then(res => {
-        console.log(res);
-        this.deviceList = res.data.data;
-      });
-    },
-
-    // 给保洁人员添加管理人员
-    addManage(manageId, manageName) {
-      this.list = manageId;
-      this.name = manageName;
-    },
-
-    // 给保洁人员添加设备
-    addDevices(e, deviceCode, deviceName) {
-      this.deviceName = deviceName;
-      // 判断是否选中
-      if (e === true) {
-        // 选中则添加到数组中
-        this.devices.push(deviceCode);
-        console.log(this.devices);
-      } else {
-        // 取消选中 判断是否存在数组中 如果在则删除
-        for (let i = 0; i < this.devices.length; i++) {
-          if (this.devices[i] === deviceCode) {
-            this.devices.splice(i, 1);
-          }
+        url: "/cleaning/trashCan/page",
+        params: {
+          itemId: this.itemId
         }
-      }
+      }).then(res => {
+        res.data.data.records.forEach(item => {
+          this.DeviceCodesList.push({
+            value: item.id,
+            label: item.name
+          });
+        });
+      });
     },
 
     // 获取分页数据
@@ -471,7 +365,8 @@ export default {
           params: {
             likeKeyWords: this.input,
             pageNum: 1,
-            pageSize: 10
+            pageSize: 10,
+            itemId: this.itemId
           }
         }).then(res => {
           this.tableData = res.data.data.records;
