@@ -5,12 +5,12 @@
     <div class="content1">
       <!-- 左侧分组 -->
       <div class="left">
-        <div>所有分组 ({{ num }})</div>
+        <div>所有分组</div>
         <div class="test-1 scroll">
           <li
             v-for="(item, index) in list"
             :key="index"
-            @click="onselec(index, item.groupId)"
+            @click="onselec(index, item.groupId, item.modelName)"
             :class="{ active: index == current }"
           >
             <span v-show="item.textShow">{{ item.name }}</span>
@@ -23,6 +23,7 @@
               type="text"
               v-show="item.inputshow"
               v-model="message"
+              maxlength="6"
               @keyup.enter="keyupInupt()"
             />
             <i
@@ -35,46 +36,40 @@
       </div>
       <!-- 右侧设备 -->
       <div class="right">
-        <div>所有设备 ({{ facilityNum }})</div>
+        <div>所有设备</div>
+        <div class="music">
+          <span
+            v-for="(item, index) in GroupInfo"
+            :key="index"
+            style="color:#f78606"
+            @click="onColor2(index, item.soundId)"
+            :class="{ textColor: index == current3 }"
+          >
+            <!-- 设备离线 -->
+            {{ item.name }}
+          </span>
+        </div>
         <div class="music">
           <span v-for="(item, index) in loudspeakers" :key="index">
             <!-- 设备离线 -->
-            <span
-              class="color2"
-              style="cursor: not-allowed"
+            <label
+              style="cursor: not-allowed;color:red"
               v-if="item.status == 1"
-              >{{ item.name }}</span
+              >{{ item.name }}</label
             >
             <!-- 在当前组里 正常 -->
-            <span
-              @click="onColor(index, item.soundId, item.groupId)"
-              class="color"
-              v-if="item.groupId == groupId && item.status == 0"
-              >{{ item.name }}</span
-            >
-            <!-- 不在当前在别组里  正常 -->
-            <span
-              @click="onColor(index, item.soundId, item.groupId)"
-              class="color4"
-              v-if="
-                item.groupId != null &&
-                  item.groupId != groupId &&
-                  item.status == 0
-              "
-              >{{ item.name }}</span
-            >
-            <!-- 不在任何组里 正常 -->
-            <span
-              class="color3"
-              @click="onColor(index, item.soundId, item.groupId)"
-              v-if="item.groupId == null && item.status == 0"
-              >{{ item.name }}</span
+            <label
+              @click="onColor(index, item.soundId)"
+              :class="{ textColor2: index == current2 }"
+              style="color:#15f6f3"
+              v-if="item.status == 0"
+              >{{ item.name }}</label
             >
           </span>
         </div>
         <div class="select">
           <div class="confirm" @click="addLoudspeaker()">添加</div>
-          <div class="cancel" @click="addLoudspeaker()">删除</div>
+          <div class="cancel" @click="delLoudspeaker()">删除</div>
         </div>
       </div>
     </div>
@@ -90,20 +85,19 @@ export default {
       text: true,
       // 样式为空
       current: -1,
+      current2: -1,
+      current3: -1,
       // 删除图标隐藏
       delShow: false,
       // 输入框隐藏
       inputshow: false,
+      modelName: "",
       // 分组列表
       list: [],
       // 新建分组
       newArr: [],
-      // 分组数量
-      num: "",
       // 音柱列表
       loudspeakers: [],
-      // 音柱设备数量
-      facilityNum: "",
       // 输入框内容
       message: "",
       // 需要修改分组的id
@@ -112,7 +106,7 @@ export default {
       arr: [],
       // 音柱id
       soundId: "",
-      str: []
+      GroupInfo: []
     };
   },
   created() {
@@ -125,9 +119,10 @@ export default {
   mounted() {},
   methods: {
     // 点击添加样式
-    onselec(index, groupId) {
+    onselec(index, groupId, modelName) {
       this.current = index;
       this.groupId = groupId;
+      this.modelName = modelName;
       // this.delShow = true;
       for (let i = 0; i < this.list.length; i++) {
         if (index == i) {
@@ -142,7 +137,7 @@ export default {
           this.list[i].inputshow = false;
         }
       }
-      this.loadLoudspeaker();
+      this.getGroupInfo();
     },
 
     // 获取分组
@@ -156,7 +151,6 @@ export default {
         }
       }).then(res => {
         this.list = res.data.data.records;
-        this.num = res.data.data.total;
         this.list.forEach(item => {
           this.$set(item, "textShow", true);
         });
@@ -181,8 +175,6 @@ export default {
         method: "POST",
         url: "/loudspeaker/group",
         data: {
-          groupId: 0,
-          modelId: 0,
           name: "新建分组",
           itemId: this.itemId
         }
@@ -199,13 +191,15 @@ export default {
 
     // 修改分组
     editGrouping(name, groupId) {
+      console.log(this.modelName);
       this.$axios({
         method: "put",
         url: "/loudspeaker/group",
         data: {
           groupId,
           name,
-          itemId: this.itemId
+          itemId: this.itemId,
+          modelName: this.modelName
         }
       }).then(res => {
         console.log(res);
@@ -248,20 +242,17 @@ export default {
           itemId: this.itemId
         }
       }).then(res => {
-        console.log(res);
         this.loudspeakers = res.data.data.records;
-        this.facilityNum = res.data.data.total;
       });
     },
 
     // 多选音柱
-    onColor(i, soundId) {
-      var idx = this.arr.indexOf(i);
-      if (idx > -1) {
-        this.arr.splice(idx, 1);
-      } else {
-        this.arr.push(i);
-      }
+    onColor(index, soundId) {
+      this.current2 = index;
+      this.soundId = soundId;
+    },
+    onColor2(index, soundId) {
+      this.current3 = index;
       this.soundId = soundId;
     },
 
@@ -274,9 +265,10 @@ export default {
           groupId: this.groupId,
           soundId: this.soundId
         }
-      }).then(res => {
-        console.log(res);
+      }).then(() => {
+        this.current2 = -1;
         this.loadLoudspeaker();
+        this.getGroupInfo();
       });
     },
 
@@ -289,9 +281,20 @@ export default {
           groupId: this.groupId,
           soundId: this.soundId
         }
-      }).then(res => {
-        console.log(res);
+      }).then(() => {
+        this.getGroupInfo();
         this.loadLoudspeaker();
+        this.current3 = -1;
+      });
+    },
+
+    // 根据id查询设备所在分组
+    getGroupInfo() {
+      this.$axios({
+        method: "get",
+        url: `/loudspeaker/group/sound/${this.groupId}`
+      }).then(res => {
+        this.GroupInfo = res.data.data.records;
       });
     }
   }

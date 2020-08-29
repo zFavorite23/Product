@@ -21,11 +21,11 @@
           >匹配管理</span
         >
       </router-link>
-      <!-- <router-link to="/loop">
-        <span @click="tag = '回路控制'" :class="{ hover: tag == '回路控制' }"
-          >回路控制</span
+      <router-link to="/paging">
+        <span @click="tag = '实时寻呼'" :class="{ hover: tag == '实时寻呼' }"
+          >实时寻呼</span
         >
-      </router-link> -->
+      </router-link>
       <div class="close" @click="close()">
         <img src="../../assets/img/close.png" alt />
       </div>

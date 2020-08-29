@@ -3,8 +3,11 @@
 }
 
 // 正常选中
-.color {
-    color: #f78606 !important;
+.textColor {
+    color: #969696!important;
+}
+.textColor2 {
+    color: #f78606!important;
 }
 
 // 离线
@@ -119,26 +122,21 @@ li {
     position: relative;
 
     .music {
-        display   : flex;
-        flex-wrap : wrap;
-        margin-top: 15px;
-        padding   : 0 15px 0 25px;
+        display        : flex;
+        flex-wrap      : wrap;
+        // justify-content: space-between;
+        padding        : 0 10px 0 18px;
 
         span {
-            width        : 120px;
-            height       : 30px;
-            line-height  : 30px;
-            margin-right : 5px;
-            color        : #15f6f3;
-            border-bottom: 1px solid #000;
+            width        : 95px;
+            margin-top   : 15px;
+            font-size    : 14px;
+            margin-right: 13px;
+            color        : #969696;
+            cursor       : pointer;
             text-overflow: ellipsis;
-            /*只是起到注解作用*/
-
-            white-space: nowrap;
-            /*不让文本换行*/
-
-            overflow: hidden;
-            /*超出的部分显示...*/
+            overflow     : hidden;
+            white-space  : nowrap;
         }
     }
 }

@@ -2,10 +2,9 @@
   <div class="musicList">
     <div class="content">
       <div class="item">
-        <span>文件名称</span>
-        <span>标签</span>
-        <span>上传时间</span>
-        <!-- <span>状态</span> -->
+        <span style="flex:33.33%">文件名称</span>
+        <span style="flex:33.33%">标签</span>
+        <span style="flex:33.33%">上传时间</span>
       </div>
       <div class="scroll">
         <div
@@ -20,6 +19,7 @@
             <select
               v-model="item.label"
               @change="label(item.label, item.musicId, item.name, item.url)"
+              style="border: none;outline: none;background: #905200;color: white;"
             >
               <option
                 v-for="(item, index) in labelList"
@@ -30,16 +30,13 @@
             </select>
           </span>
           <span>{{ item.createTime }}</span>
-          <!-- <span>
-          <img src="../../../assets/暂停.png" alt />
-          </span>-->
-          <span style="color:red" @click="onDelMusic(item.musicId)"></span>
         </div>
-      </div>
-      <!-- 底部按钮区域 -->
-      <div class="select">
-        <div class="confirm" @click="upMusic()">确定</div>
-        <div class="cancel" @click="cancel()">取消</div>
+
+        <!-- 底部按钮区域 -->
+        <div class="select">
+          <div class="confirm" @click="upMusic()">确定</div>
+          <div class="cancel" @click="cancel()">取消</div>
+        </div>
       </div>
     </div>
   </div>
@@ -138,24 +135,24 @@ export default {
   .item {
     color: white;
     display: flex;
-    margin: 0 20px;
-    padding-top: 10px;
+    padding-top: 8px;
     margin-bottom: 10px;
+    margin-right: 10px;
     span {
       font-size: 14px;
-      width: 25%;
+      text-align: center;
     }
   }
   .play {
     font-size: 14px;
     color: white;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    height: 30px;
+    line-height: 30px;
     span {
-      width: 25%;
-      flex: 25%;
+      flex: 33.33%;
       font-size: 12px;
+      text-align: center;
     }
     img {
       width: 25px;
@@ -167,9 +164,8 @@ export default {
   width: 150px;
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  left: 35%;
-  bottom: 35px;
+  margin: 10px 0;
+  margin-left: 39%;
 
   .confirm {
     width: 60px;

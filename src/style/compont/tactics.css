@@ -147,6 +147,11 @@ i {
   background-size: 100% 100%;
   text-align: center;
 }
+.tactics .status .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
 .tactics .status .data {
   margin-top: 15px;
   padding: 0 35px;

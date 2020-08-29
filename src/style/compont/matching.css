@@ -4,10 +4,12 @@ i {
 .active {
   background: url("../../assets/img/text_bg.png") no-repeat;
   background-size: 100%;
-  color: #7a5320;
 }
-.active_1 {
-  background-color: #ccc !important;
+.textColor {
+  color: #f78606 !important;
+}
+.textColor_1 {
+  color: #15f6f3 !important;
 }
 .search {
   text-align: right;
@@ -73,13 +75,13 @@ select {
   background-size: 100%;
 }
 .main .playList {
-  margin: -20px 5px;
+  margin: -20px 0px;
   height: 80px;
 }
 .main .playList .music {
   font-size: 14px;
   color: white;
-  margin-left: 15px;
+  margin-left: 5px;
   padding-top: 8px;
   text-align: left;
 }
@@ -88,6 +90,7 @@ select {
   justify-content: space-between;
   color: white;
   margin-top: 10px;
+  padding: 0 5px;
 }
 .main .playList .time span {
   text-overflow: ellipsis;

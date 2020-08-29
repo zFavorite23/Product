@@ -8,7 +8,7 @@
       </div>
     </div>
     <!-- 中间内容区域 -->
-    <div class="head">全部模式 ( {{ num }} )</div>
+    <div class="head">全部模式</div>
     <div class="list test-1">
       <div class="content img" v-for="(item, index) in list" :key="index">
         <div
@@ -23,6 +23,7 @@
             type="text"
             v-show="item.inputshow"
             v-model="message"
+            maxlength="6"
             @keyup.enter="keyupInupt(item.playOrder)"
           />
         </div>
@@ -40,13 +41,14 @@
           <span class="start">
             <span>
               播放内容:
-              {{
-                item.musics == "" ||
-                item.musics == null ||
-                item.musics == undefined
-                  ? ""
-                  : item.musics[0].name
-              }}
+              <select style="width:100px">
+                <option
+                  v-for="(item, index) in item.musics"
+                  :key="index"
+                  value
+                  >{{ item.name }}</option
+                >
+              </select>
             </span>
             <span class="icon" @click="onAddMusic(item.modelId)"></span>
           </span>
@@ -81,19 +83,15 @@
           </span>
           <span>
             音量：
-            <span>
-              <img
-                src="../../../assets/img/min.png"
-                @click="onSub(item.volume, item.modelId)"
-              />
-            </span>
-            <span>{{ item.volume }}</span>
-            <span>
-              <img
-                src="../../../assets/img/add.png"
-                @click="onAdd(item.volume, item.modelId)"
-              />
-            </span>
+            <i
+              class="el-icon-remove"
+              @click="onSub(item.volume, item.modelId)"
+            ></i>
+            <span v-text="item.volume"></span>
+            <i
+              class="el-icon-circle-plus"
+              @click="onAdd(item.volume, item.modelId)"
+            ></i>
           </span>
         </div>
       </div>
@@ -145,8 +143,6 @@ export default {
       isShow: false,
       // 需要删除模式的id
       id: "",
-      // 模式的数量
-      num: "",
       // 输入框隐藏
       inputshow: false,
       // 输入框内容
@@ -181,9 +177,8 @@ export default {
           itemId: this.itemId
         }
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         // 数量
-        this.num = res.data.data.total;
         this.list = res.data.data.records;
         this.list.forEach(item => {
           this.$set(item, "textShow", true);
@@ -199,7 +194,7 @@ export default {
       this.id = id;
     },
 
-    // 点击确定删除分组
+    // 点击确定删除模式
     onDelPattern() {
       this.$axios({
         method: "DELETE",
@@ -271,8 +266,14 @@ export default {
       });
     },
 
-    // 音量改变
-    addVolume(num, id) {
+    // 增加音量
+    onAdd(num, id) {
+      if (num >= 15) {
+        return;
+      } else {
+        num++;
+      }
+      console.log(num);
       this.$axios({
         method: "put",
         url: "loudspeaker/model/volume",
@@ -281,26 +282,26 @@ export default {
           volume: num
         }
       }).then(() => {});
-    },
-    // 增加
-    onAdd(num, id) {
-      if (num >= 15) {
-        return;
-      } else {
-        num++;
-      }
-      this.addVolume(num, id);
       // 重新渲染页面
       this.loadPattern();
     },
-    // 减少
+
+    // 减少音量
     onSub(num, id) {
       if (num <= 0) {
         return;
       } else {
         num--;
       }
-      this.addVolume(num, id);
+      console.log(num);
+      this.$axios({
+        method: "put",
+        url: "loudspeaker/model/volume",
+        data: {
+          modelId: id,
+          volume: num
+        }
+      }).then(() => {});
       // 重新渲染页面
       this.loadPattern();
     },
@@ -347,7 +348,8 @@ export default {
           type: "",
           volume: 10,
           week: [],
-          year: this.time.year
+          year: this.time.year,
+          itemId: this.itemId
         }
       }).then(() => {});
     },

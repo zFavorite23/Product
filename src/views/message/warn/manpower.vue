@@ -1,65 +1,56 @@
 <template>
   <div class="manpower">
-    <div class="search">
-      <select>
-        <option value>设备选择</option>
+    <div class="search" style="margin-left:5px">
+      <span>类型选择</span>
+      <select v-model="Device" @change="DeviceSwitchover">
+        <option v-for="item in DeviceClasses" :value="item.value" :key="item.value">{{ item.label }}</option>
       </select>
-      <select>
-        <option value>状态选择</option>
+      <select v-model="deviceId">
+        <option
+          v-for="item in DeviceList"
+          :value="item.deviceId"
+          :key="item.deviceId"
+        >{{ item.deviceName }}</option>
       </select>
-      <select>
-        <option value>2020</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <span class="lianjie">-</span>
-      <select>
-        <option value>2020</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <button>查询</button>
-      <span>
-        累计告警次数:
-        <span class="margin">0</span>
-      </span>
-      <span>
-        今日告警次数:
-        <span class="margin">0</span>
-      </span>
+      <el-date-picker
+        v-model="timeList"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        value-format="yyyy-MM-dd"
+        size="mini"
+      ></el-date-picker>
+      <button @click="inquire()">查询</button>
     </div>
     <div class="content">
-      <div class="info">
-        <div class="name">
-          <span style="color:#00f8f8">[ 人工处理 ]</span>
-          <span style="color:#e68600;margin-left:5px">18号配电柜1路</span>
+      <div class="info" v-for="(item, index) in warnList" :key="index">
+        <div v-if="warnList.length != 0" class="name">
+          <span style="color:#e68600;margin-left:5px">{{ item.deviceName }}</span>
+          <span v-if="item.status == 1" style="color:#00f8f8">人工处理</span>
         </div>
-        <div class="cause">
+        <div v-if="warnList.length != 0" class="cause">
           <div>
-            <span>告警原因及建议：功率过低，存在故障路灯，是否请排查电路</span>
-          </div>
-          <div>
-            <span>负责人：admin</span>
-            <span>2020-06-09 19:09:27</span>
+            <span>
+              告警原因及建议：{{ item.dictName }}，建议{{
+              item.remark
+              }}。
+            </span>
           </div>
         </div>
-        <div class="time">
+        <div v-if="warnList.length != 0" class="time">
           <div>
-            <span>提示时间：2020-06-08 19:25:02</span>
-            <span>结束时间：2020-06-08 19:25:02</span>
+            <span>提示时间：{{ item.createTime }}</span>
+            <span>结束时间：{{ item.disposeTime }}</span>
           </div>
           <div>
-            <span>响应时间：3</span>
-            <span>持续时间：0天23小时44分</span>
+            <span style="margin-right:35px">响应时间：3小时</span>
+            <span>持续时间：{{ item.durationTime }}</span>
           </div>
+        </div>
+        <div v-if="warnList.length != 0" class="principal">
+          <span>负责人：{{ item.disposePeople }}</span>
+          <span></span>
         </div>
       </div>
     </div>
@@ -137,20 +128,21 @@ export default {};
   display: flex;
   justify-content: space-between;
 }
-.manpower .content .info .time {
+.content .info .time {
   display: flex;
+  justify-content: space-between;
   margin-top: 10px;
   padding-bottom: 10px;
   color: #00f8f8;
   font-size: 12px;
 }
-.manpower .content .info .time div:nth-child(1) {
-  flex: 60%;
+.content .info .time div:nth-child(1) {
+  flex: 50%;
   display: flex;
   justify-content: space-between;
 }
-.manpower .content .info .time div:nth-child(2) {
-  flex: 40%;
+.content .info .time div:nth-child(2) {
+  flex: 50%;
   text-align: right;
 }
 </style>

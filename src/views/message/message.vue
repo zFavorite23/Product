@@ -21,7 +21,7 @@
             </div>
             <div>
               <span style="font-size: 24px;"
-                >{{ ((num.onLine / num.total) * 100).toFixed(2) }}%</span
+                >{{ ((num.onLine / num.total) * 100).toFixed(1) }}%</span
               >
               <span>在线率</span>
             </div>
@@ -53,12 +53,26 @@
         </div>
         <div class="left5">
           <div class="title2">
-            <span>姓名</span>
-            <span>事件</span>
-            <span>时间</span>
-            <span>次数</span>
+            <span style="flex: 15%;">姓名</span>
+            <span>开启日期</span>
+            <span>时间区间</span>
+            <span style="flex: 15%;">时长</span>
           </div>
-          <div class="text">暂无最新数据</div>
+          <div class="scroll">
+            <div
+              class="text"
+              v-for="(item, index) in speakLogList"
+              :key="index"
+            >
+              <span style="flex: 15%;">admin</span>
+              <span>{{ item.startTime.substring(0, 10) }}</span>
+              <span
+                >{{ item.startTime.substring(11, 19) }} -
+                {{ item.endTime.substring(11, 19) }}</span
+              >
+              <span style="flex: 15%;">{{ item.lastTime }}s</span>
+            </div>
+          </div>
         </div>
       </div>
       <!-- 右侧数据区域 -->
@@ -67,29 +81,6 @@
           <div class="left">
             <operation v-if="operation"></operation>
             <warn v-if="warn"></warn>
-            <!-- <div class="info">
-              <div class="coordinate">
-                <span>大门</span>
-              </div>
-              <div class="panel">
-                <div>
-                  <span>面板</span>
-                  <span>
-                    <p>背景音乐</p>
-                    <p>业务广播</p>
-                    <p>实时广播</p>
-                  </span>
-                </div>
-                <div>
-                  <span>设备状态</span>
-                  <span>在线</span>
-                </div>
-                <div>
-                  <span>播放音量</span>
-                  <span>12</span>
-                </div>
-              </div>
-            </div>-->
           </div>
           <div class="right">
             <div
@@ -122,7 +113,8 @@ export default {
       operation: false,
       warn: false,
       num: "",
-      tag: ""
+      tag: "",
+      speakLogList: []
     };
   },
   methods: {
@@ -139,6 +131,8 @@ export default {
       this.$router.push("/Mall");
       this.tag = "告警记录";
     },
+
+    // 设备数量统计
     getnum() {
       this.$axios({
         method: "get",
@@ -147,10 +141,25 @@ export default {
         // console.log(res);
         this.num = res.data.data;
       });
+    },
+
+    // 寻呼日志记录
+    getSpeakLog() {
+      this.$axios({
+        method: "get",
+        url: "/loudspeaker/speakLog/page",
+        params: {
+          size: 500
+        }
+      }).then(res => {
+        console.log(res);
+        this.speakLogList = res.data.data.records;
+      });
     }
   },
   created() {
     this.getnum();
+    this.getSpeakLog();
   }
 };
 </script>

@@ -25,7 +25,7 @@
               type="text"
               v-show="item.inputshow"
               v-model="message"
-              @keyup.enter="keyupInupt()"
+              @blur="keyupInupt()"
             />
             <i
               class="el-icon-delete"
@@ -74,7 +74,10 @@
       </div>
     </div>
     <div class="status">
-      <span>状态面板</span>
+      <span class="title">
+        <span>分区名称</span>
+        <span>模式名称</span>
+      </span>
       <div class="data">
         <div
           v-for="(item, index) in groupList"

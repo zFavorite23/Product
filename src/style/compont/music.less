@@ -25,17 +25,24 @@ i {
   font-size      : 14px;
   color          : white;
 
+  item {
+    display: flex;
+    span {
+      text-align: center;
+    }
+  }
+
   input {
     padding-left: 15px;
   }
 }
 
-.content {
-  margin-top: 10px;
+.content1 {
+  margin-top     : 10px;
   background     : url("../../assets/img/框3.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   width          : 865px;
-  height         : 375px;
+  height         : 380px;
 
   .scroll {
     overflow-y: auto;
@@ -50,16 +57,37 @@ i {
   }
 
   .item {
-    color        : white;
-    display      : flex;
-    // margin-left: ;
-    padding-top  : 20px;
-    margin-bottom: 10px;
-    text-align: center;
+    color         : white;
+    display       : flex;
+    position: relative;
+    padding-top   : 10px;
+    margin-bottom : 10px;
+    text-align    : center;
 
     span {
       font-size: 14px;
       width    : 25%;
+    }
+
+    .el-icon-s-operation {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+    }
+
+    .orderByList {
+      background     : url("../../assets/img/map_bg.png") no-repeat;
+      background-size: 100% 100%;
+      padding: 5px;
+      width: 80px;
+      position: absolute;
+      top: 35px;
+      right: -20px;
+      div {
+        margin-bottom: 5px;
+        font-size: 12px;
+      }
     }
   }
 
@@ -78,7 +106,7 @@ i {
 
     .name {
       display      : inline-block;
-      margin-left  : 45px;
+      margin-left  : 40px;
       width        : 140px;
       text-overflow: ellipsis;
       /*只是起到注解作用*/
@@ -91,6 +119,55 @@ i {
     img {
       width : 25px;
       height: 25px;
+    }
+  }
+
+  .delClean {
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    background: url("../../assets/img/map_bg.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 195px;
+    left: 30%;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    input {
+      outline-style: none;
+      border: 0px;
+      margin: 15px 0;
+      padding-left: 3px;
+    }
+
+    .select {
+      margin-top: 35px;
+      width: 150px;
+      display: flex;
+      justify-content: space-between;
+
+      .confirm {
+        width: 60px;
+        height: 20px;
+        line-height: 20px;
+        color: #0bb5b9;
+        background: url("../../assets/img/Yes.png") no-repeat;
+        background-size: 100% 100%;
+      }
+
+      .cancel {
+        width: 60px;
+        height: 20px;
+        line-height: 20px;
+        color: #f00;
+        background: url("../../assets/img/No.png") no-repeat;
+        background-size: 100% 100%;
+      }
     }
   }
 }

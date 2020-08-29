@@ -239,7 +239,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* 筛序区域 -------------------------------------------------*/
 
 .all .search select {
@@ -281,7 +281,7 @@ export default {
   margin-top: 5px;
   background: url("../../../assets/img/框3.png") no-repeat;
   background-size: 100% 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   font-size: 14px;
 }
 .content::-webkit-scrollbar {

@@ -24,11 +24,11 @@
 }
 
 .map {
-  height    : 100vh;
-  width     : 100%;
-  position  : absolute;
-  top       : -80px;
-  left      : 0;
+  height       : 100vh;
+  width        : 100%;
+  position     : absolute;
+  top          : -80px;
+  left         : 0;
   // z-index   : -2;
 }
 
@@ -137,7 +137,7 @@
     }
 
     .right {
-      flex: 10%;
+      flex   : 10%;
       z-index: 10;
 
       div {
@@ -321,38 +321,42 @@
   margin-top: 5px;
 }
 
+
 .left5 {
   margin-top: 20px;
 
+  .scroll {
+    height    : 500px;
+    overflow-y: auto;
+  }
+
+  .scroll::-webkit-scrollbar {
+    display: none;
+  }
+
   .title2 {
     display         : flex;
-    justify-content : space-between;
-    padding-right   : 20px;
-    padding-left    : 15px;
     height          : 30px;
     line-height     : 30px;
     font-size       : 16px;
     background-color: black;
+    width           : 100%;
+
+    span {
+      flex      : 35%;
+      text-align: center;
+    }
   }
 
-  .from {
-    display        : flex;
-    justify-content: space-between;
-    padding-right  : 40px;
-    padding-left   : 15px;
-    height         : 40px;
-    line-height    : 40px;
-    font-size      : 14px;
-  }
-
-  .from span:last-child {
-    color: #00d8ff;
-  }
 
   .text {
-    margin-top: 15px;
-    font-size : 14px;
-    text-align: center;
+    display   : flex;
+    margin-top: 5px;
+
+    span {
+      flex      : 35%;
+      text-align: center;
+    }
   }
 }
 

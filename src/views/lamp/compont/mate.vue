@@ -9,16 +9,16 @@
         <div
           v-for="(item, index) in groupList"
           :key="index"
-          @click="onselec(index, item.groupId, item.modelId)"
+          @click="onselec(index, item.groupId, item.modelId, item.modelName)"
           :class="{ active: index == current }"
         >
           <span>{{ item.name }}</span>
           <span>{{ item.modelName }}</span>
         </div>
       </div>
-      <!-- 添加模式 -->
+      <!-- 删除模式 -->
       <div class="addModel" v-show="delShow">
-        <span>是否删除分区模式</span>
+        <span>是否解除分区模式</span>
         <div class="select">
           <div class="confirm" @click="delGroupModelList()">确定</div>
           <div class="cancel" @click="delShow = false">取消</div>
@@ -32,9 +32,9 @@
           class="main"
           v-for="(item, index) in modelList"
           :key="index"
-          @click="onselec2(index, item.modelId)"
+          @click="onselec2(item.name, item.modelId)"
         >
-          <div class="top" :class="{ color1: index == current2 }">
+          <div class="top" :class="{ color1: name == item.name }">
             <span>{{ item.name }}</span>
             <span>
               <span>类型：GT</span>
@@ -44,40 +44,64 @@
             </span>
           </div>
 
-          <div class="bot" :class="{ color2: index == current2 }">
-            <div>
-              <span v-if="item.status == 1">光照开关</span>
-              <span v-if="item.status == 0">时段开关</span>
-              <span style="font-size:12px">{{ item.city }}</span>
-              <span style="font-size:12px">{{ item.sesson }}</span>
-              <span>关闭时间</span>
-              <span style="font-size:12px">{{ item.downTime }}</span>
+          <div class="bot" :class="{ color2: name == item.name }">
+            <div style="flex:62%">
+              <div>
+                <span v-if="item.status == 1">光照开关</span>
+                <span v-if="item.status == 0">时段开关</span>
+                <span style="font-size:12px">{{ item.city }}</span>
+                <span style="font-size:12px">{{ item.sesson }}</span>
+              </div>
+              <div>
+                <span>时间递减</span>
+                <span style="font-size:12px">
+                  {{
+                    `${
+                      item.selfData[0].selfTime == ""
+                        ? "无"
+                        : `${item.selfData[0].selfTime}`
+                    }`
+                  }}
+                </span>
+                <span style="font-size:12px">
+                  {{
+                    `${
+                      item.selfData[0].lightNess == null
+                        ? ""
+                        : `${item.selfData[0].lightNess} %`
+                    }`
+                  }}
+                </span>
+                <span style="font-size:12px">
+                  {{
+                    item.selfData.length > 1 ? item.selfData[1].selfTime : ""
+                  }}
+                </span>
+                <span style="font-size:12px">
+                  {{
+                    item.selfData.length > 1
+                      ? `${item.selfData[1].lightNess}%`
+                      : ""
+                  }}
+                </span>
+              </div>
             </div>
-            <div>
-              <span>时间递减</span>
-              <span style="font-size:12px">{{
-                item.selfData[0].selfTime
-              }}</span>
-              <span style="font-size:12px">{{
-                `${item.selfData[0].lightNess} lux`
-              }}</span>
-              <span style="font-size:12px">{{
-                item.selfData.length > 1 ? item.selfData[1].selfTime : ""
-              }}</span>
-              <span style="font-size:12px">{{
-                item.selfData.length > 1
-                  ? `${item.selfData[1].lightNess}lux`
-                  : ""
-              }}</span>
-              <span>无人时亮度</span>
-              <span style="font-size:12px">{{ item.noLightness }}lux</span>
+            <div style="flex:40%">
+              <div>
+                <span>关闭时间</span>
+                <span style="font-size:12px">{{ item.downTime }}</span>
+              </div>
+              <div>
+                <span>无人时亮度</span>
+                <span style="font-size:12px">{{ item.noLightness }}%</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="select">
-        <div class="confirm" @click="addGroupModelList()">添加</div>
-        <div class="cancel" @click="delShow = true">删除</div>
+        <div class="confirm" @click="addGroupModelList()">匹配</div>
+        <div class="cancel" @click="delShow = true">解除</div>
       </div>
     </div>
   </div>
@@ -94,19 +118,22 @@ export default {
       groupList: [], // 分组列表
       modelList: [], // 模式列表
       groupId: "", // 分组ID
-      modelId: "" // 模式id
+      modelId: "", // 模式id
+      ModelShow: false,
+      name: ""
     };
   },
   methods: {
     // 点击添加样式
-    onselec(index, groupId, modelId) {
+    onselec(index, groupId, modelId, name) {
+      this.name = name;
       this.current = index;
       this.groupId = groupId;
       this.modelId = modelId;
     },
     // 点击添加样式
-    onselec2(index, modelId) {
-      this.current2 = index;
+    onselec2(name, modelId) {
+      this.name = name;
       this.modelId = modelId;
     },
 
@@ -174,5 +201,6 @@ export default {
   }
 };
 </script>
+
 
 <style src="../../../style/compont/mate.css" scoped></style>

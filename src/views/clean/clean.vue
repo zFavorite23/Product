@@ -16,9 +16,9 @@
           </div>
           <div class="you">
             <div>
-              <span style="font-size: 24px;text-align:right">
-                {{ DevicesList.total }}
-              </span>
+              <span style="font-size: 24px;text-align:right">{{
+                DevicesList.total
+              }}</span>
               <span>设备总数</span>
             </div>
             <div>
@@ -304,9 +304,12 @@ export default {
     getDevicesNum() {
       this.$axios({
         method: "get",
-        url: "/cleaning/statistic/num"
+        url: "/cleaning/statistic/num",
+        params: {
+          itemId: this.itemId
+        }
       }).then(res => {
-        // console.log(res);
+        console.log(res);
         this.DevicesList = res.data.data;
       });
     },

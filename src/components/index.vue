@@ -69,7 +69,7 @@
           }"
           :position="{ lng: item.longitude, lat: item.latitude }"
           :dragging="true"
-          @click="infoWindowOpen(index)"
+          @click="infoWindowOpen(index, item)"
         >
           <bm-info-window
             :show="item.show"
@@ -169,12 +169,28 @@ export default {
     },
 
     // 获取所有摄像头
+    getWebCam() {
+      this.$axios({
+        method: "get",
+        url: "/security/webcam/page",
+        params: {
+          itemId: this.itemId,
+          size: 20
+        }
+      }).then(res => {
+        this.list = res.data.data.records;
+        this.list.forEach(item => {
+          this.$set(item, "show", false);
+        });
+      });
+    },
 
     // 标注点弹窗
     infoWindowClose() {
       this.show = false;
     },
-    infoWindowOpen(index) {
+    infoWindowOpen(index, item) {
+      console.log(item);
       for (let i = 0; i < this.list.length; i++) {
         if (i == index) {
           this.list[i].show = true;
@@ -209,6 +225,8 @@ export default {
           this.getLoudspeaker();
         } else if (val.path == "/clean") {
           this.getCleaning();
+        } else if (val.path == "/security") {
+          this.getWebCam();
         } else {
           this.list = [];
         }
@@ -219,6 +237,14 @@ export default {
   }
 };
 </script>
+<style>
+.pano_close {
+  top: 25px !important;
+}
+.anchorBL {
+  display: none;
+}
+</style>
 
 <style scoped>
 .map {

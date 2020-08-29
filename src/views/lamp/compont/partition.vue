@@ -23,7 +23,8 @@
             type="text"
             v-show="item.inputshow"
             v-model="message"
-            @keyup.enter="keyupInupt()"
+            @blur="keyupInupt()"
+            maxlength="6"
           />
           <i
             class="el-icon-edit-outline"
@@ -36,7 +37,7 @@
       <!--  添加分组 -->
       <div class="addGroup" v-show="addShow">
         <span>新建分区名称</span>
-        <input type="text" v-model="name" />
+        <input type="text" v-model="name" maxlength="6" />
         <div class="select">
           <div class="confirm" @click="addGroup">确定</div>
           <div class="cancel" @click="addShow = false">取消</div>
@@ -289,5 +290,4 @@ export default {
   }
 };
 </script>
-
 <style src="../../../style/compont/partition.css" scoped></style>

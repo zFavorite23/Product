@@ -2,10 +2,8 @@
   <div class="operation">
     <nav>
       <router-link to="/rubbish">
-        <span
-          @click="tag = '垃圾桶上传'"
-          :class="{ hover: tag == '垃圾桶上传' }"
-          >垃圾桶上传</span
+        <span @click="tag = '垃圾桶'" :class="{ hover: tag == '垃圾桶' }"
+          >垃圾桶</span
         >
       </router-link>
       <router-link to="/cleanPeople">
@@ -34,7 +32,7 @@ export default {
   data() {
     return {
       // 文本样式
-      tag: "垃圾桶上传"
+      tag: "垃圾桶"
     };
   },
   methods: {

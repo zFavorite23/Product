@@ -4,10 +4,6 @@
       <i class="el-icon-plus"></i>
       新建模式
     </div>
-    <div class="edit_1" @click="onClick = false">
-      <i class="el-icon-edit-outline"></i>
-      编辑模式
-    </div>
     <div class="name">
       <span>模式名称</span>
       <div class="data">
@@ -18,29 +14,22 @@
           :class="{ active: index == current }"
         >
           <i v-show="item.textShow">{{ item.name }}</i>
-          <i
-            class="el-icon-edit-outline"
-            v-show="item.delShow"
-            @click="onEdit(index)"
-          ></i>
+          <i class="el-icon-edit-outline" v-show="item.delShow" @click="onEdit(index)"></i>
           <input
             type="text"
             v-show="item.inputshow"
-            v-model="message"
-            @keyup.enter="keyupInupt()"
+            v-model.trim="message"
+            @blur="keyupInupt()"
+            maxlength="6"
           />
-          <i
-            class="el-icon-delete"
-            v-show="item.delShow"
-            @click="delShow = true"
-          ></i>
+          <i class="el-icon-delete" v-show="item.delShow" @click="delShow = true"></i>
         </span>
       </div>
 
       <!-- 添加模式 -->
       <div class="addModel" v-show="addShow">
         <span>新建模式名称</span>
-        <input type="text" v-model="ModelName" />
+        <input type="text" v-model.trim="ModelName" maxlength="6" />
         <div class="select">
           <div class="confirm" @click="addModel">确定</div>
           <div class="cancel" @click="addShow = false">取消</div>
@@ -55,30 +44,27 @@
           <div class="cancel" @click="delShow = false">取消</div>
         </div>
       </div>
+
+      <!-- 编辑模式 -->
+      <div class="editModel" v-show="editShow">
+        <span>是否保存当前模式</span>
+        <div class="select" style="margin-top:20px">
+          <div class="confirm" @click="confirmEdit()">确定</div>
+          <div class="cancel" @click="editShow = false">取消</div>
+        </div>
+      </div>
     </div>
 
     <!-- 修改模式 -->
     <div class="edit" :class="{ on: onClick }">
       <span>编辑面板</span>
-      <div class="info">
-        <div style="position: relative">
-          <span style="color: #15f6f3">模式控制</span>
-          <input
-            style="top:5px"
-            class="radio"
-            type="radio"
-            value="0"
-            v-model="modeInfo.pattern"
-          />
-          <span>常亮模式</span>
-          <input
-            style="top:5px"
-            class="radio2"
-            type="radio"
-            value="1"
-            v-model="modeInfo.pattern"
-          />
-          <span style="margin-left:35px">感应模式</span>
+      <div class="info" v-show="modelList.length != 0">
+        <div style="position: relative;margin-bottom: 10px;">
+          <span style="color: #15f6f3">模式选择</span>
+          <input style="top:5px" class="radio" type="radio" value="1" v-model="modeInfo.pattern" />
+          <span>普通模式</span>
+          <input style="top:5px" class="radio2" type="radio" value="0" v-model="modeInfo.pattern" />
+          <span style="margin-left:35px;">智慧模式</span>
         </div>
         <div style="position: relative">
           <span style="color: #15f6f3">开关控制</span>
@@ -101,13 +87,7 @@
           />
           <span style="margin-left:35px">时段开关</span>
         </div>
-        <div>
-          <input
-            type="text"
-            v-if="onClick == true"
-            v-model="modeInfo.province"
-            style="margin-left: 114px"
-          />
+        <div v-if="modeInfo.status == 1">
           <select
             v-if="onClick == false"
             style="margin-left:115px"
@@ -122,8 +102,6 @@
               :value="item.value"
             ></option>
           </select>
-
-          <input type="text" v-model="modeInfo.city" v-if="onClick == true" />
 
           <select v-if="onClick == false" v-model="modeInfo.city">
             <option
@@ -151,6 +129,7 @@
             style="width:157px"
             placeholder="添加开始时间"
             v-model="modeInfo.openTime"
+            maxlength="5"
           />
         </div>
         <div>
@@ -160,45 +139,61 @@
             style="width:157px"
             placeholder="添加关闭时间"
             v-model="modeInfo.downTime"
+            maxlength="5"
           />
         </div>
-        <div v-for="(item, index) in modeInfo.selfData" :key="index">
-          <span style="color: #15f6f3">亮度控制</span>
-          <span>时间亮度</span>
-          <input type="text" placeholder="开始时间" v-model="item.selfTime" />
-          <input
-            placeholder="开始亮度"
-            type="text"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
-            v-model.number="item.lightNess"
-          />
-          <i class="el-icon-circle-plus" @click="add()"></i>
-          <i class="el-icon-remove" @click="del(index)"></i>
+        <div v-if="modeInfo.pattern == 1" style="margin-top: 10px;">
+          <nav v-for="(item, index) in modeInfo.selfData" :key="index">
+            <span style="color: #15f6f3">亮度控制</span>
+            <span style="margin-right:68px">时间亮度</span>
+            <input
+              style=" width:100px"
+              type="text"
+              placeholder="开始时间"
+              maxlength="5"
+              v-model="item.selfTime"
+            />
+            <input
+              style=" width:100px"
+              placeholder="开始亮度"
+              type="text"
+              onkeyup="value=value.replace(/[^\d]/g,'')"
+              v-model.number="item.lightNess"
+              oninput="if(value>100)value=100;if(value<0)value=10"
+            />%
+            <i class="el-icon-circle-plus" @click="add()"></i>
+            <i class="el-icon-remove" @click="del(index)"></i>
+          </nav>
         </div>
-        <!-- <div>
-          <span style="margin-left:115px;margin-right:126px">添加感应模式</span>
-          <input type="text" placeholder="填写无人时亮度" />
-        </div>-->
-        <div v-if="modeInfo.pattern == 1">
+        <div v-if="modeInfo.pattern == 0" style="margin-top: 10px;">
           <span style="color: #15f6f3">感应控制</span>
-          <span>感应模式</span>
+          <span style="margin-right:0px">有人时亮度</span>
           <input
             type="text"
+            style="margin-left:54px;width:40px"
             placeholder="填写有人时亮度"
             onkeyup="value=value.replace(/[^\d]/g,'')"
             v-model.number="modeInfo.oneLightness"
+            oninput="if(value>100)value=100;if(value<0)value=10"
           />
+          %
+        </div>
+        <div v-if="modeInfo.pattern == 0">
+          <span style="margin-left:117px">无人时亮度</span>
           <input
+            style="margin-left:-7px;width:40px"
             type="text"
             placeholder="填写无人时亮度"
             onkeyup="value=value.replace(/[^\d]/g,'')"
             v-model.number="modeInfo.noLightness"
+            oninput="if(value>100)value=100;if(value<0)value=10"
           />
+          %
         </div>
       </div>
-      <div class="select">
-        <div class="confirm" @click="confirmEdit">确定</div>
-        <div class="cancel" @click="cancelEdit">取消</div>
+      <div class="select" v-show="modelList.length != 0">
+        <div class="confirm" @click="editShow = true">保存</div>
+        <!-- <div class="cancel" @click="cancelEdit">取消</div> -->
       </div>
     </div>
   </div>
@@ -213,6 +208,7 @@ export default {
       modelList: [], // 模式列表
       addShow: false, // 新增显示状态
       delShow: false, // 删除显示状态
+      editShow: false,
       message: "", //编辑输入框内容
       newGroup: "", // 新增模式
       modelId: "", // 当前模式id
@@ -283,7 +279,7 @@ export default {
           this.modelList[i].inputshow = false;
         }
       }
-
+      this.onClick = false;
       // 获取模式详情
       this.modelEcho(modelId);
       this.getProv();
@@ -307,8 +303,8 @@ export default {
 
     add() {
       this.modeInfo.selfData.push({ selfTime: "", lightNess: "" });
-      if (this.modeInfo.selfData.length > 5) {
-        this.modeInfo.selfData.length = 5;
+      if (this.modeInfo.selfData.length > 3) {
+        this.modeInfo.selfData.length = 3;
       }
     },
 
@@ -325,23 +321,23 @@ export default {
         url: "/lighting/model/addModel",
         data: {
           name: this.ModelName,
-          city: "",
-          downTime: "",
-          noLightness: 0,
-          oneLightness: 0,
-          openTime: "",
+          province: "北京市",
+          city: "北京市",
+          downTime: "22:00",
+          noLightness: 10,
+          oneLightness: 100,
+          openTime: "18:00",
           selfData: [
             {
               lightNess: "",
               selfTime: ""
             }
           ],
-          sesson: "",
+          sesson: "春",
           status: 0,
-          pattern: "0"
+          pattern: 0
         }
       }).then(res => {
-        console.log(res);
         // 进行判断
         if (res.data.code === 1) {
           confirm(res.data.msg);
@@ -371,6 +367,7 @@ export default {
         this.getModel();
         this.delShow = false;
         this.current = -1;
+        this.onClick = true;
       });
     },
 
@@ -442,13 +439,46 @@ export default {
 
     // 确定修改
     confirmEdit() {
-      // 调用修改分组
+      var reg = /^(20|21|22|23|[0-1]\d):[0-5]\d/;
+      var regExp = new RegExp(reg);
+      if (!regExp.test(this.modeInfo.openTime)) {
+        alert("时间格式不正确，正确格式为：12:00");
+        return;
+      } else if (!regExp.test(this.modeInfo.downTime)) {
+        alert("时间格式不正确，正确格式为：12:00");
+        return;
+      } else if (
+        this.modeInfo.pattern == 1 &&
+        this.modeInfo.selfData.length == 1 &&
+        !regExp.test(this.modeInfo.selfData[0].selfTime)
+      ) {
+        alert("时间格式不正确，正确格式为：12:00");
+        return;
+      } else if (
+        this.modeInfo.pattern == 1 &&
+        this.modeInfo.selfData.length == 2 &&
+        !regExp.test(this.modeInfo.selfData[1].selfTime)
+      ) {
+        alert("时间格式不正确，正确格式为：12:00");
+        return;
+      } else if (
+        this.modeInfo.pattern == 1 &&
+        this.modeInfo.selfData.length == 3 &&
+        !regExp.test(this.modeInfo.selfData[2].selfTime)
+      ) {
+        alert("时间格式不正确，正确格式为：12:00");
+        return;
+      }
+      // 调用修改模式
       this.editModel(this.modelId);
       // 清空输入框
       this.message = "";
       this.onClick = true;
+      this.current = -1;
+      this.editShow = false;
     },
-    // 回车修改名称
+
+    // 失去光标修改名称
     keyupInupt() {
       // 调用修改分组
       this.editModel_2(this.message, this.modelId);
@@ -463,6 +493,7 @@ export default {
         this.modelList[i].textShow = true;
       }
       this.onClick = true;
+      this.current = -1;
     },
 
     //  模式回显
@@ -2017,5 +2048,4 @@ export default {
   }
 };
 </script>
-
 <style src="../../../style/compont/model.css" scoped></style>

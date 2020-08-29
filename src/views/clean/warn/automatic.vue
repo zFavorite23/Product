@@ -1,85 +1,50 @@
 <template>
   <div class="automatic">
-    <div class="search">
-      <select>
-        <option value>设备选择</option>
+    <div class="search" style="margin-left:5px">
+      <span>类型选择</span>
+      <select v-model="Device" @change="DeviceSwitchover">
+        <option v-for="item in DeviceClasses" :value="item.value" :key="item.value">{{ item.label }}</option>
       </select>
-      <select>
-        <option value>2020</option>
+      <select v-model="deviceId">
+        <option
+          v-for="item in DeviceList"
+          :value="item.deviceId"
+          :key="item.deviceId"
+        >{{ item.deviceName }}</option>
       </select>
-      <select class="selectW">
-        <option value>01</option>
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <span class="lianjie">-</span>
-      <select>
-        <option value>2020</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <button>查询</button>
-      <span>
-        累计告警次数:
-        <span class="margin">0</span>
-      </span>
-      <span>
-        今日告警次数:
-        <span class="margin">0</span>
-      </span>
+      <el-date-picker
+        v-model="timeList"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        value-format="yyyy-MM-dd"
+        size="mini"
+      ></el-date-picker>
+      <button @click="inquire()">查询</button>
     </div>
     <div class="content">
-      <div class="info">
+      <div class="info" v-for="(item, index) in warnList" :key="index">
         <div class="name">
-          <span style="color:#00f8f8">[ 自动处理 ]</span>
-          <span style="color:#e68600;margin-left:5px">18号配电柜1路</span>
+          <span style="color:#e68600;margin-left:5px">
+            {{
+            item.deviceName
+            }}
+          </span>
+          <span style="color:#00f8f8">自动处理</span>
         </div>
         <div class="cause">
           <div>
-            <span>告警原因及建议：功率过低，存在故障路灯，是否请排查电路</span>
+            <span>告警原因及建议：{{ item.dictName }}，建议{{ item.remark }}。</span>
           </div>
-          <div>
-            <span>负责人：自动处理</span>
-            <span>2020-06-09 19:09:27</span>
-          </div>
+          <div style="padding-left:60px"></div>
         </div>
         <div class="time">
           <div>
-            <span>提示时间：2020-06-08 19:25:02</span>
-            <span>结束时间：2020-06-08 19:25:02</span>
+            <span>提示时间：{{ item.createTime }}</span>
           </div>
           <div>
-            <span>持续时间：0天23小时44分</span>
-          </div>
-        </div>
-      </div>
-      <div class="info">
-        <div class="name">
-          <span style="color:#00f8f8">[ 自动处理 ]</span>
-          <span style="color:#e68600;margin-left:5px">18号配电柜1路</span>
-        </div>
-        <div class="cause">
-          <div>
-            <span>告警原因及建议：功率过低，存在故障路灯，是否请排查电路</span>
-          </div>
-          <div>
-            <span>负责人：自动处理</span>
-            <span>2020-06-09 19:09:27</span>
-          </div>
-        </div>
-        <div class="time">
-          <div>
-            <span>提示时间：2020-06-08 19:25:02</span>
-            <span>结束时间：2020-06-08 19:25:02</span>
-          </div>
-          <div>
-            <span>持续时间：0天23小时44分</span>
+            <span>持续时间：{{ item.durationTime }}</span>
           </div>
         </div>
       </div>

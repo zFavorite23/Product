@@ -6,12 +6,12 @@
     <div class="main">
       <!-- 左侧分组 -->
       <div class="left">
-        <div class="title">所有分组（{{ groupingNum }}）</div>
+        <div class="title">所有分组</div>
         <div class="scroll test-1">
           <li
             v-for="(item, index) in groupingList"
             :key="index"
-            @click="onselec(index, item.groupId, item.groupName)"
+            @click="onselec(index, item.groupId, item.name, item.modelName)"
             :class="{ active: index == current }"
           >
             <span>{{ item.name }}</span>
@@ -21,29 +21,35 @@
       </div>
       <!-- 右侧模式 -->
       <div class="right">
-        <div class="head">全部模式 （{{ pattrenNum }}）</div>
+        <div class="head">全部模式</div>
         <div class="scroll test-1">
           <div
             class="playList img"
             v-for="(item, index) in pattrenList"
             :key="index"
-            @click="getModelId(item.modelId, index)"
-            :class="{ active_1: index == current_1 }"
+            @click="getModelId(item.modelId, item.name)"
           >
-            <div class="music" style="color:#15f6f3">{{ item.name }}</div>
-            <div class="time">
-              <span style="width: 29%">
-                播放内容：{{
-                  item.musics == "" ||
-                  item.musics == null ||
-                  item.musics == undefined
-                    ? ""
-                    : item.musics[0].name
-                }}
+            <div class="music" :class="{ textColor: modelName == item.name }">
+              {{ item.name }}
+            </div>
+            <div class="time" :class="{ textColor_1: modelName == item.name }">
+              <span style="flex:30%">
+                播放内容：
+                <select
+                  style="width:100px"
+                  :class="{ textColor_1: modelName == item.name }"
+                >
+                  <option
+                    v-for="(item, index) in item.musics"
+                    :key="index"
+                    value
+                    >{{ item.name }}</option
+                  >
+                </select>
               </span>
-              <span style="width: 29%">
+              <span style="flex:30%">
                 播放时间：
-                <select>
+                <select :class="{ textColor_1: modelName == item.name }">
                   <option
                     v-for="(item, index) in item.timeList"
                     :key="index"
@@ -52,13 +58,13 @@
                   >
                 </select>
               </span>
-              <span style="width: 29%">
+              <span style="flex:28%">
                 播放顺序：
                 <i v-if="item.playOrder === '1'">顺序播放</i>
                 <i v-if="item.playOrder === '2'">倒序播放</i>
                 <i v-if="item.playOrder === '3'">随机播放</i>
               </span>
-              <span style="width: 13%">
+              <span style="flex:12%">
                 音量：
                 <span>{{ item.volume }}</span>
               </span>
@@ -83,24 +89,19 @@ export default {
       itemId: "",
       // 模式列表
       pattrenList: [],
-      // 模式时间
-      times: [],
-      // 模式数量
-      pattrenNum: "",
       // 分组列表
       groupingList: [],
-      // 分组数量
-      groupingNum: "",
       // 分组样式为空
       current: -1,
       // 模式样式为空
-      current_1: "",
+      current_1: -1,
       // 分组id
       groupId: "",
       // 分组名称
       groupName: "",
       // 模式id
-      modelId: ""
+      modelId: "",
+      modelName: ""
     };
   },
   created() {
@@ -138,28 +139,29 @@ export default {
         }
       }).then(res => {
         this.groupingList = res.data.data.records;
-        // 模式数量
-        this.groupingNum = res.data.data.total;
       });
     },
 
     // 点击添加样式
-    onselec(index, groupId, groupName) {
+    onselec(index, groupId, groupName, modelName) {
       this.current = index;
       // 分组id
       this.groupId = groupId;
       // 分组名称
       this.groupName = groupName;
+      this.modelName = modelName;
     },
 
     // 获取模式id
-    getModelId(modelId, index) {
+    getModelId(modelId, modelName) {
       this.modelId = modelId;
-      this.current_1 = index;
+      this.modelName = modelName;
+      console.log(this.modelName);
     },
 
     // 修改分组
     putPattern() {
+      console.log(this.groupName);
       this.$axios({
         method: "put",
         url: "/loudspeaker/group",

@@ -129,7 +129,8 @@
 .mate .status .data .main .bot {
   margin-top: 5px;
   text-align: left;
-  margin-left: 85px;
+  margin-left: 30px;
+  display: flex;
 }
 .mate .status .data .main .bot div {
   margin-bottom: 10px;

@@ -13,15 +13,13 @@
           <div class="le"></div>
           <div class="rig">
             <div>
-              <span style="font-size: 24px;text-align:center">
-                {{ lampNum.totalNum }}
-              </span>
+              <span style="font-size: 24px;text-align:center">{{ lampNum.totalNum }}</span>
               <span>设备总数</span>
             </div>
             <div>
-              <span style="font-size: 24px;text-align: right">
-                {{ ((lampNum.onNum / lampNum.totalNum) * 100).toFixed(1) }}%
-              </span>
+              <span
+                style="font-size: 24px;text-align: right"
+              >{{ ((lampNum.onNum / lampNum.totalNum) * 100).toFixed(1) }}%</span>
               <span>在线率</span>
             </div>
           </div>
@@ -48,63 +46,94 @@
         </div>
 
         <!-- 头部标题 -->
-        <div class="title" style="margin: 20px 0">
-          <span>电量使用情况</span>
+        <div class="title">
+          <span>用电数据</span>
           <span>POWER DATE</span>
+        </div>
+        <div class="electric">
+          <div>
+            <span>总耗电量</span>
+            <span>{{ Power.thisNum }}</span>
+          </div>
+          <div>
+            <span>节省电量</span>
+            <span>{{ Power.savePower }}</span>
+          </div>
+          <div>
+            <span>上月耗电量</span>
+            <span>{{ Power.lastSavePower }}</span>
+          </div>
+          <div>
+            <span>总节省金额</span>
+            <span>{{ Power.saveMoney }}</span>
+          </div>
+          <div>
+            <span>上月节省金额</span>
+            <span>{{ Power.lastSaveMoney }}</span>
+          </div>
+        </div>
+
+        <!-- 头部标题 -->
+        <div class="title">
+          <span>各项电量使用情况</span>
         </div>
 
         <!-- 各项路灯 -->
         <div class="light">
-          <div>路灯1</div>
+          <div>普通路灯</div>
           <div>
-            <el-progress :percentage="90" :show-text="false"></el-progress>
+            <el-progress
+              v-if="PowerType.commonLamp"
+              :percentage="(PowerType.commonLamp / Power.thisNum) * 100"
+              :show-text="false"
+            ></el-progress>
           </div>
-          <div>90</div>
+          <div>{{ PowerType.commonLamp }}</div>
         </div>
         <div class="light">
-          <div>路灯2</div>
+          <div>智慧路灯</div>
           <div>
-            <el-progress :percentage="75" :show-text="false"></el-progress>
+            <el-progress
+              v-if="PowerType.streetLamp"
+              :percentage="(PowerType.streetLamp / Power.thisNum) * 100"
+              :show-text="false"
+            ></el-progress>
           </div>
-          <div>75</div>
+          <div>{{ PowerType.streetLamp }}</div>
         </div>
         <div class="light">
-          <div>路灯3</div>
+          <div>草坪路灯</div>
           <div>
-            <el-progress :percentage="65" :show-text="false"></el-progress>
+            <el-progress
+              v-if="PowerType.lawnLamp"
+              :percentage="PowerType.lawnLamp"
+              :show-text="false"
+            ></el-progress>
           </div>
-          <div>65</div>
+          <div>{{ PowerType.lawnLamp }}</div>
         </div>
         <div class="light">
-          <div>路灯4</div>
+          <div>感应路灯</div>
           <div>
-            <el-progress :percentage="50" :show-text="false"></el-progress>
+            <el-progress
+              v-if="PowerType.lnductionLamp"
+              :percentage="PowerType.lnductionLamp"
+              :show-text="false"
+            ></el-progress>
           </div>
-          <div>50</div>
-        </div>
-        <div class="light">
-          <div>路灯5</div>
-          <div>
-            <el-progress :percentage="40" :show-text="false"></el-progress>
-          </div>
-          <div>40</div>
+          <div>{{ PowerType.lnductionLamp }}</div>
         </div>
 
         <!-- 头部标题 -->
-        <div class="title" style="margin: 20px 0">
+        <div class="title">
           <span>用电趋势</span>
-          <span>POWER DATE</span>
         </div>
 
         <!-- 时间筛选 -->
 
         <div class="comTop">
           <span class="monitorPoint">间隔选择</span>
-          <select
-            name="sel"
-            style="margin-left:8%;margin-right:50px"
-            v-model="timeIntervalValue"
-          >
+          <select name="sel" style="margin-left:8%;margin-right:50px" v-model="timeIntervalValue">
             <option
               v-for="item in timeIntervalOptions"
               :key="item.timeIntervalValue"
@@ -125,87 +154,64 @@
         <div>
           <div v-if="timeIntervalValue == '日'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              class
-              style="margin-right:4%;margin-left:8%"
-            >
+            <select v-model="selectYear" class style="margin-right:4%;margin-left:8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class style="margin-right:4%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay" class style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-right:3%;margin-left:21.5%"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-right:3%;margin-left:21.5%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectMonth1"
-              class="comTop"
-              style="margin-right:3%"
-            >
+            <select v-model="selectMonth1" class="comTop" style="margin-right:3%">
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectDay1" class="comTop" style="margin-right:4%">
               <option
                 v-for="item in selectDayList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
           <div v-if="timeIntervalValue == '月'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%; margin-left: 8%"
-            >
+            <select v-model="selectYear" style="margin-right: 4%; margin-left: 8%">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- <div class="comTop" style="margin-left: 19%;"> -->
             <select
@@ -217,43 +223,32 @@
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <select v-model="selectMonth1" class>
               <option
                 v-for="item in selectMonthList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
             <!-- </div> -->
           </div>
           <div v-if="timeIntervalValue == '年'" class="comTop">
             <span class="monitorPoint">时间选择</span>
-            <select
-              v-model="selectYear"
-              style="margin-right: 4%;margin-left: 8% "
-            >
+            <select v-model="selectYear" style="margin-right: 4%;margin-left: 8% ">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
-            <select
-              v-model="selectYear1"
-              class="comTop"
-              style="margin-left: 21.5%;display:block"
-            >
+            <select v-model="selectYear1" class="comTop" style="margin-left: 21.5%;display:block">
               <option
                 v-for="item in selectYearList"
                 :value="item.value"
                 :key="item.value"
-                >{{ item.label }}</option
-              >
+              >{{ item.label }}</option>
             </select>
           </div>
         </div>
@@ -268,15 +263,8 @@
             <warn v-if="warn"></warn>
           </div>
           <div class="right">
-            <div
-              :class="{ bc_color: tag == '配置面板' }"
-              @click="operationShow"
-            >
-              配置面板
-            </div>
-            <div :class="{ bc_color: tag == '告警记录' }" @click="warnShow">
-              告警记录
-            </div>
+            <div :class="{ bc_color: tag == '配置面板' }" @click="operationShow">配置面板</div>
+            <div :class="{ bc_color: tag == '告警记录' }" @click="warnShow">告警记录</div>
           </div>
         </div>
         <div class="info_1">
@@ -340,33 +328,7 @@
           </div>
         </div>
 
-        <!-- 告警区域 -->
-        <div class="botside">
-          <div class="warn">
-            <span>故障</span>
-            <span>故障信息：#15 设备离线</span>
-            <span>故障原因：#15 设备离线</span>
-            <span>解决建议：请及时排查</span>
-          </div>
-          <div class="warn">
-            <span>故障</span>
-            <span>故障信息：#15 设备离线</span>
-            <span>故障原因：#15 设备离线</span>
-            <span>解决建议：请及时排查</span>
-          </div>
-          <div class="warn">
-            <span class="back">告警</span>
-            <span>告警信息：#15 垃圾满溢</span>
-            <span>告警原因：纸类垃圾已满</span>
-            <span>解决建议：请及时清理</span>
-          </div>
-          <div class="warn">
-            <span class="back">告警</span>
-            <span>告警信息：#15 垃圾满溢</span>
-            <span>告警原因：纸类垃圾已满</span>
-            <span>解决建议：请及时清理</span>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -393,7 +355,7 @@ export default {
       selectMonth: 1,
       selectYear1: new Date().getFullYear(),
       selectYear: 2020,
-      timeIntervalValue: "日",
+      timeIntervalValue: "年",
       timeIntervalOptions: [
         {
           timeIntervalValue: "年",
@@ -408,50 +370,35 @@ export default {
           timeIntervalLabel: "日"
         }
       ],
-      timeIntervalValue1: "日",
-      timeIntervalOptions1: [
-        {
-          timeIntervalValue1: "年",
-          timeIntervalLabel1: "年"
-        },
-        {
-          timeIntervalValue1: "月",
-          timeIntervalLabel1: "月"
-        },
-        {
-          timeIntervalValue1: "日",
-          timeIntervalLabel1: "日"
-        }
-      ],
       selectYearList: [
         { value: "2018", label: "2018" },
         { value: "2019", label: "2019" },
         { value: "2020", label: "2020" }
       ],
       selectMonthList: [
-        { value: "1", label: "1" },
-        { value: "2", label: "2" },
-        { value: "3", label: "3" },
-        { value: "4", label: "4" },
-        { value: "5", label: "5" },
-        { value: "6", label: "6" },
-        { value: "7", label: "7" },
-        { value: "8", label: "8" },
-        { value: "9", label: "9" },
+        { value: "01", label: "01" },
+        { value: "02", label: "02" },
+        { value: "03", label: "03" },
+        { value: "04", label: "04" },
+        { value: "05", label: "05" },
+        { value: "06", label: "06" },
+        { value: "07", label: "07" },
+        { value: "08", label: "08" },
+        { value: "09", label: "09" },
         { value: "10", label: "10" },
         { value: "11", label: "11" },
         { value: "12", label: "12" }
       ],
       selectDayList: [
-        { value: "1", label: "1" },
-        { value: "2", label: "2" },
-        { value: "3", label: "3" },
-        { value: "4", label: "4" },
-        { value: "5", label: "5" },
-        { value: "6", label: "6" },
-        { value: "7", label: "7" },
-        { value: "8", label: "8" },
-        { value: "9", label: "9" },
+        { value: "01", label: "01" },
+        { value: "02", label: "02" },
+        { value: "03", label: "03" },
+        { value: "04", label: "04" },
+        { value: "05", label: "05" },
+        { value: "06", label: "06" },
+        { value: "07", label: "07" },
+        { value: "08", label: "08" },
+        { value: "09", label: "09" },
         { value: "10", label: "10" },
         { value: "11", label: "11" },
         { value: "12", label: "12" },
@@ -478,22 +425,13 @@ export default {
       str_1: [], // 左侧曲线图数据
       str_2: [],
       time: [],
-      lampList1: "", // 路灯列表
-      lampList2: "", // 路灯列表
-      lampList3: "", // 路灯列表
-      lampList4: "", // 路灯列表
-      lampList5: "", // 路灯列表
+      Power: "",
+      PowerType: "",
       isShow: false,
-      isShow2: false,
-      isShow3: false,
-      isShow4: false,
-      isShow5: false,
-      lampInfo: "",
-      value: "",
-      value2: "",
-      value3: "",
-      value4: "",
-      value5: ""
+      tag: "",
+      LampList: "",
+      LampInfo: "",
+      LampStatus: ""
     };
   },
   methods: {
@@ -614,23 +552,6 @@ export default {
       }
     },
 
-    // 获取所有路灯
-    getLamp() {
-      this.$axios({
-        method: "post",
-        url: "http://www.dreamdeck.cn:18000/light/getightPageVo",
-        params: {
-          current: 1,
-          limit: 10
-        }
-      }).then(() => {
-        // this.lampList1 = res.data.data.records[0];
-        // this.lampList2 = res.data.data.records[1];
-        // this.lampList3 = res.data.data.records[2];
-        // this.lampList4 = res.data.data.records[3];
-        // this.lampList5 = res.data.data.records[4];
-      });
-    },
     // 获取路灯统计数量
     getLampNum2() {
       this.$axios({
@@ -641,51 +562,38 @@ export default {
         this.lampNum = res.data.data;
       });
     },
-    // 路灯详情
-    getLampInfo1(id) {
-      this.isShow = !this.isShow;
-      this.isShow2 = false;
-      this.isShow3 = false;
-      this.isShow4 = false;
-      this.isShow5 = false;
+
+    // 获取节省电量
+    getPower() {
       this.$axios({
-        method: "post",
-        url: "http://www.dreamdeck.cn:18000/light/getConfig",
-        params: {
-          deviceId: id
-        }
+        method: "get",
+        url: "/lighting/lamp/powerList"
       }).then(res => {
         // console.log(res);
-        this.lampInfo = res.data.data;
+        this.Power = res.data.data;
       });
     },
 
-    // 开启关闭路灯
-    change(id) {
-      // 关闭路灯
-      if (this.value == false) {
-        this.$axios({
-          method: "get",
-          url: "http://www.dreamdeck.cn:18000/light/close",
-          params: {
-            id
-          }
-        }).then(() => {
-          this.getLamp();
-        });
-      }
-      // 开启路灯
-      if (this.value == true) {
-        this.$axios({
-          method: "get",
-          url: "http://www.dreamdeck.cn:18000/light/open",
-          params: {
-            id
-          }
-        }).then(() => {
-          this.getLamp();
-        });
-      }
+    // 获取电量信息
+    getPowerType() {
+      this.$axios({
+        method: "get",
+        url: "/lighting/lamp/powerType"
+      }).then(res => {
+        // console.log(res);
+        this.PowerType = res.data.data;
+      });
+    },
+
+    // 获取所有路灯
+    getLamp() {
+      this.$axios({
+        method: "get",
+        url: "/lighting/lamp/all"
+      }).then(res => {
+        // console.log(res);
+        this.LampList = res.data.data;
+      });
     }
   },
   watch: {
@@ -700,13 +608,21 @@ export default {
     this.getTime();
   },
   created() {
-    // 获取路灯统计数量
-    // this.getLampNum();
     // 获取所有路灯
-    this.getLamp();
     this.getLampNum2();
+    this.getPower();
+    this.getPowerType();
+    this.getLamp();
   }
 };
 </script>
+<style>
+.el-progress-bar__outer {
+  height: 4px !important;
+  width: 300px !important;
+  margin-right: 10px !important;
+  margin-top: 5px !important;
+}
+</style>
 
 <style src="../../style/illumination/illumination.css" scoped></style>

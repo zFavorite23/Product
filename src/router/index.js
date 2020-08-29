@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // 登陆
-import login from '../views/login/login.vue'
+import login from "../views/login/login.vue";
 
 // 首页
 import home from "../components/index.vue";
@@ -21,6 +21,7 @@ import music from "../views/message/compont/music.vue";
 import grouping from "../views/message/compont/grouping.vue";
 import matching from "../views/message/compont/matching.vue";
 import pattern from "../views/message/compont/pattern.vue";
+import paging from "../views/message/compont/paging.vue";
 // 信息发布告警
 import Mall from "../views/message/warn/all.vue";
 import Mmanpower from "../views/message/warn/manpower.vue";
@@ -86,12 +87,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",   // path 设置为 “/” ，默认显示该页面
-    component: login,
+    path: "/", // path 设置为 “/” ，默认显示该页面
+    component: login
   },
   {
     // 登录页
-    path: '/login',
+    path: "/login",
     component: login
   },
   {
@@ -99,8 +100,8 @@ const routes = [
     component: home,
     children: [
       {
-        path: '',
-        redirect: '/security'
+        path: "",
+        redirect: "/security"
       },
       // 环境感知
       {
@@ -134,7 +135,6 @@ const routes = [
         path: "/message",
         component: message,
         children: [
-
           {
             // 音乐管理
             path: "/music",
@@ -154,6 +154,11 @@ const routes = [
           {
             path: "/pattern",
             component: pattern
+          },
+          // 实时寻呼
+          {
+            path: "/paging",
+            component: paging
           },
           // 全部
           {
@@ -234,7 +239,6 @@ const routes = [
         path: "/clean",
         component: clean,
         children: [
-
           // 垃圾桶上传
           {
             path: "/rubbish",

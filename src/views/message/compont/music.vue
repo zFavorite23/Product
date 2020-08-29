@@ -9,12 +9,20 @@
       </div>
     </div>
     <!-- 内容区域 -->
-    <div class="content">
+    <div class="content1">
       <div class="item">
-        <span>文件名称</span>
-        <span>标签</span>
-        <span>上传时间</span>
-        <!-- <span>状态</span> -->
+        <span style="flex:25%">文件名称</span>
+        <span style="flex:25%">标签</span>
+        <span style="flex:25%">上传时间</span>
+        <span style="flex:25%">操作</span>
+        <i class="el-icon-s-operation" @click="orderByIShow = true"></i>
+        <div class="orderByList" v-show="orderByIShow">
+          <div
+            v-for="(item, index) in orderByList"
+            :key="index"
+            @click="getorderBy(item.value)"
+          >{{ item.name }}</div>
+        </div>
       </div>
       <div class="scroll">
         <div
@@ -24,8 +32,8 @@
           @click="onselec(index)"
           :class="{ active: index == current }"
         >
-          <span class="name">{{ item.name }}</span>
-          <span>
+          <span style="flex:25%" class="name">{{ item.name }}</span>
+          <span style="flex:25%;margin-right: 138px;margin-left: -5px;">
             <select
               v-model="item.label"
               @change="label(item.label, item.musicId, item.name, item.url)"
@@ -34,17 +42,24 @@
                 v-for="(item, index) in labelList"
                 :value="item.value"
                 :key="index"
-                >{{ item.name }}</option
-              >
+              >{{ item.name }}</option>
             </select>
           </span>
-          <span>{{ item.createTime }}</span>
+          <span style="flex:25%">{{ item.createTime }}</span>
           <span
-            style="color:red"
+            style="color:red;margin-left:13px"
             @click="onDelMusic(item.musicId)"
             v-show="item.delShow"
-            >删除</span
-          >
+          >删除</span>
+        </div>
+      </div>
+
+      <!-- 删除音乐 -->
+      <div class="delClean" v-show="delShow">
+        <span>是否删除当前音乐</span>
+        <div class="select">
+          <div class="confirm" @click="DelMusic()">确定</div>
+          <div class="cancel" @click="delShow = false">取消</div>
         </div>
       </div>
     </div>
@@ -55,9 +70,10 @@
 export default {
   data() {
     return {
+      delShow: false,
       itemId: "",
       // 删除图标隐藏
-      delShow: false,
+      orderByIShow: false,
       // 样式为空
       current: -1,
       // 文件路径
@@ -73,7 +89,17 @@ export default {
         { value: "3", name: "三类" },
         { value: "4", name: "四类" },
         { value: "5", name: "五类" }
-      ]
+      ],
+      orderBy: "",
+      orderByList: [
+        { value: "11", name: "时间正排" },
+        { value: "10", name: "时间倒排" },
+        { value: "21", name: "名称正排" },
+        { value: "20", name: "名称倒排" },
+        { value: "31", name: "标签正排" },
+        { value: "30", name: "标签倒排" }
+      ],
+      musicId: ""
     };
   },
   created() {
@@ -88,6 +114,7 @@ export default {
         method: "GET",
         url: "/loudspeaker/music/page",
         params: {
+          orderBy: this.orderBy,
           size: 50,
           itemId: this.itemId
         }
@@ -97,16 +124,28 @@ export default {
       });
     },
 
-    // 删除音乐
-    onDelMusic(id) {
-      // console.log(id);
+    // 排序方式
+    getorderBy(orderBy) {
+      this.orderBy = orderBy;
+      this.orderByIShow = false;
+      this.GetMusic();
+    },
+
+    // 获取删除音乐ID
+    onDelMusic(musicId) {
+      this.musicId = musicId;
+      this.delShow = true;
+    },
+    // 确定删除
+    DelMusic() {
       this.$axios({
         method: "DELETE",
-        url: `/loudspeaker/music/${id}`
+        url: `/loudspeaker/music/${this.musicId}`
       }).then(() => {
         // 重新刷新页面
         this.GetMusic();
         this.current = -1;
+        this.delShow = false;
       });
     },
 
@@ -127,11 +166,13 @@ export default {
         data: params
       }).then(res => {
         this.musicData = res.data.data;
+        console.log(this.musicData);
 
         this.$axios({
           method: "post",
           url: "/loudspeaker/music",
           data: {
+            itemId: this.itemId,
             label: 5,
             musicId: 0,
             name: this.musicData.name,
@@ -151,6 +192,7 @@ export default {
         method: "put",
         url: "/loudspeaker/music",
         data: {
+          itemId: this.itemId,
           label,
           musicId,
           name,

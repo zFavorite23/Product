@@ -1,147 +1,112 @@
 <template>
   <div class="managePeople">
-    <!-- 搜索 -->
-    <div class="search">
-      <el-input
-        v-model="input"
-        style="width:80px"
-        placeholder="关键字..."
-        size="mini"
-      ></el-input>
-      <el-button type="primary" icon="el-icon-search" size="mini"
-        >搜索</el-button
-      >
-      <el-button type="primary" @click="add()" size="mini">新增</el-button>
+    <div class="add">
+      <span>
+        <i class="el-icon-plus"></i>
+        <el-button type="text" @click="addManageShow = true">添加管理人员</el-button>
+      </span>
+      <input type="text" v-model="input" placeholder="关键字..." />
     </div>
-    <!-- table表单 -->
-    <el-table :data="tableData" border style="width: 100%" size="mini">
-      <el-table-column
-        prop="manageName"
-        label="管理人员姓名"
-        height="20px"
-        align="center"
-      ></el-table-column>
-      <el-table-column
-        prop="jobNum"
-        label="工号"
-        align="center"
-      ></el-table-column>
-      <el-table-column
-        prop="tel"
-        label="联系方式"
-        align="center"
-      ></el-table-column>
-      <el-table-column prop="cleanerList" label="所管理保洁人员" align="center">
-        <template slot-scope="scope">
-          <span v-for="(item, index) in scope.row.cleanerList" :key="index">
-            {{ `${item.cleanerName} 、` }}
+    <div class="table">
+      <div class="item">
+        <span>管理人员姓名</span>
+        <span>工号</span>
+        <span>联系方式</span>
+        <span>所管理保洁人员</span>
+        <span>操作</span>
+      </div>
+      <div class="scroll">
+        <div v-for="(item, index) in tableData" :key="index" :class="{ bg: index % 2 == 1 }">
+          <span>{{ item.manageName }}</span>
+          <span>{{ item.jobNum }}</span>
+          <span>{{ item.tel }}</span>
+          <span></span>
+          <span>
+            <el-button type="text" style="color:#f78606" @click="getId(item.manageId)">编辑</el-button>
+            <el-button type="text" style="color:red" @click="getDelManageId(item.manageId)">删除</el-button>
           </span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="operation" label="操作" align="center">
-        <!-- 在 template 上声明slot-scope ，然后通过scope.row来获取遍历项
-        scope.row就相当于v-for中的item-->
-        <template slot-scope="scope">
-          <el-button size="mini" @click="getId(scope.row.manageId)"
-            >编辑</el-button
-          >
-          <el-button
-            size="mini"
-            :lock-scroll="false"
-            @click="delManage(scope.row.manageId)"
-            >删除</el-button
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 分页 -->
+        </div>
+      </div>
 
-    <el-pagination
-      class="right"
-      layout="prev, pager, next"
-      :total="total"
-      @current-change="getPageIndex"
-    ></el-pagination>
+      <!-- 添加管理人员 -->
+      <div class="addClean" v-show="addManageShow">
+        <div>新增管理人员</div>
+        <div class="cleanInfo">
+          <span>姓名：</span>
+          <input type="text" v-model="formInline.manageName" />
+        </div>
+        <div class="cleanInfo">
+          <span>性别：</span>
+          <span class="radio">
+            <span>
+              <input type="radio" v-model="formInline.sex" value="1" />
+              <span>男</span>
+            </span>
+            <span>
+              <input type="radio" v-model="formInline.sex" value="2" />
+              <span>女</span>
+            </span>
+          </span>
+        </div>
+        <div class="cleanInfo">
+          <span>工号：</span>
+          <input type="text" v-model="formInline.jobNum" />
+        </div>
+        <div class="cleanInfo">
+          <span>联系方式：</span>
+          <input type="text" v-model="formInline.tel" />
+        </div>
 
-    <!-- 新增弹窗 -->
-    <el-dialog
-      :lock-scroll="false"
-      title="新增管理人员"
-      :visible.sync="dialogVisible"
-      width="20%"
-    >
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="姓名：">
-          <el-input
-            v-model="formInline.manageName"
-            size="mini"
-            maxlength="3"
-            show-word-limit
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="性别：">
-          <el-radio v-model="formInline.sex" label="1">男</el-radio>
-          <el-radio v-model="formInline.sex" label="2">女</el-radio>
-        </el-form-item>
-        <el-form-item label="工号：">
-          <el-input v-model="formInline.jobNum" size="mini"></el-input>
-        </el-form-item>
-        <el-form-item label="联系方式：">
-          <el-input
-            v-model="formInline.tel"
-            size="mini"
-            maxlength="11"
-            show-word-limit
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
-        <el-button type="primary" @click="addManage()" size="mini"
-          >提 交</el-button
-        >
-      </span>
-    </el-dialog>
+        <div class="select">
+          <div class="confirm" @click="addManage()">确定</div>
+          <div class="cancel" @click="cancel()">取消</div>
+        </div>
+      </div>
 
-    <!-- 编辑弹窗 -->
-    <el-dialog
-      :lock-scroll="false"
-      title="编辑管理人员"
-      :visible.sync="dialogVisible2"
-      width="20%"
-    >
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="姓名：">
-          <el-input
-            v-model="formInline.manageName"
-            size="mini"
-            maxlength="3"
-            show-word-limit
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="性别：">
-          <el-radio v-model="formInline.sex" label="1">男</el-radio>
-          <el-radio v-model="formInline.sex" label="2">女</el-radio>
-        </el-form-item>
-        <el-form-item label="工号：">
-          <el-input v-model="formInline.jobNum" size="mini"></el-input>
-        </el-form-item>
-        <el-form-item label="联系方式：">
-          <el-input
-            v-model="formInline.tel"
-            size="mini"
-            maxlength="11"
-            show-word-limit
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible2 = false" size="mini">取 消</el-button>
-        <el-button type="primary" @click="editManage()" size="mini"
-          >提 交</el-button
-        >
-      </span>
-    </el-dialog>
+      <!-- 编辑管理人员 -->
+      <div class="editClean" v-show="editManageShow">
+        <div>编辑管理人员</div>
+        <div class="cleanInfo">
+          <span>姓名：</span>
+          <input type="text" v-model="formInline.manageName" />
+        </div>
+        <div class="cleanInfo">
+          <span>性别：</span>
+          <span class="radio">
+            <span>
+              <input type="radio" v-model="formInline.sex" value="1" />
+              <span>男</span>
+            </span>
+            <span>
+              <input type="radio" v-model="formInline.sex" value="2" />
+              <span>女</span>
+            </span>
+          </span>
+        </div>
+        <div class="cleanInfo">
+          <span>工号：</span>
+          <input type="text" v-model="formInline.jobNum" />
+        </div>
+        <div class="cleanInfo">
+          <span>联系方式：</span>
+          <input type="text" v-model="formInline.tel" />
+        </div>
+
+        <div class="select">
+          <div class="confirm" @click="editManage()">确定</div>
+          <div class="cancel" @click="cancel()">取消</div>
+        </div>
+      </div>
+
+      <!-- 删除管理人员 -->
+      <div class="delManage" v-show="delShow">
+        <span>是否删除当前管理人员</span>
+        <div class="select">
+          <div class="confirm" @click="delManage()">确定</div>
+          <div class="cancel" @click="delShow = false">取消</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -150,12 +115,12 @@ export default {
   data() {
     return {
       itemId: "",
+      delShow: false,
+      addManageShow: false,
+      editManageShow: false,
       total: 0, // 数据总条数
       input: "", // 搜索框
       tableData: [], // 管理员列表
-      dialogVisible: false, // 新增弹窗
-      dialogVisible2: false, // 编辑弹窗
-      centerDialogVisible: false, // 所有保洁人员弹窗
       formInline: {
         // 姓名
         manageName: "",
@@ -181,13 +146,12 @@ export default {
   },
   methods: {
     // 获取管理人员
-    getManage(current) {
+    getManage() {
       this.$axios({
         method: "get",
         url: "/cleaning/manage/page",
         params: {
-          current,
-          size: 8,
+          size: 50,
           itemId: this.itemId
         }
       }).then(res => {
@@ -197,14 +161,17 @@ export default {
       });
     },
 
-    // 新增清空原数据
-    add() {
-      this.dialogVisible = true;
+    // 取消编辑或新增
+    cancel() {
+      this.addManageShow = false;
+      this.editManageShow = false;
       this.formInline.manageName = "";
       this.formInline.jobNum = "";
       this.formInline.sex = "";
       this.formInline.tel = "";
+      this.formInline.entryDay = "";
     },
+
     // 添加管理人员
     addManage() {
       // 调用接口
@@ -221,46 +188,38 @@ export default {
           // 电话
           tel: this.formInline.tel
         }
-      })
-        .then(res => {
-          console.log(res);
-          // 从新获取数据
-          this.getManage();
-          // 关闭弹窗
-          this.dialogVisible = false;
-        })
-        .catch(() => {
-          // 从新获取数据
-          this.getManage();
-          // 关闭弹窗
-          this.dialogVisible = false;
-          // 清空原数组
-          this.list = [];
-        });
+      }).then(res => {
+        console.log(res);
+        // 从新获取数据
+        this.getManage();
+        // 关闭弹窗
+        this.addManageShow = false;
+      });
     },
 
-    // 删除管理人员
-    delManage(manageId) {
-      console.log(manageId);
-      this.$confirm("是否确认删除?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+    // 过去删除管理人员ID
+    getDelManageId(manageId) {
+      // 获取当前id
+      this.manageId = manageId;
+      this.delShow = true;
+    },
+
+    // 确定删除
+    delManage() {
+      this.$axios({
+        url: `/cleaning/manage/${this.manageId}`,
+        method: "delete"
       }).then(() => {
-        this.$axios({
-          url: `/cleaning/manage/${manageId}`,
-          method: "delete"
-        }).then(() => {
-          // 获取管理人员
-          this.getManage();
-        });
+        // 获取管理人员
+        this.getManage();
+        this.delShow = false;
       });
     },
 
     // 获取编辑id
     getId(manageId) {
       // 编辑弹框显示
-      this.dialogVisible2 = true;
+      this.editManageShow = true;
       // 获取当前id
       this.manageId = manageId;
       // 查看当前详细信息
@@ -315,7 +274,7 @@ export default {
         res.data.data.records.forEach(item => {
           this.cleanList.push({
             value: item.cleanerId,
-            label: item.cleanerName
+            label: item.manageName
           });
         });
       });
@@ -353,37 +312,214 @@ export default {
 };
 </script>
 
-<style>
-.el-pagination .btn-next,
-.el-pagination .btn-prev {
-  color: #969696 !important;
-  background: center center no-repeat #000 !important;
-}
-.el-dialog,
-.el-pager li {
-  background: rgb(12, 0, 0) !important;
-  color: #969696;
-}
-.el-form-item__label {
-  color: #969696 !important;
-}
-.el-dialog__title {
-  color: #969696 !important;
-}
-</style>
-<style scoped>
-.search {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 7px;
-}
-.search .el-button {
-  background-color: #000001;
-  margin-left: 5px;
-  border: 0;
-}
-.right {
-  float: right;
-  margin-top: 10px;
+<style scoped lang="less">
+.managePeople {
+  color: #fff;
+  font-size: 14px;
+
+  .add {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .el-icon-plus {
+      margin-right: 3px;
+    }
+
+    .el-button {
+      padding: 0;
+      color: #fff;
+    }
+
+    input {
+      width: 100px;
+      height: 20px;
+      outline-style: none;
+      border: 0px;
+      background: url("../../../assets/img/search.png") no-repeat;
+      background-size: 100% 100%;
+      color: #ccc;
+      margin-right: 15px;
+    }
+  }
+
+  .table {
+    background: url("../../../assets/img/框3.png") no-repeat;
+    background-size: 100% 100%;
+    width: 865px;
+    height: 407px;
+    position: relative;
+    margin-top: 5px;
+    .bg {
+      background-color: #000;
+    }
+
+    .el-button {
+      padding: 0;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 7px;
+
+      span {
+        text-align: center;
+        flex: 15%;
+      }
+    }
+    .scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll {
+      color: #969696;
+      margin-top: 15px;
+      height: 330px;
+      overflow: auto;
+      overflow-x: hidden;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        height: 35px;
+        line-height: 35px;
+        margin-left: 3px;
+
+        span {
+          text-align: center;
+          flex: 15%;
+        }
+      }
+    }
+
+    .addClean,
+    .editClean {
+      width: 400px;
+      height: 300px;
+      position: absolute;
+      top: 5%;
+      left: 25%;
+      // background: url("../../../assets/img/框3.png") no-repeat;
+      // background-size: 100% 100%;
+      background-color: #061826;
+      padding: 0 15px;
+
+      div:nth-child(1) {
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+      }
+
+      .cleanInfo {
+        display: flex;
+
+        span {
+          color: #969696;
+          margin-bottom: 17px;
+          flex: 20%;
+        }
+
+        input {
+          flex: 80%;
+          height: 15px;
+          padding-left: 5px;
+          outline-style: none;
+          border: 0px;
+          background: url("../../../assets/img/search.png") no-repeat;
+          background-size: 100% 100%;
+          color: #fff;
+          margin-right: 10px;
+        }
+
+        .radio {
+          flex: 80%;
+          display: flex;
+          justify-content: space-around;
+          span {
+            display: inline-block;
+            flex: 50%;
+            text-align: center;
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .select {
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        left: 30%;
+        bottom: 35px;
+        text-align: center !important;
+
+        .confirm {
+          width: 60px;
+          height: 20px;
+          line-height: 20px;
+          color: #0bb5b9;
+          background: url("../../../assets/img/Yes.png") no-repeat;
+          background-size: 100% 100%;
+        }
+
+        .cancel {
+          width: 60px;
+          height: 20px;
+          line-height: 20px;
+          color: #f00;
+          background: url("../../../assets/img/No.png") no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+
+    .delManage {
+      text-align: center;
+      width: 300px;
+      height: 150px;
+      background: url("../../../assets/img/map_bg.png") no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: 105px;
+      left: 245px;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        outline-style: none;
+        border: 0px;
+        margin: 15px 0;
+        padding-left: 3px;
+      }
+
+      .select {
+        margin-top: 35px;
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+
+        .confirm {
+          width: 60px;
+          height: 20px;
+          line-height: 20px;
+          color: #0bb5b9;
+          background: url("../../../assets/img/Yes.png") no-repeat;
+          background-size: 100% 100%;
+        }
+
+        .cancel {
+          width: 60px;
+          height: 20px;
+          line-height: 20px;
+          color: #f00;
+          background: url("../../../assets/img/No.png") no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+  }
 }
 </style>

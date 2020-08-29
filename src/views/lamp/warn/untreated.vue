@@ -1,62 +1,59 @@
 <template>
   <div class="untreated">
-    <div class="search">
-      <select>
-        <option value>设备选择</option>
+    <div class="search" style="margin-left:5px">
+      <span>类型选择</span>
+      <select v-model="Device" @change="DeviceSwitchover">
+        <option
+          v-for="item in DeviceClasses"
+          :value="item.value"
+          :key="item.value"
+          >{{ item.label }}</option
+        >
       </select>
-      <select>
-        <option value>状态选择</option>
+      <select v-model="deviceId">
+        <option
+          v-for="item in DeviceList"
+          :value="item.deviceId"
+          :key="item.deviceId"
+          >{{ item.deviceName }}</option
+        >
       </select>
-      <select>
-        <option value>2020</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <span class="lianjie">-</span>
-      <select>
-        <option value>2020</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <select class="selectW">
-        <option value>01</option>
-      </select>
-      <button>查询</button>
-      <span>
-        累计告警次数:
-        <span class="margin">0</span>
-      </span>
-      <span>
-        今日告警次数:
-        <span class="margin">0</span>
-      </span>
+      <el-date-picker
+        v-model="timeList"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        value-format="yyyy-MM-dd"
+        size="mini"
+      ></el-date-picker>
+      <button @click="inquire()">查询</button>
     </div>
-    <!-- <div class="content">
-      <div class="info">
+    <div class="content">
+      <div class="info" v-for="(item, index) in warnList" :key="index">
         <div class="name">
-          <span style="color:#00f8f8">[ 未处理 ]</span>
-          <span style="color:#e68600;margin-left:5px">18号配电柜1路</span>
+          <span style="color:#e68600;margin-left:5px">{{
+            item.deviceName
+          }}</span>
+          <span style="color:#00f8f8">未处理</span>
         </div>
         <div class="cause">
           <div>
-            <span>告警原因及建议：功率过低，存在故障路灯，是否请排查电路</span>
+            <span>
+              告警原因及建议：{{ item.dictName }}，建议{{ item.remark }}。
+            </span>
+          </div>
+          <div>
+            <el-button type="text" class="go">去处理</el-button>
           </div>
         </div>
         <div class="time">
           <div>
-            <span>提示时间：2020-06-08 19:25:02</span>
-          </div>
-          <div style="margin-top: -20px; margin-right:40px">
-            <span class="go">去处理</span>
+            <span>提示时间：{{ item.createTime }}</span>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -122,15 +119,9 @@ export default {};
 .untreated .content .info .cause {
   display: flex;
   margin-top: 15px;
-}
-.untreated .content .info .cause div:nth-child(1) {
-  flex: 60%;
-}
-.untreated .content .info .cause div:nth-child(2) {
-  flex: 40%;
-  display: flex;
   justify-content: space-between;
 }
+
 .untreated .content .info .time {
   display: flex;
   margin-top: 10px;

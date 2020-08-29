@@ -1,76 +1,62 @@
 <template>
   <div class="all">
-    <div class="search">
-      <select>
-        <option value>设备选择</option>
-      </select>
-      <select v-model="query.status">
+    <div class="search" style="margin-left:5px">
+      <span>设备选择</span>
+      <select v-model="soundId">
         <option
-          v-for="item in statusList"
+          v-for="(item, index) in Loudspeaker"
+          :key="index"
           :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
+          :label="item.label"
+        ></option>
       </select>
-      <select v-model="query.selectYear">
-        <!-- <option value>2020</option> -->
-        <option
-          v-for="item in selectYearList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
-      <select class="selectW" v-model="query.selectMonth">
-        <option
-          v-for="item in selectMonthList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
-      <select class="selectW" v-model="query.selectDay">
-        <option
-          v-for="item in selectDayList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
-      <span class="lianjie">-</span>
-      <select v-model="query.selectYear_1">
-        <option
-          v-for="item in selectYearList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
-      <select class="selectW" v-model="query.selectMonth_1">
-        <option
-          v-for="item in selectMonthList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
-      <select class="selectW" v-model="query.selectDay_1">
-        <option
-          v-for="item in selectDayList"
-          :value="item.value"
-          :key="item.value"
-          >{{ item.label }}</option
-        >
-      </select>
+      <el-date-picker
+        v-model="timeList"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        value-format="yyyy-MM-dd"
+        size="mini"
+      ></el-date-picker>
+
       <button @click="inquire()">查询</button>
-      <span>
-        累计告警次数:
-        <span class="margin">{{ warnNum.totalNum }}</span>
-      </span>
-      <span>
-        今日告警次数:
-        <span class="margin">{{ warnNum.todayNum }}</span>
-      </span>
+    </div>
+    <div class="content">
+      <div class="info" v-for="(item, index) in warnList" :key="index">
+        <div class="name">
+          <span style="color:#e68600;margin-left:5px">
+            {{
+            item.trashCanName
+            }}
+          </span>
+          <span v-if="item.status == 1" style="color:#00f8f8">人工处理</span>
+          <span v-if="item.status == 2" style="color:#00f8f8">自动处理</span>
+          <span v-if="item.status == 3" style="color:#00f8f8">未处理</span>
+        </div>
+        <div class="cause">
+          <div>
+            <span>告警原因：{{ item.desc }}</span>
+          </div>
+          <div v-if="item.status == 3">
+            <el-button type="text" class="go">去处理</el-button>
+          </div>
+        </div>
+        <div class="time">
+          <div>
+            <span>提示时间：{{ item.createTime }}</span>
+            <span v-if="item.status == 1">结束时间：{{ item.disposeTime }}</span>
+          </div>
+          <div>
+            <span v-if="item.status == 1" style="margin-right:35px">响应时间：{{ item.lastTime }}小时</span>
+            <span v-if="item.status == 2 || item.status == 1">持续时间：{{ item.durationTime }}</span>
+          </div>
+        </div>
+        <div class="principal">
+          <span>负责人：{{ item.disposePeople }}</span>
+          <span></span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -79,61 +65,18 @@
 export default {
   data() {
     return {
+      timeList: "",
+      itemId: "",
+      soundId: "",
+      type: "",
+      status: "",
       // 告警列表
       warnList: [],
-      // 告警次数
-      warnNum: "",
-      selectYearList: [
-        { value: "2018", label: "2018" },
-        { value: "2019", label: "2019" },
-        { value: "2020", label: "2020" }
-      ],
-      selectMonthList: [
-        { value: "01", label: "01" },
-        { value: "02", label: "02" },
-        { value: "03", label: "03" },
-        { value: "04", label: "04" },
-        { value: "05", label: "05" },
-        { value: "06", label: "06" },
-        { value: "07", label: "07" },
-        { value: "08", label: "08" },
-        { value: "09", label: "09" },
-        { value: "10", label: "10" },
-        { value: "11", label: "11" },
-        { value: "12", label: "12" }
-      ],
-      selectDayList: [
-        { value: "01", label: "01" },
-        { value: "02", label: "02" },
-        { value: "03", label: "03" },
-        { value: "04", label: "04" },
-        { value: "05", label: "05" },
-        { value: "06", label: "06" },
-        { value: "07", label: "07" },
-        { value: "08", label: "08" },
-        { value: "09", label: "09" },
-        { value: "10", label: "10" },
-        { value: "11", label: "11" },
-        { value: "12", label: "12" },
-        { value: "13", label: "13" },
-        { value: "14", label: "14" },
-        { value: "15", label: "15" },
-        { value: "16", label: "16" },
-        { value: "17", label: "17" },
-        { value: "18", label: "18" },
-        { value: "19", label: "19" },
-        { value: "20", label: "20" },
-        { value: "21", label: "21" },
-        { value: "22", label: "22" },
-        { value: "23", label: "23" },
-        { value: "24", label: "24" },
-        { value: "25", label: "25" },
-        { value: "26", label: "26" },
-        { value: "27", label: "27" },
-        { value: "28", label: "28" },
-        { value: "29", label: "29" },
-        { value: "30", label: "30" },
-        { value: "31", label: "31" }
+      Loudspeaker: [
+        {
+          value: "",
+          label: "全部"
+        }
       ],
       statusList: [
         {
@@ -141,35 +84,99 @@ export default {
           label: "全部"
         },
         {
-          value: "1",
+          value: "0",
           label: "未处理"
         },
         {
-          value: "2",
-          label: "未知"
-        },
-        {
-          value: "3",
+          value: "1",
           label: "自动处理"
         },
         {
-          value: "4",
+          value: "2",
           label: "人工处理"
         }
       ],
-      query: {
-        // 开始年月日
-        selectYear: 2020,
-        selectMonth: "01",
-        selectDay: "01",
-        // 状态
-        status: null,
-        // 结束年月日
-        selectYear_1: new Date().getFullYear(),
-        selectMonth_1: ("0" + (new Date().getMonth() + 1)).slice(-2),
-        selectDay_1: new Date().getDate()
-      }
+
+
+      typeList: [
+        {
+          value: null,
+          label: "全部"
+        },
+        {
+          value: "0",
+          label: "上线"
+        },
+        {
+          value: "1",
+          label: "离线"
+        }
+      ]
     };
+  },
+  methods: {
+    // 获取告警列表
+    getWarnPage() {
+      this.$axios({
+        method: "get",
+        url: "/loudspeaker/log/page",
+        params: {
+          itemId: this.itemId,
+          size: 20
+        }
+      }).then(res => {
+        console.log(res);
+        this.warnList = res.data.data.records;
+      });
+    },
+
+    // 获取所有设备
+    getLoudspeakerPage() {
+      this.$axios({
+        method: "GET",
+        url: "/loudspeaker/sound/page",
+        params: {
+          size: 50,
+          itemId: this.itemId
+        }
+      }).then(res => {
+        res.data.data.records.forEach(item => {
+          this.Loudspeaker.push({
+            value: item.soundId,
+            label: item.name
+          });
+        });
+      });
+    },
+
+    inquire() {
+      this.warnList = [];
+      // console.log(this.query);
+      var startTime = `${this.query.selectYear}-${this.query.selectMonth}-${this.query.selectDay}`;
+      var endTime = `${this.query.selectYear_1}-${this.query.selectMonth_1}-${this.query.selectDay_1}`;
+      this.$axios({
+        method: "get",
+        url: "/loudspeaker/log/page",
+        params: {
+          type: this.type,
+          soundId: this.soundId,
+          itemId: this.itemId,
+          startDay: startTime,
+          endDay: endTime,
+          status: this.status,
+          size: 20
+        }
+      }).then(res => {
+        console.log(res);
+        this.warnList = res.data.data.records;
+      });
+    }
+  },
+  created() {
+    this.itemId = sessionStorage.getItem("itemId");
+    this.getWarnPage();
+    // 获取所有设备
+    this.getLoudspeakerPage();
   }
 };
 </script>
@@ -209,5 +216,74 @@ export default {
   border: 1px solid #000;
   outline: none;
   margin-right: 15px;
+}
+
+.content {
+  height: 400px;
+  margin-top: 5px;
+  background: url("../../../assets/img/框3.png") no-repeat;
+  background-size: 100% 100%;
+  overflow-x: hidden;
+  font-size: 14px;
+}
+.content::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+.content .info {
+  color: #fff;
+  background: url("../../../assets/img/上地0109-3_04.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 0 10px;
+  margin-left: 3px;
+}
+
+.content .info .name {
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.content .info .name span:nth-child(2) {
+  width: 70px;
+  border: 1px solid #00f8f8;
+  text-align: center;
+  font-size: 12px;
+}
+
+.content .info .cause {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+.content .info .principal {
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: #00f8f8;
+}
+
+.content .info .time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  color: #00f8f8;
+  font-size: 12px;
+}
+.content .info .time div:nth-child(1) {
+  flex: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.content .info .time div:nth-child(2) {
+  flex: 50%;
+  text-align: right;
+}
+
+.content .info .cause .go {
+  display: inline-block;
+  width: 72px;
+  text-align: center;
+  background-color: #ff7e00;
+  padding: 0;
+  color: #fff;
 }
 </style>

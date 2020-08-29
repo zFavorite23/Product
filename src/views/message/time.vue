@@ -5,12 +5,16 @@
         v-model="value1"
         placeholder="任意时间点"
         value-format="HH:mm"
+        size="mini"
+        style="width:130px"
       ></el-time-picker>
       <el-time-picker
         arrow-control
         v-model="value2"
         placeholder="任意时间点"
         value-format="HH:mm"
+        size="mini"
+        style="width:130px;margin-right:0"
       ></el-time-picker>
     </div>
     <div>
@@ -19,7 +23,11 @@
         v-model="value3"
         placeholder="选择一个或多个日期"
         value-format="yyyy-MM-dd"
+        size="mini"
+        style="width:100%"
       ></el-date-picker>
+    </div>
+    <div>
       <select v-model="type" @change="editType(type)">
         <option
           v-for="(item, index) in types"
@@ -28,18 +36,23 @@
           >{{ item.name }}</option
         >
       </select>
-    </div>
-    <select v-model="misfirePolicy" @change="editMisfirePolicy(misfirePolicy)">
-      <option
-        v-for="(misfirePolicy, index) in misfirePolicys"
-        :value="misfirePolicy.value"
-        :key="index"
-        >{{ misfirePolicy.name }}</option
+      <select
+        v-model="misfirePolicy"
+        @change="editMisfirePolicy(misfirePolicy)"
       >
-    </select>
+        <option
+          v-for="(misfirePolicy, index) in misfirePolicys"
+          :value="misfirePolicy.value"
+          :key="index"
+          >{{ misfirePolicy.name }}</option
+        >
+      </select>
+    </div>
 
-    <button @click="addTime()">添 加</button>
-    <div class="close" @click="close()"></div>
+    <div class="select">
+      <div class="confirm" @click="addTime()">确定</div>
+      <div class="cancel" @click="close()">取消</div>
+    </div>
   </div>
 </template>
 
@@ -73,14 +86,18 @@ export default {
         { value: "3", name: "每周" },
         { value: "4", name: "每月" }
       ],
-      week: ""
+      week: "",
+      dayList: []
     };
   },
   props: ["modelid", "name"],
   methods: {
     // 添加时间
     addTime() {
-      console.log(this.name);
+      this.dayList = [];
+      this.value3.forEach(item => {
+        this.dayList.push(item.substr(-2));
+      });
       this.$axios({
         method: "put",
         url: "/loudspeaker/model",
@@ -90,11 +107,11 @@ export default {
           playOrder: "1",
           time: [`${this.value1}-${this.value2}`],
           volume: 10,
-          day: this.value3,
+          day: this.dayList,
           month: this.time.month,
           week: [this.week],
           year: this.time.year,
-          misfirePolicy: this.value,
+          misfirePolicy: this.misfirePolicy,
           type: this.type,
           itemId: this.itemId
         }
@@ -137,49 +154,63 @@ export default {
 
 <style lang="less" scoped>
 .playTime {
-  width: 400px;
-  height: 230px;
-  background-color: rgba(0, 0, 0, 0.9);
+  // width: 370px;
+  height: 180px;
+  background: url("../../assets/img/map_bg.png") no-repeat;
+  background-size: 100% 100%;
   position: absolute;
-  top: 80px;
-  left: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  top: 90px;
+  left: 230px;
+  text-align: left;
+  padding: 20px 40px;
+
+  div:nth-child(3) {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  .select {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 31%;
+    bottom: 20px;
+    text-align: center;
+
+    .confirm {
+      width: 60px;
+      height: 20px;
+      line-height: 20px;
+      color: #0bb5b9;
+      background: url("../../assets/img/Yes.png") no-repeat;
+      background-size: 100% 100%;
+    }
+
+    .cancel {
+      width: 60px;
+      height: 20px;
+      line-height: 20px;
+      color: #f00;
+      background: url("../../assets/img/No.png") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+
   .el-date-editor {
     width: 150px;
     margin-top: 25px;
     margin-right: 15px;
-    // margin-bottom: 20px;
   }
 
   select {
-    background: url("../../assets/img/dayBg.png");
-    color: #fff;
-    border: none; //清除select聚焦时候的边框颜色
-    outline: none; //将select的宽高等于div的宽高
-    width: 85px;
-    margin-top: 15px;
-    option {
-      color: #000;
-    }
-  }
-  .close {
-    width: 20px;
-    height: 20px;
-    background: url("../../assets/img/close.png") no-repeat;
-    background-size: 100%;
-    position: absolute;
-    top: 8px;
-    right: 15px;
-  }
-  button {
-    margin-top: 20px;
-    width: 50px;
-    height: 30px;
+    outline: none;
     border: none;
-    background-color: rgb(22, 22, 21);
+    background: url("../../assets/img/dayBg.png") no-repeat;
+    background-size: 100% 100%;
+    width: 90px;
     color: #fff;
+    background: #030d14;
   }
 }
 </style>
